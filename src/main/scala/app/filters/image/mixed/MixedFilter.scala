@@ -1,7 +1,7 @@
 package filters.image.mixed
 
-import dataTypes.Image
 import filters.image.ImageFilter
+import models.dataTypes.Image
 
 class MixedFilter (filters: Seq[ImageFilter]) extends ImageFilter {
 	/**

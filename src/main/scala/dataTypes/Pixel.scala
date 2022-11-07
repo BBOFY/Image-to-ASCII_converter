@@ -1,5 +1,0 @@
-package dataTypes
-
-trait Pixel {
-
-}

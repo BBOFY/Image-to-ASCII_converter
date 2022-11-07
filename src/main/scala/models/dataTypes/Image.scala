@@ -1,4 +1,4 @@
-package dataTypes
+package models.dataTypes
 
 trait Image {
 
