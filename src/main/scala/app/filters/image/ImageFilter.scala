@@ -1,7 +1,7 @@
 package filters.image
 
 import filters.Filter
-import models.dataTypes.Image
+import models.image.Image
 
 trait ImageFilter extends Filter[Image] {
 
