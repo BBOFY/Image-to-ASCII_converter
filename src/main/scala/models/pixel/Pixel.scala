@@ -1,9 +1,7 @@
 package models.pixel
 
-import models.utils.pixelValue.PixelValue
-
-trait Pixel {
+trait Pixel[T] {
+	def getValue: T
 
 	def getGreyScale: Int
-	def getValue: PixelValue
 }

@@ -1,5 +1,7 @@
 package models.image
 
-class ImageGrey {
+import models.pixel.PixelGrey
+
+class ImageGrey extends Image[PixelGrey] {
 
 }
