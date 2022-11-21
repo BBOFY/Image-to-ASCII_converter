@@ -1,23 +1,35 @@
 package models.pixel
 
-import models.utils.ValueRGB
-
-import java.security.InvalidParameterException
-
-class PixelRGB( _r: Int, _g: Int, _b: Int ) extends Pixel[ValueRGB] {
-
-	private val value: ValueRGB = {
-		if ( !(0 to 255 contains _r)
-			|| !(0 to 255 contains _g)
-			|| !(0 to 255 contains _b)
-		) throw new InvalidParameterException("All values must be in range 0 to 255")
-
-		ValueRGB(_r, _g, _b)
+case class RGB(r: Int, g: Int, b: Int) {
+	private val _r = {
+		if (0 to 255 contains _r) r
+		else
+			throw new IllegalArgumentException("Argument 'r' must be between 0 to 255")
 	}
 
-	override def getValue: ValueRGB = value
+	private val _g = {
+		if (0 to 255 contains _g) g
+		else
+			throw new IllegalArgumentException("Argument 'g' must be between 0 to 255")
+	}
 
-	override def getGreyScale: Int = {
+	private val _b = {
+		if (0 to 255 contains _b) b
+		else
+			throw new IllegalArgumentException("Argument 'b' must be between 0 to 255")
+	}
+}
+
+class PixelRGB(r: Int, g: Int, b: Int) extends PixelNumeric[RGB] {
+	override def value: RGB = {
+		try {
+			RGB(r, g, b)
+		} catch {
+			case e: IllegalArgumentException => throw new IllegalArgumentException(e.getMessage)
+		}
+	}
+
+	override def getGreyscale(): Int = {
 		((0.3 * value.r) + (0.59 * value.g) + (0.11 * value.b)).toInt
 	}
 }

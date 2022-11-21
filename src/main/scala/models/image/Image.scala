@@ -1,6 +1,6 @@
 package models.image
 
-import models.pixel.Pixel
+import models.pixelOLD.Pixel
 import models.utils.Pos
 
 import java.security.InvalidParameterException

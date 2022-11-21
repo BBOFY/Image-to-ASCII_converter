@@ -1,7 +1,7 @@
 package models.pixel
 
-trait Pixel[T] {
-	def getValue: T
+trait Pixel {
 
-	def getGreyScale: Int
+
+
 }

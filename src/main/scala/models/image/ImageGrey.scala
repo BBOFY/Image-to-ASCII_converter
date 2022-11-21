@@ -1,6 +1,6 @@
 package models.image
 
-import models.pixel.PixelGrey
+import models.pixelOLD.PixelGrey
 
 class ImageGrey extends Image[PixelGrey] {
 

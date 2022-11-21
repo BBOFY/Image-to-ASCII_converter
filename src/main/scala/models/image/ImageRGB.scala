@@ -1,6 +1,6 @@
 package models.image
 
-import models.pixel.PixelRGB
+import models.pixelOLD.PixelRGB
 
 class ImageRGB extends Image[PixelRGB] {
 	override def getRow(y: Int): List[PixelRGB] = ???

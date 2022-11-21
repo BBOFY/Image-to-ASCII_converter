@@ -1,6 +1,6 @@
 package models.image
 
-import models.pixel.PixelASCII
+import models.pixelOLD.PixelASCII
 
 class ImageAscii extends Image[PixelASCII] {
 

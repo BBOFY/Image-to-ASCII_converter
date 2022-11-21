@@ -1,17 +1,14 @@
 package models.pixel
 
-import java.security.InvalidParameterException
+class PixelGrey(value: Int) extends PixelNumeric[Int] {
 
-class PixelGrey( _value: Int ) extends Pixel[Int] {
-
-	private val value: Int = {
-		if ( 0 to 255 contains _value )
-			_value
+	private val _value: Int = {
+		if ( 0 to 255 contains value ) value
 		else
-			throw new InvalidParameterException("Value must be in range 0 to 255")
+			throw new IllegalArgumentException("Argument 'value' must be between 0 to 255")
 	}
 
-	override def getValue: Int = value
+	override def value: Int = _value
+	override def getGreyscale(): Int = _value
 
-	override def getGreyScale: Int = value
 }
