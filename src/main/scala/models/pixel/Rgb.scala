@@ -1,6 +1,6 @@
 package models.pixel
 
-case class RGB(_r: Int, _g: Int, _b: Int) {
+case class Rgb(_r: Int, _g: Int, _b: Int) {
 	private val r_ : Int = {
 		if (0 to 255 contains _r) _r
 		else

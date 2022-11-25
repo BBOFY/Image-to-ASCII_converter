@@ -1,14 +1,11 @@
-//package models.image
-//
-//import models.pixelOLD.PixelASCII
-//
-//class ImageAscii extends Image[PixelASCII] {
-//
-//
-//	override def getRow(y: Int): List[PixelASCII]
-//
-//	override def getColumn(x: Int): List[PixelASCII] = ???
-//
-//	override def getPixel(x: Int, y: Int): PixelASCII = ???
-//
-//}
+package models.image
+
+import models.pixel.PixelAscii
+
+class ImageAscii(width: Int, height: Int) extends Image[PixelAscii](width, height) {
+	override protected var _grid: Vector[Vector[PixelAscii]] = {
+		Vector.fill(_height, _width) {
+			PixelAscii(0.toChar)
+		}
+	}
+}
