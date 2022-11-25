@@ -1,7 +1,7 @@
 package models.pixel
 
-trait Pixel {
+trait Pixel[T] {
 
-
+	def getValue: T
 
 }

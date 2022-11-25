@@ -1,9 +1,7 @@
 package models.pixel
 
-trait PixelNumeric[T] extends Pixel {
+abstract class PixelNumeric[T] extends Pixel[T] {
 
-	def value: T
-
-	def getGreyscale(): Int
+	def getGreyscale: Int
 
 }
