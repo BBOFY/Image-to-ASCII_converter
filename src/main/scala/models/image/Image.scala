@@ -39,24 +39,26 @@ abstract class Image[T <: Pixel[_]](private val __width: Int, private val __heig
 		_grid.apply(y).apply(x)
 	}
 
-	def setRow(y: Int, newRow: Seq[T]):Unit  = {
+	def setRow(y: Int, newRow: Seq[T]): Unit  = {
 		if (y >= height) throwArgEx("y")
 		if (newRow.length != width) throw new IllegalArgumentException("Length of the new row must be equal to width")
 		_grid = _grid.updated(y, newRow.toVector)
 	}
 
-//	def setColumn(x: Int, newColumn: Set[T]): Vector[T] = {
-//		if (x >= width) throwArgEx("x")
-//
-//		_grid = _grid.updated()
-//
-//
-//		var col = Vector[T]()
-//		for (row <- _grid) {
-//			col = col.appended(row.apply(x))
-//		}
-//		col
-//	}
+	def setColumn(x: Int, newColumn: Seq[T]): Unit = {
+		if (x >= width) throwArgEx("x")
+		if (newColumn.length != height) throw new IllegalArgumentException("Length of the new column must be equal to height")
+
+		for (row <- 0 until height) {
+			_grid = _grid.updated(row, _grid.apply(row).updated(x, newColumn.apply(row)))
+		}
+
+		var col = Vector[T]()
+		for (row <- _grid) {
+			col = col.appended(row.apply(x))
+		}
+		col
+	}
 
 	def setPixel(x: Int, y: Int, newPixel: T): Unit = {
 		if (x >= width) throwArgEx("x")
