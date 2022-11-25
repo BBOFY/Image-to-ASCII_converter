@@ -41,7 +41,7 @@ class ImageGreyTests extends FunSuite {
 		assert(image.getColumn(2) == Vector(PixelGrey(2), PixelGrey(5)))
 	}
 
-	test ("Valid image - Changing") {
+	test ("Valid image - Changing rows") {
 		val image = new ImageGrey(width, height)
 
 		for (i <- 0 until height) {
@@ -78,6 +78,44 @@ class ImageGreyTests extends FunSuite {
 		// wrong value inside replacement row
 		assertThrows[IllegalArgumentException] {
 			image.setRow(0, Vector(PixelGrey(100), PixelGrey(1500), PixelGrey(200)))
+		}
+
+	}
+
+	test("Valid image - Changing columns") {
+		val image = new ImageGrey(width, height)
+
+		for (i <- 0 until height) {
+			image.setRow(i, testingGrid.apply(i))
+		}
+
+		image.setColumn(1, Vector( PixelGrey(10), PixelGrey(20)))
+
+		assertResult(10) {
+			image.getRow(0).apply(1).value
+		}
+		assertResult(20) {
+			image.getPixel(1, 1).value
+		}
+
+		assertResult(0) {
+			image.getPixel(0, 0).value
+		}
+		assertResult(5) {
+			image.getPixel(2, 1).value
+		}
+
+		// row out of bounds
+		assertThrows[IllegalArgumentException] {
+			image.setColumn(3, Vector( PixelGrey(10), PixelGrey(20)))
+		}
+		// long replacement row
+		assertThrows[IllegalArgumentException] {
+			image.setColumn(1, Vector( PixelGrey(10), PixelGrey(20), PixelGrey(30)))
+		}
+		// wrong value inside replacement row
+		assertThrows[IllegalArgumentException] {
+			image.setColumn(1, Vector( PixelGrey(1000), PixelGrey(20)))
 		}
 
 	}
