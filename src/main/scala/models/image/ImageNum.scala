@@ -1,5 +1,5 @@
-package models.image
-
-class ImageNum {
-
-}
+//package models.image
+//
+//class ImageNum {
+//
+//}

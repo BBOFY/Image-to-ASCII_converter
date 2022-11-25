@@ -1,13 +1,14 @@
 package models.pixel
 
-case class PixelGrey(private val value: Int) extends PixelNumeric[Int] {
+case class PixelGrey(private val _value: Int) extends PixelNumeric[Int] {
 
-	private val _value: Int = {
-		if ( 0 to 255 contains value ) value
+	@throws (classOf[IllegalArgumentException])
+	private val value_ : Int = {
+		if ( 0 to 255 contains _value ) _value
 		else
 			throw new IllegalArgumentException("Argument 'value' must be between 0 to 255")
 	}
-	override def getValue: Int = _value
+	override def value: Int = value_
 
-	override def getGreyscale: Int = _value
+	override def getGreyscale: Int = value_
 }

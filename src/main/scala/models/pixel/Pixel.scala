@@ -2,6 +2,6 @@ package models.pixel
 
 trait Pixel[T] {
 
-	def getValue: T
+	def value: T
 
 }

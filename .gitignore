@@ -12,3 +12,6 @@
 project/project/
 project/target/
 target/
+project/
+
+sbt.json
