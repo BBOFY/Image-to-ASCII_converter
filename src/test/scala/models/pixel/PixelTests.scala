@@ -1,9 +1,6 @@
-package models
+package models.pixel
 
-import models.pixel.{PixelGrey, PixelRGB, PixelAscii}
 import org.scalatest.FunSuite
-
-import java.security.InvalidParameterException
 
 class PixelTests extends FunSuite {
 
@@ -36,7 +33,7 @@ class PixelTests extends FunSuite {
 		val g = 234
 		val b = 186
 
-		val pixel = PixelRGB(r, g, b)
+		val pixel = PixelRgb(r, g, b)
 
 		assertResult(r) {
 			pixel.value.r
@@ -59,16 +56,16 @@ class PixelTests extends FunSuite {
 
 	test("RGB pixel invalid") {
 		assertThrows[IllegalArgumentException] {
-			val pixel = PixelRGB(900, 12, -5)
+			val pixel = PixelRgb(900, 12, -5)
 		}
 		assertThrows[IllegalArgumentException] {
-			val pixel = PixelRGB(100, -12, 5)
+			val pixel = PixelRgb(100, -12, 5)
 		}
 		assertThrows[IllegalArgumentException] {
-			val pixel = PixelRGB(-100, -12, -5)
+			val pixel = PixelRgb(-100, -12, -5)
 		}
 		assertThrows[IllegalArgumentException] {
-			val pixel = PixelRGB(1623, 256, 633)
+			val pixel = PixelRgb(1623, 256, 633)
 		}
 	}
 
