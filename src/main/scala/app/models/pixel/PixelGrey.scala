@@ -1,4 +1,4 @@
-package models.pixel
+package app.models.pixel
 
 case class PixelGrey(private val _value: Int) extends PixelNumeric[Int] {
 

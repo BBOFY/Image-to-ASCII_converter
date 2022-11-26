@@ -1,4 +1,4 @@
-package models.pixel
+package app.models.pixel
 
 abstract class PixelNumeric[T] extends Pixel[T] {
 

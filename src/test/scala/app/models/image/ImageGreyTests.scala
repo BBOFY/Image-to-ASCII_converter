@@ -1,6 +1,7 @@
-package models.image
+package app.models.image
 
-import models.pixel.PixelGrey
+import app.models.image.ImageGrey
+import app.models.pixel.PixelGrey
 import org.scalatest.FunSuite
 
 class ImageGreyTests extends FunSuite {
@@ -9,10 +10,8 @@ class ImageGreyTests extends FunSuite {
 	val height: Int = 2
 
 	val testingGrid: Vector[Vector[PixelGrey]] = Vector(
-		//         0              1            2
 		Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
 		Vector(PixelGrey(3), PixelGrey(4), PixelGrey(5))
-
 	)
 
 	test("Valid image - Creating") {
@@ -117,8 +116,25 @@ class ImageGreyTests extends FunSuite {
 		assertThrows[IllegalArgumentException] {
 			image.setColumn(1, Vector( PixelGrey(1000), PixelGrey(20)))
 		}
+	}
+
+	test("Valid image - Changing pixel") {
+		val image = new ImageGrey(width, height)
+
+		for (i <- 0 until height) {
+			image.setRow(i, testingGrid.apply(i))
+		}
+
+		image.setPixel(1, 1, PixelGrey(255))
+
+		assertResult(255) {
+			image.getPixel(1, 1).value
+		}
 
 	}
 
+//	private def initTestImage(w: Int, h: Int): ImageGrey = {
+//
+//	}
 
 }

@@ -1,8 +1,8 @@
-package models.image
+package app.models.image
 
-import models.pixel.Pixel
+import app.models.pixel.Pixel
 
-abstract class Image[T <: Pixel[_]](private val __width: Int, private val __height: Int ) {
+abstract class ImageImpl[T <: Pixel[_]](private val __width: Int, private val __height: Int ) {
 
 	protected val _width: Int = {
 		if (__width <= 0) throw new IllegalArgumentException("Width of the image must be greater than zero")

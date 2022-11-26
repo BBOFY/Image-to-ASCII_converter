@@ -1,4 +1,4 @@
-package models.pixel
+package app.models.pixel
 
 case class PixelAscii(private val _value: Char) extends PixelText[Char] {
 

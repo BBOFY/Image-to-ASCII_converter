@@ -1,5 +1,6 @@
-package models.pixel
+package app.models.pixel
 
+import app.models.pixel.{PixelAscii, PixelGrey, PixelRgb}
 import org.scalatest.FunSuite
 
 class PixelTests extends FunSuite {
