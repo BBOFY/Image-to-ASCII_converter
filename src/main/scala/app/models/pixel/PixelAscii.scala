@@ -9,5 +9,5 @@ case class PixelAscii(private val _value: Char) extends PixelText[Char] {
 			throw new IllegalArgumentException("Argument 'value' must be valid regular ASCII character with decimal value between 0 to 127")
 	}
 
-	override def value: Char = value_
+	def value: Char = value_
 }
