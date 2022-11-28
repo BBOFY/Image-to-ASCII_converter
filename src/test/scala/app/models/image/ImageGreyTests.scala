@@ -6,26 +6,22 @@ import org.scalatest.FunSuite
 
 class ImageGreyTests extends FunSuite {
 
-	val width: Int = 3
-	val height: Int = 2
-
 	val testingGrid: Vector[Vector[PixelGrey]] = Vector(
 		Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
 		Vector(PixelGrey(3), PixelGrey(4), PixelGrey(5))
 	)
 
+	val width: Int = testingGrid.apply(0).length
+	val height: Int = testingGrid.length
+
 	test("Valid image - Creating") {
-		val image = new ImageGrey(width, height)
+		val image = new ImageGrey(testingGrid)
 
-		for (i <- 0 until height) {
-			image.setRow(i, testingGrid.apply(i))
-		}
-
-		assertResult(width) {
+		assertResult(3) {
 			image.width
 		}
 
-		assertResult(height) {
+		assertResult(2) {
 			image.height
 		}
 
@@ -41,11 +37,7 @@ class ImageGreyTests extends FunSuite {
 	}
 
 	test ("Valid image - Changing rows") {
-		val image = new ImageGrey(width, height)
-
-		for (i <- 0 until height) {
-			image.setRow(i, testingGrid.apply(i))
-		}
+		val image = new ImageGrey(testingGrid)
 
 		image.setRow(0, Vector( PixelGrey(100), PixelGrey(150), PixelGrey(200)))
 
@@ -82,11 +74,7 @@ class ImageGreyTests extends FunSuite {
 	}
 
 	test("Valid image - Changing columns") {
-		val image = new ImageGrey(width, height)
-
-		for (i <- 0 until height) {
-			image.setRow(i, testingGrid.apply(i))
-		}
+		val image = new ImageGrey(testingGrid)
 
 		image.setColumn(1, Vector( PixelGrey(10), PixelGrey(20)))
 
@@ -119,7 +107,7 @@ class ImageGreyTests extends FunSuite {
 	}
 
 	test("Valid image - Changing pixel") {
-		val image = new ImageGrey(width, height)
+		val image = new ImageGrey(testingGrid)
 
 		for (i <- 0 until height) {
 			image.setRow(i, testingGrid.apply(i))
@@ -130,7 +118,21 @@ class ImageGreyTests extends FunSuite {
 		assertResult(255) {
 			image.getPixel(1, 1).value
 		}
+	}
 
+	test("Rewriting row") {
+		val image = new ImageGrey(testingGrid)
+
+		image.getRow(0).map({pixel => PixelGrey(pixel.value + 2)})
+
+		assert(
+			image.getRow(0) == Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2))
+		)
+
+		assert(
+			image.getRow(0).map({pixel => PixelGrey(pixel.value + 2)})
+			  == Vector(PixelGrey(2), PixelGrey(3), PixelGrey(4))
+		)
 	}
 
 //	private def initTestImage(w: Int, h: Int): ImageGrey = {
