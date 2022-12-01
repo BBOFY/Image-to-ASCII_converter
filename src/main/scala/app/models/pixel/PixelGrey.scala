@@ -1,6 +1,6 @@
 package app.models.pixel
 
-case class PixelGrey(private val _value: Int) extends PixelNumeric[Int] {
+final case class PixelGrey(private val _value: Int) extends PixelNumeric[Int] {
 
 	@throws (classOf[IllegalArgumentException])
 	private val value_ : Int = {

@@ -1,6 +1,6 @@
 package app.models.pixel
 
-case class PixelAscii(private val _value: Char) extends PixelText[Char] {
+final case class PixelAscii(private val _value: Char) extends PixelText[Char] {
 
 	@throws (classOf[IllegalArgumentException])
 	private val value_ : Char = {

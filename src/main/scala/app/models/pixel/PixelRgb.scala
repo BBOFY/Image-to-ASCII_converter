@@ -2,7 +2,7 @@ package app.models.pixel
 
 import app.models.utils.RgbValue
 
-case class PixelRgb(private val r: Int, private val g: Int, private val b: Int) extends PixelNumeric[RgbValue] {
+final case class PixelRgb(private val r: Int, private val g: Int, private val b: Int) extends PixelNumeric[RgbValue] {
 
 	@throws (classOf[IllegalArgumentException])
 	private val value_ : RgbValue = RgbValue(r, g, b)
