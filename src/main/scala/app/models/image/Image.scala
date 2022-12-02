@@ -2,9 +2,9 @@ package app.models.image
 
 import app.models.pixel.Pixel
 
-abstract class Image[T <: Pixel](private val __grid: Vector[Vector[T]]) {
+abstract class Image[+T <: Pixel](private val __grid: Vector[Vector[T]]) {
 
-	protected var _grid: Vector[Vector[T]] = {
+	protected val _grid: Vector[Vector[T]] = {
 		if (__grid.isEmpty) throw new IllegalArgumentException("Image must have at least 1x1 dimensions")
 
 		val w = __grid.apply(0).length
@@ -63,11 +63,11 @@ abstract class Image[T <: Pixel](private val __grid: Vector[Vector[T]]) {
 //		}
 //	}
 
-	def setPixel(x: Int, y: Int, newPixel: T): Unit = {
-		if (x >= width) throwArgEx("x")
-		if (y >= height) throwArgEx("y")
-		_grid = _grid.updated(y, _grid.apply(y).updated(x, newPixel))
-	}
+//	def setPixel(x: Int, y: Int, newPixel: T): Unit = {
+//		if (x >= width) throwArgEx("x")
+//		if (y >= height) throwArgEx("y")
+//		_grid = _grid.updated(y, _grid.apply(y).updated(x, newPixel))
+//	}
 
 	protected def throwArgEx(param: String): Unit = {
 		throw new IllegalArgumentException(s"Parameter $param is out of bounds of image size")
