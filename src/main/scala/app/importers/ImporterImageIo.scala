@@ -1,8 +1,5 @@
 package app.importers
 
-import java.io.File
-import javax.imageio.ImageIO
-import java.awt.image.BufferedImage
 import app.models.image.{ImageRegular, ImageRgb}
 import app.models.pixel.{PixelNumeric, PixelRgb}
 
