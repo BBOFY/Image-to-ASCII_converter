@@ -13,6 +13,7 @@ class ImportPngHandler (val imgProcessor: ImageProcessorImpl.type) extends Impor
 		if (validCommandForms.exists(postfix => path.endsWith(postfix))) {
 			val image = new ImporterPng(path)
 			imgProcessor.loadImage(image.doImport())
+			println("HERE")
 			None
 		}
 		else nextHandler
