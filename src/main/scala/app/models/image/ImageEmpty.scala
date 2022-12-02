@@ -10,9 +10,9 @@ object ImageEmpty extends Image[PixelEmpty](Vector.empty) {
 
 	override def height: Int = super.height
 
-	override def getRow(y: Int): Vector[Nothing] = Vector.empty
+//	override def getRow(y: Int): Vector[Nothing] = Vector.empty
 
-	override def getColumn(x: Int): Vector[Nothing] = Vector.empty
+//	override def getColumn(x: Int): Vector[Nothing] = Vector.empty
 
 	override def getPixel(x: Int, y: Int): PixelEmpty = new PixelEmpty
 
