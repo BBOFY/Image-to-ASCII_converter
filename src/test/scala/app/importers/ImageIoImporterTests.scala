@@ -4,11 +4,12 @@ import org.scalatest.FunSuite
 
 class ImageIoImporterTests extends FunSuite {
 
-	test("importing") {
+	test("importer") {
 
-		val importer = new ImporterImageIo("src/main/resources/photo.jpg")
+		val importer = new ImporterJpg("src/main/resources/photo.jpg")
 
 		importer.doImport()
+
 
 	}
 

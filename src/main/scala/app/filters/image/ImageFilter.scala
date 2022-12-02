@@ -1,7 +1,7 @@
-//package filters.image
+//package app.filters.image
 //
+//import app.models.image.Image
 //import filters.Filter
-//import models.image.Image
 //
 //trait ImageFilter extends Filter[Image] {
 //
