@@ -1,4 +1,4 @@
-package filters.image.specific
+package app.filters.specific
 
 class FontAspectRationFilter {
 

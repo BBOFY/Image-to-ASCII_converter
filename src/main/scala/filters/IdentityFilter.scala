@@ -1,6 +1,4 @@
-package filters.defualt
-
-import filters.Filter
+package filters
 
 class IdentityFilter[T] extends Filter[T] {
 
