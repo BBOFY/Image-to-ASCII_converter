@@ -1,0 +1,20 @@
+package app.handlers.importHandlers
+
+import app.handlers.{Handler, ImportHandler}
+import app.importers.ImporterPng
+import app.processor.ImageProcessorImpl
+
+class ImportPngHandler (val imgProcessor: ImageProcessorImpl.type) extends ImportHandler {
+	override protected def validCommandForms: Seq[String] = Seq(
+		".png", ".PNG"
+	)
+
+	override def handle(path: String): Option[Handler[String]] = {
+		if (validCommandForms.exists(postfix => path.endsWith(postfix))) {
+			val image = new ImporterPng(path)
+			imgProcessor.loadImage(image.doImport())
+			None
+		}
+		else nextHandler
+	}
+}
