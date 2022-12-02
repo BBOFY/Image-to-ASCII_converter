@@ -5,7 +5,7 @@ import java.io.File
 import javax.imageio.ImageIO
 
 class ImporterJpg(private val path: String) extends ImporterImageIo {
-	override def doImport(): Image[_] = {
+	override def doImport(): ImageRgb = {
 		val img = ImageIO.read(new File(path))
 
 		var imgGrid: Vector[Vector[PixelRgb]] = Vector.empty
