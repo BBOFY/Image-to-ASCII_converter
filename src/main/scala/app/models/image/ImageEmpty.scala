@@ -16,9 +16,9 @@ object ImageEmpty extends Image[PixelEmpty](Vector.empty) {
 
 	override def getPixel(x: Int, y: Int): PixelEmpty = new PixelEmpty
 
-	def setRow(y: Int, newRow: Seq[Nothing]): Unit = throw new NotImplementedError("Cannot set for empty image")
+//	override def setRow(y: Int, newRow: Seq[Nothing]): Unit = throw new NotImplementedError("Cannot set for empty image")
 
-	def setColumn(x: Int, newColumn: Seq[Nothing]): Unit = throw new NotImplementedError("Cannot set for empty image")
+//	override def setColumn(x: Int, newColumn: Seq[Nothing]): Unit = throw new NotImplementedError("Cannot set for empty image")
 
 	def setPixel(x: Int, y: Int, newPixel: Nothing): Unit = throw new NotImplementedError("Cannot set for empty image")
 
