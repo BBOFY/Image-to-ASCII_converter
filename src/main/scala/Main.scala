@@ -6,7 +6,6 @@ import app.processor.ImageProcessorImpl
 import scala.io.Source
 import java.io.{File, PrintStream}
 import javax.imageio.ImageIO
-import java.awt.Image
 import java.awt.image.BufferedImage
 
 object Main {

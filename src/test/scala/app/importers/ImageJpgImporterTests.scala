@@ -10,7 +10,7 @@ class ImageJpgImporterTests extends FunSuite {
 		val importer = new ImporterJpg("src/main/resources/test_jpg.jpg")
 		val img: ImageRgb = importer.doImport()
 
-		println(img.getPixel(1, 0).value)
+		println(img.getPixel(1, 0))
 
 
 	}

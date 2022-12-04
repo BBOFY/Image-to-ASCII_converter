@@ -1,55 +1,40 @@
 package app.filters.specific
 
 import app.filters.ImageFilter
-import app.models.image.{ImageGrey, ImageRegular, ImageRgb}
-import app.models.pixel.{Pixel, PixelGrey, PixelNumeric, PixelRgb}
+import app.models.image.{Image, ImageGrey}
+import app.models.pixel.{Pixel, PixelGrey}
+
 
 class BrightnessFilter(private val increment: Int) extends ImageFilter {
-	/**
-	 * Applies the specific filter on inserted image
-	 *
-	 * @param image on which filter will be applied
-	 * @return item with applied filter
-	 */
-	/*override def apply(image: ImageRegular[_<:PixelNumeric[_]]): ImageRegular[_<:PixelNumeric[_]] = {
 
-		val imgGrid: Vector[Vector[PixelNumeric[_]]] = image.getGrid
+	override def apply(image: ImageGrey): ImageGrey = {
+
+		val imgGrid = image.getGrid
 
 		imgGrid.map(row => {
 			row.map( pixel => {
-				pixel.incrementValue(increment)
+				pixel
 			} )
 		})
 
-		image match {
-			case _: ImageGrey => new ImageGrey(imgGrid)
-			case _: ImageRgb => new ImageRgb(imgGrid)
-		}
+		image
 
-	}*/
-
-	override def apply(image: ImageRegular[_ <: PixelNumeric[_]]): ImageRegular[_ <: PixelNumeric[_]] = {
-
-		image match {
-			case _: ImageGrey => {
-				val imgGrid: Vector[Vector[PixelGrey]] = image.getGrid
-				imgGrid.map(row => {
-					row.map(pixel => {
-						pixel.incrementValue(increment)
-					})
-				})
-				new ImageGrey(imgGrid)
-			}
-			case _: ImageRgb => {
-				val imgGrid: Vector[Vector[PixelRgb]] = image.getGrid
-				imgGrid.map(row => {
-					row.map(pixel => {
-						pixel.incrementValue(increment)
-					})
-				})
-				new ImageRgb(imgGrid)
-			}
-		}
 
 	}
+
+//	def foo(): Image[Pixel] = {
+//
+//		val testingGrid: Vector[Vector[PixelGrey]] = Vector(
+//			Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
+//			Vector(PixelGrey(3), PixelGrey(4), PixelGrey(5))
+//		)
+//		new ImageGrey(testingGrid)
+//
+//	}
+
 }
+
+//Type mismatch.
+//Required: Vector[Vector[Pixel]]
+//   found: Vector[Vector[PixelGrey]]
+

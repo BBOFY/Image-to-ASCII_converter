@@ -1,5 +1,5 @@
 package app.filters.specific
 
-class InvertFilter {
+class InvertFilter extends {
 
 }

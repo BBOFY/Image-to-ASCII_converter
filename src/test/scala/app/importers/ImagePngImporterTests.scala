@@ -12,7 +12,7 @@ class ImagePngImporterTests extends FunSuite {
 
 		for (x <- 0 until img.width) {
 			for (y <- 0 until img.height) {
-				println(img.getPixel(x, y).value)
+				println(img.getPixel(x, y))
 			}
 		}
 

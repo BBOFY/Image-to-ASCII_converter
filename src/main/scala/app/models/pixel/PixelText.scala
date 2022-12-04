@@ -1,5 +1,5 @@
-package app.models.pixel
-
-abstract class PixelText[T] extends Pixel {
-	def value: T
-}
+//package app.models.pixel
+//
+//abstract class PixelText extends Pixel {
+//	def value: Char
+//}

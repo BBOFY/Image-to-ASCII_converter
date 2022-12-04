@@ -10,10 +10,10 @@ class PixelTests extends FunSuite {
 		for ( i <- 0 to 255 ) {
 			val pixel = PixelGrey(i)
 			assertResult(i) {
-				pixel.value
+				pixel.value_
 			}
 			assertResult(i) {
-				pixel.value
+				pixel.value_
 			}
 		}
 	}
@@ -37,21 +37,17 @@ class PixelTests extends FunSuite {
 		val pixel = PixelRgb(r, g, b)
 
 		assertResult(r) {
-			pixel.value.r
+			pixel.value_.r
 		}
 		assertResult(g) {
-			pixel.value.g
+			pixel.value_.g
 		}
 		assertResult(b) {
-			pixel.value.b
+			pixel.value_.b
 		}
 
 		def getGreyscaleFromRGB( r0: Int, g0: Int, b0: Int ): Int = {
 			((0.3 * r0) + (0.59 * g0) + (0.11 * b0)).toInt
-		}
-
-		assertResult(getGreyscaleFromRGB(r, g, b)) {
-			pixel.getGreyscale
 		}
 	}
 
@@ -74,21 +70,21 @@ class PixelTests extends FunSuite {
 		for (i: Char <- 0.toChar to 127.toChar) {
 			val pixel = PixelAscii(i)
 			assertResult(i) {
-				pixel.value
+				pixel.value_
 			}
 		}
 
 		assertResult('i') {
 			var pixel = PixelAscii('i')
-			pixel.value
+			pixel.value_
 		}
 		assertResult('+') {
 			var pixel = PixelAscii(43)
-			pixel.value
+			pixel.value_
 		}
 		assertResult(126) {
 			var pixel = PixelAscii('~')
-			pixel.value
+			pixel.value_
 		}
 	}
 

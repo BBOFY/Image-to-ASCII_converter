@@ -1,6 +1,6 @@
 package app.models.utils
 
-case class RgbValue(_r: Int, _g: Int, _b: Int) {
+final case class RgbValue(_r: Int, _g: Int, _b: Int) {
 	private val r_ : Int = {
 		if (0 to 255 contains _r) _r
 		else

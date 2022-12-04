@@ -25,13 +25,13 @@ class ImageGreyTests extends FunSuite {
 			image.height
 		}
 
-		assertResult(2) {
-			image.getPixel(2, 0).value
-		}
-
-		assertResult(4) {
-			image.getPixel(1, 1).value
-		}
+//		assertResult(2) {
+//			image.getPixel(2, 0).value
+//		}
+//
+//		assertResult(4) {
+//			image.getPixel(1, 1).value
+//		}
 
 //		assert(image.getColumn(2) == Vector(PixelGrey(2), PixelGrey(5)))
 	}
