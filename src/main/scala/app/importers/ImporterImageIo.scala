@@ -1,7 +1,7 @@
 package app.importers
 
 import app.models.image.{Image, ImageRgb}
-import app.models.pixel.{PixelRgb}
+import app.models.pixel.PixelRgb
 
 
 abstract class ImporterImageIo extends FileInputImporter[Image[_]] {

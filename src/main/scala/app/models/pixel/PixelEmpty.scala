@@ -1,5 +1,5 @@
-package app.models.pixel
-
-final case class PixelEmpty() extends Pixel {
-
-}
+//package app.models.pixel
+//
+//final case class PixelEmpty() extends Pixel {
+//
+//}

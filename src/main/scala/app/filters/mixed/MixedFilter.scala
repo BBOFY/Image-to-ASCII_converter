@@ -1,8 +1,7 @@
 package app.filters.mixed
 
 import app.filters.ImageFilter
-import app.models.image.{Image, ImageGrey}
-import app.models.pixel.Pixel
+import app.models.image.ImageGrey
 
 class MixedFilter (filters: Seq[ImageFilter]) extends ImageFilter {
 	/**
