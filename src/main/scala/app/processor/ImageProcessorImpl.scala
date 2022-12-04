@@ -7,7 +7,7 @@ object ImageProcessorImpl extends ImageProcessor {
 
 	private var _image: Image[_<:Pixel] = new ImageGrey(Vector(Vector(PixelGrey(0))))
 
-	override def loadImage(img: Image[Pixel]): Unit = _image = img
+	override def loadImage(img: Image[_<:Pixel]): Unit = _image = img
 
 	override def greyScaleImage(): Unit = {
 		var newGrid: Vector[Vector[PixelGrey]] = Vector.empty

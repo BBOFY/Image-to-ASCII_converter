@@ -6,7 +6,7 @@ import filters.Filter
 import jdk.incubator.vector.VectorOperators.Conversion
 
 trait ImageProcessor {
-	def loadImage(img: Image[Pixel]): Unit
+	def loadImage(img: Image[_<:Pixel]): Unit
 
 	def greyScaleImage(): Unit
 
