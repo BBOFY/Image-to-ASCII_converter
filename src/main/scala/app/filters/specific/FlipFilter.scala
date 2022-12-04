@@ -12,7 +12,7 @@ class FlipFilter(val flipAxis: String) extends ImageFilter {
 
 		flipAxis match {
 			case "x" | "X" => newGrid = grid.reverse
-			case "y" | "Y" => 
+			case "y" | "Y" =>
 				for ( row <- grid ) {
 					newGrid = newGrid.appended(row.reverse)
 				}
