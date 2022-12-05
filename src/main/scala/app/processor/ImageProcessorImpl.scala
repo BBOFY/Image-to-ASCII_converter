@@ -29,7 +29,7 @@ class ImageProcessorImpl(val converter: Converter[ImageGrey, ImageAscii]) extend
 
 
 
-	override def getImage(): Image[_<:Pixel] = _image
+	override def getImage: Image[_<:Pixel] = _image
 
 	//todo
 	override def convertImage(conversionTable: String): Unit = {
