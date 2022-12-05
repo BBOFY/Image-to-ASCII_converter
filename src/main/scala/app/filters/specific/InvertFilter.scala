@@ -15,7 +15,7 @@ class InvertFilter extends ImageFilter {
 		var newGrid: Vector[Vector[PixelGrey]] = Vector.empty
 
 		for(row <- image.getGrid) {
-			var newRow: Vector[Vector[PixelGrey]] = Vector.empty
+			var newRow: Vector[PixelGrey] = Vector.empty
 			for (pixel <- row) {
 				newRow = newRow.appended(invertPixel(pixel))
 			}

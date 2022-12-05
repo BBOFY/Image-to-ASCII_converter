@@ -73,6 +73,12 @@ abstract class Image[T](private val __grid: Vector[Vector[T]]) {
 		throw new IllegalArgumentException(s"Parameter $param is out of bounds of image size")
 	}
 
+	override def equals(o: Any): Boolean = o match {
+		case that: Image[_] => that.getGrid == this.getGrid
+		case _ => false
+	}
+
+	override def hashCode: Int = __grid.hashCode
 }
 
 

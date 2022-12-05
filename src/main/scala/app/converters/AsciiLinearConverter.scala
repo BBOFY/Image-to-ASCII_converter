@@ -25,7 +25,7 @@ class AsciiLinearConverter(protected val conversionTable: String = "@B%8&WM#*ahk
 	}
 
 	protected def findAsciiValue(numValue: Int): Char = {
-		val resultIdx = (numValue / 4).floor.toInt
+		val resultIdx = (numValue / 4.0).floor.toInt
 		conversionTable.charAt(resultIdx)
 	}
 }

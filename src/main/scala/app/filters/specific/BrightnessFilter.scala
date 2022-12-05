@@ -12,7 +12,7 @@ class BrightnessFilter(private val increment: Int) extends ImageFilter {
 		var newGrid: Vector[Vector[PixelGrey]] = Vector.empty
 
 		for (row <- image.getGrid) {
-			var newRow: Vector[Vector[PixelGrey]] = Vector.empty
+			var newRow: Vector[PixelGrey] = Vector.empty
 			for (pixel <- row) {
 				val brightenedPixel = brightenPixel(increment, pixel)
 				newRow = newRow.appended(brightenedPixel)

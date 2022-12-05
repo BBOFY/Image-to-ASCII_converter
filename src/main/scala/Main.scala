@@ -8,7 +8,7 @@ import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
 
 object Main {
-	private val imageProcessor = ImageProcessorImpl
+//	private val imageProcessor = new ImageProcessorImpl
 	private val outStream = new PrintStream(System.out)
 
 	def main(args: Array[String]): Unit = {
@@ -31,16 +31,16 @@ object Main {
 
 	}
 
-	def importHandlers(): ImportHandler = {
+//	def importHandlers(): ImportHandler = {
 
-		val importJpgHandler = new ImportJpgHandler(imageProcessor)
-		val importPngHandler = new ImportPngHandler(imageProcessor)
+//		val importJpgHandler = new ImportJpgHandler(imageProcessor)
+//		val importPngHandler = new ImportPngHandler(imageProcessor)
 
-		val initialImportHandler: ImportHandler = importJpgHandler
-		initialImportHandler
-		  .setNext(importPngHandler)
-		  .setNext(new ImportErrorHandler(outStream))
+//		val initialImportHandler: ImportHandler = importJpgHandler
+//		initialImportHandler
+//		  .setNext(importPngHandler)
+//		  .setNext(new ImportErrorHandler(outStream))
 
-		initialImportHandler
-	}
+//		initialImportHandler
+//	}
 }

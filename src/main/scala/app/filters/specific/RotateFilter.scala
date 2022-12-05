@@ -11,20 +11,20 @@ class RotateFilter(val rotation: Int) extends ImageFilter {
 		rotation % 360 match {
 			case 0 => image
 			case 90 | -270 =>
-				rotateClockvise90(image)
+				rotateClockVise90(image)
 
 			case 180 | -180 =>
-				rotateClockvise90(rotateClockvise90(image))
+				rotateClockVise90(rotateClockVise90(image))
 
 			case 270 | -90 =>
-				rotateAntiClockvise90(image)
+				rotateAntiClockVise90(image)
 		}
 	}
 
-	protected def rotateClockvise90(image: ImageGrey): ImageGrey = {
+	protected def rotateClockVise90(image: ImageGrey): ImageGrey = {
 		var newGrid: Vector[Vector[PixelGrey]] = Vector.empty
 		for (col <- 0 until image.width) {
-			var newRow: Vector[Vector[PixelGrey]] = Vector.empty
+			var newRow: Vector[PixelGrey] = Vector.empty
 			for (row <- image.getGrid) {
 				newRow = newRow.appended(row.apply(col))
 			}
@@ -33,10 +33,10 @@ class RotateFilter(val rotation: Int) extends ImageFilter {
 		new ImageGrey(newGrid)
 	}
 
-	protected def rotateAntiClockvise90(image: ImageGrey): ImageGrey = {
+	protected def rotateAntiClockVise90(image: ImageGrey): ImageGrey = {
 		var newGrid: Vector[Vector[PixelGrey]] = Vector.empty
 		for (col <- 0 until image.width) {
-			var newRow: Vector[Vector[PixelGrey]] = Vector.empty
+			var newRow: Vector[PixelGrey] = Vector.empty
 			for (row <- image.getGrid) {
 				newRow = newRow.prepended(row.apply(col))
 			}
