@@ -8,6 +8,4 @@ final case class PixelGrey(private val _value: Int) extends Pixel {
 		else
 			throw new IllegalArgumentException("Argument 'value' must be between 0 to 255")
 	}
-
-	override def getGreyScale: Int = value_
 }
