@@ -21,7 +21,7 @@ class InputArgumentsParser(private val args: Array[String], val cmds: Commands )
 	override def getConversionArgs: List[String] = convertersArgs
 
 	override def getExportingArgs: List[String] = exportArgs
-	
+
 	private def sortArguments(): Unit = {
 		var argIndex = 0
 		while (argIndex < args.length) {
