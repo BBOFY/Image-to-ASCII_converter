@@ -4,7 +4,11 @@ import app.models.image.{Image, ImageRgb}
 import app.models.pixel.PixelRgb
 
 
-abstract class ImporterImageIo extends FileInputImporter[Image[_]] {
+abstract class ImporterImageIo extends FileInputImporter[ImageRgb] {
+
+	protected var _path: String = ""
+
+	def setPath(path: String): Unit = _path = path
 
 	protected def processRgbValue(rgb: Int): PixelRgb = {
 		val r: Int = (rgb & 0x00_ff_00_00) >>> 16

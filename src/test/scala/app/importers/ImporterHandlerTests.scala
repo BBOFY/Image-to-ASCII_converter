@@ -1,7 +1,7 @@
 package app.importers
 
-import app.handlers.{Handler, ImportHandler}
-import app.handlers.importHandlers.{ImportErrorHandler, ImportJpgHandler, ImportPngHandler}
+import app.handlers.Handler
+import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler}
 import app.processor.ImageProcessorImpl
 import org.scalatest.FunSuite
 

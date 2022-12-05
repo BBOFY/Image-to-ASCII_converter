@@ -1,10 +1,10 @@
 package app.handlers.importHandlers
 
-import app.handlers.{Handler, ImportHandler}
+import app.handlers.Handler
 import app.importers.ImporterPng
 import app.processor.ImageProcessorImpl
 
-class ImportPngHandler (val imgProcessor: ImageProcessorImpl.type) extends ImportHandler {
+class ImportPngHandler (val imgProcessor: ImageProcessorImpl) extends ImportHandler {
 	override protected def validCommandForms: Seq[String] = Seq(
 		".png", ".PNG"
 	)

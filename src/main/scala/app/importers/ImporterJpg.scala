@@ -4,9 +4,11 @@ import app.models.pixel.PixelRgb
 import java.io.File
 import javax.imageio.ImageIO
 
-class ImporterJpg(private val path: String) extends ImporterImageIo {
+class ImporterJpg extends ImporterImageIo {
+
+
 	override def doImport(): ImageRgb = {
-		val img = ImageIO.read(new File(path))
+		val img = ImageIO.read(new File(_path))
 
 		var imgGrid: Vector[Vector[PixelRgb]] = Vector.empty
 

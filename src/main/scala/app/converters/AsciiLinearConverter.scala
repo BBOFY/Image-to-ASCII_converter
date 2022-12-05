@@ -4,12 +4,9 @@ import app.models.image.{Image, ImageAscii, ImageGrey}
 import app.models.pixel.{Pixel, PixelAscii}
 
 
-class AsciiConverter extends Converter[ImageGrey, ImageAscii] {
-
-	// modified from here http://paulbourke.net/dataformats/asciiart/
-	val conversionTable: String = "@B%8&WM#*ahkbdpqwmZ0QLCJUYzcvunxrjft/\\|()1{}[]?-_+~<>i!;:,\"^`'. "
-
-
+class AsciiLinearConverter(protected val conversionTable: String = "@B%8&WM#*ahkbdpqwmZ0QLCJUYzcvunxrjft/\\|()1{}[]?-_+~<>i!;:,\"^`'. ")
+  extends Converter[ImageGrey, ImageAscii] {
+	
 	override def convert(image: ImageGrey): ImageAscii = {
 
 		var newGrid: Vector[Vector[PixelAscii]] = Vector.empty

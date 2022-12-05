@@ -1,6 +1,5 @@
 
-import app.handlers.ImportHandler
-import app.handlers.importHandlers.{ImportErrorHandler, ImportJpgHandler, ImportPngHandler}
+import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler}
 import app.processor.ImageProcessorImpl
 
 import scala.io.Source

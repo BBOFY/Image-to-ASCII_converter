@@ -13,6 +13,6 @@ class RotateFilter(val rotation: Int) extends ImageFilter {
 			case 180 | -180 => {}
 			case 270 | -90 => {}
 		}
-		image
+		???
 	}
 }

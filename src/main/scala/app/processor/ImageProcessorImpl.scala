@@ -1,11 +1,15 @@
 package app.processor
 
-import app.models.image.{Image, ImageGrey, ImageRgb}
+import app.converters.Converter
+import app.models.image.{Image, ImageAscii, ImageGrey, ImageRgb}
 import app.models.pixel.{Pixel, PixelGrey, PixelRgb}
 
-object ImageProcessorImpl extends ImageProcessor {
+class ImageProcessorImpl(val converter: Converter[ImageGrey, ImageAscii]) extends ImageProcessor {
 
 	private var _image: Image[_<:Pixel] = new ImageGrey(Vector(Vector(PixelGrey(0))))
+	private val importerImage = new ImageRgb(Vector(Vector(PixelRgb(0, 0, 0))))
+	private val greyedImage = new ImageGrey(Vector(Vector(PixelGrey(0))))
+
 
 	override def loadImage(img: Image[_<:Pixel]): Unit = _image = img
 
@@ -21,8 +25,14 @@ object ImageProcessorImpl extends ImageProcessor {
 			newGrid = newGrid.appended(newRow)
 		}
 		_image = new ImageGrey(newGrid)
-
 	}
 
+
+
 	override def getImage(): Image[_<:Pixel] = _image
+
+	//todo
+	override def convertImage(conversionTable: String): Unit = {
+//		_image = converter.convert(_image)
+	}
 }

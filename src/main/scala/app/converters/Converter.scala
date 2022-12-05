@@ -1,5 +1,5 @@
 package app.converters
 
-trait Converter[-T, +S] {
-	def convert(item: T): S
+trait Converter[-C, +P] {
+	def convert(item: C): P
 }

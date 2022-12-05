@@ -1,9 +1,9 @@
 package app.processor
 
-import app.models.image.Image
+import app.converters.{AsciiLinearConverter, Converter}
+import app.models.image.{Image, ImageAscii, ImageGrey}
 import app.models.pixel.Pixel
 import filters.Filter
-import jdk.incubator.vector.VectorOperators.Conversion
 
 trait ImageProcessor {
 	def loadImage(img: Image[_<:Pixel]): Unit
@@ -12,7 +12,9 @@ trait ImageProcessor {
 
 //	def applyFilter(filter: Filter): Unit
 
-//	def convertImage(conversion: Conversion): Unit
+//	def convertImage(conversion: Converter[ImageGrey, ImageAscii]): Unit
 
-	def getImage(): Image[_<:Pixel]
+	def convertImage(conversionTable: String): Unit
+
+	def getImage: Image[_<:Pixel]
 }

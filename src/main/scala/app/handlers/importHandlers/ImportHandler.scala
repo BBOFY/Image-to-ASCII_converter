@@ -1,4 +1,6 @@
-package app.handlers
+package app.handlers.importHandlers
+
+import app.handlers.{Handler, SimpleHandler}
 
 abstract class ImportHandler extends SimpleHandler[String] {
 
