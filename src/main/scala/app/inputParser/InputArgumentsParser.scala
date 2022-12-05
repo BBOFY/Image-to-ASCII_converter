@@ -27,56 +27,51 @@ class InputArgumentsParser(private val args: Array[String], val cmds: Commands )
 		while (argIndex < args.length) {
 			val arg = args.apply(argIndex)
 			try {
-				arg match {
-					case cmds.cmdImage =>
-						importArgsCount = importArgsCount + 1
-						importArgs = importArgs.appended(cmds.cmdImage).appended(args.apply(argIndex + 1))
-						argIndex = argIndex + 2
-
-					case cmds.cmdImageRandom =>
-						importArgsCount = importArgsCount + 1
-						importArgs = importArgs.appended(cmds.cmdImageRandom)
-						argIndex = argIndex + 1
-
-					case cmd == cmds.cmdTable | cmds.cmdTableCustom =>
-						conversionArgsCount = conversionArgsCount + 1
-						convertersArgs = convertersArgs.appended(cmd).appended(args.apply(argIndex + 1))
-						argIndex = argIndex + 2
-
-					case cmds.cmdFilterRotate =>
-						filtersArgs = filtersArgs.appended(cmds.cmdFilterRotate).appended(args.apply(argIndex + 1))
-						argIndex = argIndex + 2
-
-					case cmds.cmdFilterScale =>
-						filtersArgs = filtersArgs.appended(cmds.cmdFilterScale).appended(args.apply(argIndex + 1))
-						argIndex = argIndex + 2
-
-					case cmds.cmdFilterInv =>
-						filtersArgs = filtersArgs.appended(cmds.cmdFilterInv)
-						argIndex = argIndex + 1
-
-					case cmds.cmdFilterFlip =>
-						filtersArgs = filtersArgs.appended(cmds.cmdFilterFlip).appended(args.apply(argIndex + 1))
-						argIndex = argIndex + 2
-
-					case cmds.cmdFilterBright =>
-						filtersArgs = filtersArgs.appended(cmds.cmdFilterBright).appended(args.apply(argIndex + 1))
-						argIndex = argIndex + 2
-
-					case cmds.cmdOutputFile =>
-						exportArgs = exportArgs.appended(cmds.cmdOutputFile).appended(args.apply(argIndex + 1))
-						argIndex = argIndex + 2
-
-					case cmds.cmdOutputConsole =>
-						exportArgs = exportArgs.appended(cmds.cmdOutputConsole)
-						argIndex = argIndex + 1
-
-					case _ => throw new IllegalArgumentException(s"Wrong argument at position \'$argIndex\'")
+				if (arg == cmds.cmdImage) {
+					importArgsCount = importArgsCount + 1
+					importArgs = importArgs.appended(arg).appended(args.apply(argIndex + 1))
+					argIndex = argIndex + 2
 				}
+				else if (arg == cmds.cmdImageRandom) {
+					importArgsCount = importArgsCount + 1
+					importArgs = importArgs.appended(arg)
+					argIndex = argIndex + 1
+				}
+				else if (Seq(
+					cmds.cmdTable,
+					cmds.cmdTableCustom
+				).contains(arg)) {
+					conversionArgsCount = conversionArgsCount + 1
+					convertersArgs = convertersArgs.appended(arg).appended(args.apply(argIndex + 1))
+					argIndex = argIndex + 2
+				}
+				else if (Seq(
+					cmds.cmdFilterRotate,
+					cmds.cmdFilterScale,
+					cmds.cmdFilterFlip,
+					cmds.cmdFilterBright
+				).contains(arg)) {
+					filtersArgs = filtersArgs.appended(arg).appended(args.apply(argIndex + 1))
+					argIndex = argIndex + 2
+				}
+				else if (arg == cmds.cmdFilterInv) {
+					filtersArgs = filtersArgs.appended(arg)
+					argIndex = argIndex + 1
+				}
+				else if (arg == cmds.cmdOutputFile) {
+					exportArgs = exportArgs.appended(arg).appended(args.apply(argIndex + 1))
+					argIndex = argIndex + 2
+				}
+				else if (arg == cmds.cmdOutputConsole) {
+					exportArgs = exportArgs.appended(arg)
+					argIndex = argIndex + 1
+				}
+				else throw new IllegalArgumentException(s"Wrong argument at position \'$argIndex\'")
+
 			} catch {
 				case e: ArrayIndexOutOfBoundsException => throw new IllegalArgumentException("Missing argument for last imputed command.")
 				case e: IllegalArgumentException => throw e
-				case e: _ => throw new UnknownError(s"UnknownError at sorting imputed arguments at argument index \'$argIndex")
+				case _ => throw new UnknownError(s"UnknownError at sorting imputed arguments at argument index \'$argIndex")
 			}
 
 			if (importArgsCount != 1) throw new IllegalArgumentException("There must be exactly one \"--image*\" argument")
