@@ -1,7 +1,7 @@
 
 import app.builders.FilterBuilder
 import app.converters.AsciiLinearConverter
-import app.handlers.filterHandlers.FilterHandler
+import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler}
 import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.importers.{ImporterJpg, ImporterPng, PrimitiveImageGenerator}
 import app.inputParser.{InputArgumentsParser, InputParser}
@@ -25,6 +25,7 @@ object Main {
 
 		// todo builder for converter, similarly as filters
 		val imageProcessor = new ImageProcessorImpl(new AsciiLinearConverter)
+		val filterBuilder = new FilterBuilder
 
 		// call import handler
 		importHandlers(imageProcessor).handle(inputParser.getImageSource)
@@ -33,13 +34,13 @@ object Main {
 		imageProcessor.greyScaleImage()
 
 
-		// call filter handler
-		// or
-		// call filters (from image processor)
-
-		// call image converter
-
-		// call export handler
+		// sort args into pairs on as singles (defined by command) in input parser
+		// create mixed filter with parsed args and insert it to image processor
+		// call input handler
+		// call greyscale conversion
+		// call image processor's filtering
+		// call conversion specified in args
+		// call export handlers, image processor should only pass done image to exporters via handler
 
 	}
 
@@ -58,7 +59,11 @@ object Main {
 		initialImportHandler
 	}
 
-//	def filterHandlers(filterBuilder: FilterBuilder): FilterHandler {
-//
-//	}
+	def filterHandlers(filterBuilder: FilterBuilder): FilterHandler = {
+		val brightnessFilterHandler = new BrightnessFilterHandler(filterBuilder, commands)
+
+		val initialFilterHandler: FilterHandler = brightnessFilterHandler
+
+		initialFilterHandler
+	}
 }
