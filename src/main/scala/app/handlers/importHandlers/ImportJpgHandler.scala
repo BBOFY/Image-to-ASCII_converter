@@ -1,10 +1,10 @@
 package app.handlers.importHandlers
 
 import app.handlers.{Handler, SimpleHandler}
-import app.importers.ImporterJpg
+import app.importers.{ImporterImageIo, ImporterJpg}
 import app.processor.ImageProcessorImpl
 
-class ImportJpgHandler(val importer: ImporterJpg, val imgProcessor: ImageProcessorImpl) extends ImportHandler {
+class ImportJpgHandler(val importer: ImporterImageIo, val imgProcessor: ImageProcessorImpl) extends ImportHandler {
 	override def validCommandForms: Seq[String] = Seq(
 		".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi",
 		".JPG", ".JPEG", ".JPE", ".JIF", ".JFIF", ".JFI"
