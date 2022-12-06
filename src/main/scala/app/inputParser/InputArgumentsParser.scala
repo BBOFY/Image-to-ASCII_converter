@@ -71,7 +71,7 @@ class InputArgumentsParser(private val args: Array[String], val cmds: Commands )
 			} catch {
 				case e: ArrayIndexOutOfBoundsException => throw new IllegalArgumentException("Missing argument for last imputed command.")
 				case e: IllegalArgumentException => throw e
-				case _ => throw new UnknownError(s"UnknownError at sorting imputed arguments at argument index \'$argIndex")
+				case _: Throwable => throw new UnknownError(s"UnknownError at sorting imputed arguments at argument index \'$argIndex")
 			}
 
 			if (importArgsCount != 1) throw new IllegalArgumentException("There must be exactly one \"--image*\" argument")

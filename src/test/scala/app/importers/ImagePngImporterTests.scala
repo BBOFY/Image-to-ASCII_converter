@@ -7,7 +7,9 @@ class ImagePngImporterTests extends FunSuite {
 
 	test("importer") {
 
-		val importer = new ImporterPng("src/main/resources/test_png.png")
+		val path = "src/main/resources/test_png.png"
+		val importer = new ImporterPng
+		importer.setPath(path)
 		val img: ImageRgb = importer.doImport()
 
 		for (x <- 0 until img.width) {

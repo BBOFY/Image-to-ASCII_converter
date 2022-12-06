@@ -4,7 +4,9 @@ import app.models.image.{Image, ImageRgb}
 import app.models.pixel.PixelRgb
 
 
-abstract class ImporterImageIo extends FileInputImporter[ImageRgb] {
+abstract class ImporterImageIo extends ImageImporter[ImageRgb] {
+
+	override def doImport(): ImageRgb
 
 	protected var _path: String = ""
 

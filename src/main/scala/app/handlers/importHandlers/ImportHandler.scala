@@ -2,8 +2,8 @@ package app.handlers.importHandlers
 
 import app.handlers.{Handler, SimpleHandler}
 
-abstract class ImportHandler extends SimpleHandler[String] {
+trait ImportHandler extends SimpleHandler[List[String]] {
 
-	protected def validCommandForms: Seq[String]
-	def handle(path: String): Option[Handler[String]]
+	protected def validPostfixes: Seq[String]
+	def handle(args: List[String]): Option[Handler[List[String]]]
 }
