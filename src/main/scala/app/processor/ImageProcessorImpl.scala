@@ -1,6 +1,7 @@
 package app.processor
 
 import app.converters.Converter
+import app.filters.ImageFilter
 import app.models.image.{Image, ImageAscii, ImageGrey, ImageRgb}
 import app.models.pixel.{Pixel, PixelGrey, PixelRgb}
 
@@ -8,7 +9,7 @@ class ImageProcessorImpl(val converter: Converter[ImageGrey, ImageAscii]) extend
 
 	private var _image: Image[_<:Pixel] = new ImageGrey(Vector(Vector(PixelGrey(0))))
 	private val importerImage = new ImageRgb(Vector(Vector(PixelRgb(0, 0, 0))))
-	private val greyedImage = new ImageGrey(Vector(Vector(PixelGrey(0))))
+	private var greyedImage = new ImageGrey(Vector(Vector(PixelGrey(0))))
 
 
 	override def loadImage(img: Image[_<:Pixel]): Unit = _image = img
@@ -34,5 +35,9 @@ class ImageProcessorImpl(val converter: Converter[ImageGrey, ImageAscii]) extend
 	//todo
 	override def convertImage(conversionTable: String): Unit = {
 //		_image = converter.convert(_image)
+	}
+
+	override def filterImage(filter: ImageFilter): Unit = {
+		greyedImage = filter.apply(greyedImage)
 	}
 }

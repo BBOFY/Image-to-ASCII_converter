@@ -1,5 +1,7 @@
 
+import app.builders.FilterBuilder
 import app.converters.AsciiLinearConverter
+import app.handlers.filterHandlers.FilterHandler
 import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.importers.{ImporterJpg, ImporterPng, PrimitiveImageGenerator}
 import app.inputParser.{InputArgumentsParser, InputParser}
@@ -18,15 +20,18 @@ object Main {
 
 	def main(args: Array[String]): Unit = {
 
-
+		// filter args
 		val inputParser = new InputArgumentsParser(args, commands)
 
+		// todo builder for converter, similarly as filters
 		val imageProcessor = new ImageProcessorImpl(new AsciiLinearConverter)
-		// filter args
 
 		// call import handler
+		importHandlers(imageProcessor).handle(inputParser.getImageSource)
 
 		// change image to greyscale (can be as a filter at the beginning)
+		imageProcessor.greyScaleImage()
+
 
 		// call filter handler
 		// or
@@ -36,7 +41,6 @@ object Main {
 
 		// call export handler
 
-		importHandlers(imageProcessor).handle(inputParser.getImageSource)
 	}
 
 	def importHandlers(imageProcessor: ImageProcessor): ImportHandler = {
@@ -53,4 +57,8 @@ object Main {
 
 		initialImportHandler
 	}
+
+//	def filterHandlers(filterBuilder: FilterBuilder): FilterHandler {
+//
+//	}
 }

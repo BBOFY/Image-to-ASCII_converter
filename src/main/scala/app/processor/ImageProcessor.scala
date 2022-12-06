@@ -1,6 +1,7 @@
 package app.processor
 
 import app.converters.{AsciiLinearConverter, Converter}
+import app.filters.ImageFilter
 import app.models.image.{Image, ImageAscii, ImageGrey}
 import app.models.pixel.Pixel
 import filters.Filter
@@ -9,6 +10,8 @@ trait ImageProcessor {
 	def loadImage(img: Image[_<:Pixel]): Unit
 
 	def greyScaleImage(): Unit
+
+	def filterImage(filter: ImageFilter): Unit
 
 //	def applyFilter(filter: Filter): Unit
 
