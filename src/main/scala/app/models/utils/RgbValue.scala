@@ -1,27 +1,22 @@
 package app.models.utils
 
 final case class RgbValue(_r: Int, _g: Int, _b: Int) {
-	private val r_ : Int = {
+	val r : Int = {
 		if (0 to 255 contains _r) _r
 		else
 			throw new IllegalArgumentException("Argument 'r' must be between 0 to 255")
 	}
 
-	private val g_ : Int = {
+	val g : Int = {
 		if (0 to 255 contains _g) _g
 		else
 			throw new IllegalArgumentException("Argument 'g' must be between 0 to 255")
 	}
 
-	private val b_ : Int = {
+	val b : Int = {
 		if (0 to 255 contains _b) _b
 		else
 			throw new IllegalArgumentException("Argument 'b' must be between 0 to 255")
 	}
 
-	def r: Int = r_
-
-	def g: Int = g_
-
-	def b: Int = b_
 }

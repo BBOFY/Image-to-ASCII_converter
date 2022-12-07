@@ -15,7 +15,7 @@ class AsciiConverter(protected val table: ConversionTable[Int, Char] = new Bourk
 		for (rowIdx <- 0 until image.height) {
 			var newRow: Vector[PixelAscii] = Vector.empty
 			for (columnIdx <- 0 until image.width) {
-				val pixelValue = image.getPixel(columnIdx, rowIdx).value_
+				val pixelValue = image.getPixel(columnIdx, rowIdx).value
 				newRow = newRow.appended(PixelAscii(
 					table.getTableValue(pixelValue)
 				))

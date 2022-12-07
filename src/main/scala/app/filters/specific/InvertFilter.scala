@@ -26,7 +26,7 @@ class InvertFilter extends ImageFilter {
 	}
 
 	protected def invertPixel(pix: PixelGrey): PixelGrey = {
-		val newVal = 255 - pix.value_
+		val newVal = 255 - pix.value
 		PixelGrey(newVal)
 	}
 }
