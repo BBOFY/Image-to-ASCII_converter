@@ -1,23 +1,24 @@
 package app.processor
 
-import app.converters.{AsciiConverter, Converter}
+import app.converters.{AsciiConverter, Converter, GreyScaler}
 import app.filters.ImageFilter
-import app.models.image.{Image, ImageAscii, ImageGrey}
+import app.models.image.{Image, ImageAscii, ImageGrey, ImageRgb}
 import app.models.pixel.Pixel
 import filters.Filter
 
 trait ImageProcessor {
-	def loadImage(img: Image[_<:Pixel]): Unit
+	def loadImage(img: ImageRgb): Unit
 
-	def greyScaleImage(): Unit
+	def greyScaleImage(greyScaleConverter: GreyScaler): Unit
 
 	def filterImage(filter: ImageFilter): Unit
 
-//	def applyFilter(filter: Filter): Unit
+	def convertImage(converter: AsciiConverter): Unit
 
-//	def convertImage(conversion: Converter[ImageGrey, ImageAscii]): Unit
+	/**
+	 * I am not using this form of method, because variation does not work
+	 */
+//	def convertImage(conversion: Converter[Image[Pixel], Image[Pixel]]): Unit
 
-	def convertImage(conversionTable: String): Unit
-
-	def getImage: Image[_<:Pixel]
+	def getDoneImage: ImageAscii
 }

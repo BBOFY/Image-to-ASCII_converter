@@ -1,40 +1,28 @@
 package app.processor
 
-import app.converters.Converter
+import app.converters.{AsciiConverter, Converter, GreyScaler}
 import app.filters.ImageFilter
 import app.models.image.{Image, ImageAscii, ImageGrey, ImageRgb}
-import app.models.pixel.{Pixel, PixelGrey, PixelRgb}
+import app.models.pixel.{Pixel, PixelAscii, PixelGrey, PixelRgb}
 
-class ImageProcessorImpl(val converter: Converter[ImageGrey, ImageAscii]) extends ImageProcessor {
+class ImageProcessorImpl extends ImageProcessor {
 
-	private var _image: Image[_<:Pixel] = new ImageGrey(Vector(Vector(PixelGrey(0))))
-	private val importerImage = new ImageRgb(Vector(Vector(PixelRgb(0, 0, 0))))
+	private var importedImage = new ImageRgb(Vector(Vector(PixelRgb(0, 0, 0))))
 	private var greyedImage = new ImageGrey(Vector(Vector(PixelGrey(0))))
+	private var asciiImage = new ImageAscii(Vector(Vector(PixelAscii('F'))))
+
+	override def loadImage(img: ImageRgb): Unit = importedImage = img
 
 
-	override def loadImage(img: Image[_<:Pixel]): Unit = _image = img
-
-	override def greyScaleImage(): Unit = {
-//		var newGrid: Vector[Vector[PixelGrey]] = Vector.empty
-//
-//		for (row <- 0 until _image.height) {
-//			var newRow: Vector[PixelGrey] = Vector.empty
-//			for (col <- 0 until _image.width) {
-//				val greyScaleValue = _image.getPixel(col, row).getGreyScale
-//				newRow = newRow.appended(PixelGrey(greyScaleValue))
-//			}
-//			newGrid = newGrid.appended(newRow)
-//		}
-//		_image = new ImageGrey(newGrid)
+	override def greyScaleImage(greyScaleConverter: GreyScaler): Unit = {
+		greyedImage = greyScaleConverter.convert(importedImage)
 	}
 
+	override def getDoneImage: ImageAscii = asciiImage
 
 
-	override def getImage: Image[_<:Pixel] = _image
-
-	//todo
-	override def convertImage(conversionTable: String): Unit = {
-//		_image = converter.convert(_image)
+	override def convertImage(converter: AsciiConverter): Unit = {
+		asciiImage = converter.convert(greyedImage)
 	}
 
 	override def filterImage(filter: ImageFilter): Unit = {
