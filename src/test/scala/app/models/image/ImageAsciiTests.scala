@@ -1,21 +1,20 @@
 package app.models.image
 
-import app.models.image.ImageGrey
-import app.models.pixel.PixelGrey
+import app.models.pixel.PixelAscii
 import org.scalatest.FunSuite
 
-class ImageGreyTests extends FunSuite {
+class ImageAsciiTests extends FunSuite {
 
-	val testingGrid: Vector[Vector[PixelGrey]] = Vector(
-		Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
-		Vector(PixelGrey(3), PixelGrey(4), PixelGrey(5))
+	val testingGrid: Vector[Vector[PixelAscii]] = Vector(
+		Vector(PixelAscii('0'), PixelAscii('1'), PixelAscii('2')),
+		Vector(PixelAscii('3'), PixelAscii('4'), PixelAscii('5'))
 	)
 
 	val width: Int = testingGrid.head.length
 	val height: Int = testingGrid.length
 
 	test("Valid image") {
-		val image = new ImageGrey(testingGrid)
+		val image = new ImageAscii(testingGrid)
 
 		assertResult(3) {
 			image.width
@@ -25,11 +24,11 @@ class ImageGreyTests extends FunSuite {
 			image.height
 		}
 
-		assertResult(2) {
+		assertResult('2') {
 			image.getPixel(2, 0).value
 		}
 
-		assertResult(4) {
+		assertResult('4') {
 			image.getPixel(1, 1).value
 		}
 
@@ -39,9 +38,9 @@ class ImageGreyTests extends FunSuite {
 	}
 
 	test("Small image") {
-		val smallGrid = Vector(Vector(PixelGrey(153)))
+		val smallGrid = Vector(Vector(PixelAscii('A')))
 
-		val img = new ImageGrey(smallGrid)
+		val img = new ImageAscii(smallGrid)
 
 		assertResult(1) {
 			img.width
@@ -52,7 +51,7 @@ class ImageGreyTests extends FunSuite {
 		assert(
 			img.getGrid == smallGrid
 		)
-		assertResult(153) {
+		assertResult('A') {
 			img.getPixel(0, 0).value
 		}
 		assertThrows[IndexOutOfBoundsException] {
@@ -69,7 +68,7 @@ class ImageGreyTests extends FunSuite {
 	test("Invalid image 0") {
 		val emptyGrid = Vector.empty
 		assertThrows[ExceptionInInitializerError] {
-			new ImageGrey(emptyGrid)
+			new ImageAscii(emptyGrid)
 		}
 	}
 
@@ -78,44 +77,44 @@ class ImageGreyTests extends FunSuite {
 			Vector.empty
 		)
 		assertThrows[ExceptionInInitializerError] {
-			new ImageGrey(gridEmptyRow)
+			new ImageAscii(gridEmptyRow)
 		}
 	}
 
 	test("Irregular image 0") {
 		val irregularGrid = Vector(
-			Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
-			Vector(PixelGrey(3), PixelGrey(4)),
-			Vector(PixelGrey(5), PixelGrey(6), PixelGrey(7))
+			Vector(PixelAscii(0), PixelAscii(1), PixelAscii(2)),
+			Vector(PixelAscii(3), PixelAscii(4)),
+			Vector(PixelAscii(5), PixelAscii(6), PixelAscii(7))
 		)
 		assertThrows[ExceptionInInitializerError] {
-			new ImageGrey(irregularGrid)
+			new ImageAscii(irregularGrid)
 		}
 	}
 
 	test("Irregular image 1") {
 		val irregularGrid = Vector(
-			Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
-			Vector(PixelGrey(3), PixelGrey(4), PixelGrey(5)),
-			Vector(PixelGrey(6), PixelGrey(7), PixelGrey(8)),
-			Vector(PixelGrey(91)),
-			Vector(PixelGrey(56))
+			Vector(PixelAscii(0), PixelAscii('1'), PixelAscii(2)),
+			Vector(PixelAscii('3'), PixelAscii(' '), PixelAscii('5')),
+			Vector(PixelAscii('6'), PixelAscii('7'), PixelAscii(8)),
+			Vector(PixelAscii(91)),
+			Vector(PixelAscii(56))
 		)
 		assertThrows[ExceptionInInitializerError] {
-			new ImageGrey(irregularGrid)
+			new ImageAscii(irregularGrid)
 		}
 	}
 
 	test("Empty row") {
 		val withEmptyRow = Vector(
-			Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
-			Vector(PixelGrey(3), PixelGrey(4), PixelGrey(5)),
-			Vector(PixelGrey(6), PixelGrey(7), PixelGrey(8)),
+			Vector(PixelAscii(0), PixelAscii('1'), PixelAscii(2)),
+			Vector(PixelAscii('3'), PixelAscii(' '), PixelAscii('5')),
+			Vector(PixelAscii('6'), PixelAscii('7'), PixelAscii(8)),
 			Vector.empty,
-			Vector(PixelGrey(6), PixelGrey(7), PixelGrey(8))
+			Vector(PixelAscii('3'), PixelAscii('4'), PixelAscii('5'))
 		)
 		assertThrows[ExceptionInInitializerError] {
-			new ImageGrey(withEmptyRow)
+			new ImageAscii(withEmptyRow)
 		}
 	}
 

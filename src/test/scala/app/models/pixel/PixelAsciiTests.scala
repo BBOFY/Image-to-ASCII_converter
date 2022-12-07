@@ -26,11 +26,11 @@ class PixelAsciiTests extends FunSuite {
 	}
 
 	test("Pixel invalid") {
-		assertThrows[IllegalArgumentException] {
+		assertThrows[ExceptionInInitializerError] {
 			PixelAscii(961)
 		}
 
-		assertThrows[IllegalArgumentException] {
+		assertThrows[ExceptionInInitializerError] {
 			PixelAscii('‰')
 		}
 	}

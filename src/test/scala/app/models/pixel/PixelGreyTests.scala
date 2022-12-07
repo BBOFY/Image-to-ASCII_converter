@@ -18,11 +18,11 @@ class PixelGreyTests extends FunSuite {
 
 	test("Pixel invalid") {
 
-		assertThrows[IllegalArgumentException] {
+		assertThrows[ExceptionInInitializerError] {
 			PixelGrey(-5)
 		}
 
-		assertThrows[IllegalArgumentException] {
+		assertThrows[ExceptionInInitializerError] {
 			PixelGrey(256)
 		}
 	}

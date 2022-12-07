@@ -22,16 +22,16 @@ class PixelRgbTests extends FunSuite {
 	}
 
 	test("Pixel invalid") {
-		assertThrows[IllegalArgumentException] {
+		assertThrows[ExceptionInInitializerError] {
 			PixelRgb(900, 12, -5)
 		}
-		assertThrows[IllegalArgumentException] {
+		assertThrows[ExceptionInInitializerError] {
 			PixelRgb(100, -12, 5)
 		}
-		assertThrows[IllegalArgumentException] {
+		assertThrows[ExceptionInInitializerError] {
 			PixelRgb(-100, -12, -5)
 		}
-		assertThrows[IllegalArgumentException] {
+		assertThrows[ExceptionInInitializerError] {
 			PixelRgb(1623, 256, 633)
 		}
 	}
