@@ -2,9 +2,10 @@ package app.handlers.filterHandlers
 
 import app.Commands
 import app.builders.FilterBuilder
-import app.filters.specific.{BrightnessFilter, VariableFilter}
-import app.handlers.Handler
+import app.filters.VariableFilter
+import app.filters.specific.BrightnessFilter
 import app.inputParser.InputParser
+import handler.Handler
 
 class BrightnessFilterHandler(val filterBuilder: FilterBuilder,
 							  val parser: InputParser[String],

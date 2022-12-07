@@ -4,7 +4,7 @@ import app.converters.{AsciiConverter, Converter, GreyScaler}
 import app.filters.ImageFilter
 import app.models.image.{Image, ImageAscii, ImageGrey, ImageRgb}
 import app.models.pixel.Pixel
-import filters.Filter
+import filter.Filter
 
 trait ImageProcessor {
 	def loadImage(img: ImageRgb): Unit

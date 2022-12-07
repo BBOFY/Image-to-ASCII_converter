@@ -1,10 +1,10 @@
 package app.handlers.importHandlers
 
 import app.Commands
-import app.handlers.Handler
 import app.importers.{ImportRandom, PrimitiveImageGenerator}
 import app.inputParser.InputParser
 import app.processor.ImageProcessor
+import handler.Handler
 
 class ImportRandomHandler(val imgProcessor: ImageProcessor,
 						  val parser: InputParser[String],

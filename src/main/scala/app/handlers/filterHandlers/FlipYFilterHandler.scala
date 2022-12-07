@@ -4,8 +4,8 @@ import app.Commands
 import app.builders.FilterBuilder
 import app.filters.ImageFilter
 import app.filters.specific.FlipYFilter
-import app.handlers.Handler
 import app.inputParser.InputParser
+import handler.Handler
 
 class FlipYFilterHandler(val filterBuilder: FilterBuilder,
 						 val parser: InputParser[String],

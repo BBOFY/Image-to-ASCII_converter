@@ -1,6 +1,6 @@
 package app.filters.specific
 
-import app.filters.ImageFilter
+import app.filters.{ImageFilter, VariableFilter}
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
 

@@ -1,4 +1,4 @@
-package app.handlers
+package handler
 
 class SimpleHandler[T] extends Handler[T] {
 	var nextHandler: Option[Handler[T]] = None

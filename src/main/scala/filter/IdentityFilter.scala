@@ -1,4 +1,4 @@
-package filters
+package filter
 
 class IdentityFilter[T] extends Filter[T] {
 

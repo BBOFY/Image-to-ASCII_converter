@@ -1,6 +1,6 @@
 package app.handlers.converterHandlers
 
-import app.handlers.{Handler, SimpleHandler}
+import handler.{Handler, SimpleHandler}
 
 trait ConverterHandler extends SimpleHandler[List[String]] {
 

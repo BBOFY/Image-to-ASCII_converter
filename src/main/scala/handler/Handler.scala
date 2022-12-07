@@ -1,4 +1,4 @@
-package app.handlers
+package handler
 
 import scala.annotation.tailrec
 
@@ -9,7 +9,7 @@ trait Handler[T] {
 }
 
 object Handler {
-	def handleAll[T](start: Handler[T], value: T) = {
+	def handleAll[T](start: Handler[T], value: T): Unit = {
 
 		@tailrec
 		def handleLoop(current: Handler[T]): Unit = {

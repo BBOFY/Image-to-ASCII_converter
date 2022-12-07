@@ -1,6 +1,6 @@
 package app.handlers.importHandlers
 
-import app.handlers.{Handler, SimpleHandler}
+import handler.{Handler, SimpleHandler}
 
 trait ImportHandler extends SimpleHandler[List[String]] {
 

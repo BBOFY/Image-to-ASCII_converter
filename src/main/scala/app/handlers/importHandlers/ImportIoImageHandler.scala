@@ -1,10 +1,10 @@
 package app.handlers.importHandlers
 
 import app.Commands
-import app.handlers.Handler
 import app.importers.ImporterImageIo
 import app.inputParser.InputParser
 import app.processor.ImageProcessor
+import handler.Handler
 
 abstract class ImportIoImageHandler(private val importer: ImporterImageIo,
 									private val imgProcessor: ImageProcessor,

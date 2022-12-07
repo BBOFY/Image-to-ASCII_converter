@@ -1,7 +1,7 @@
 package app.filters
 
 import app.models.image.ImageGrey
-import filters.Filter
+import filter.Filter
 
 trait ImageFilter extends Filter[ImageGrey] {
 

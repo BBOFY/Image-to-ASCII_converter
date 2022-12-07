@@ -1,4 +1,4 @@
-package filters
+package filter
 
 trait Filter[T] {
 

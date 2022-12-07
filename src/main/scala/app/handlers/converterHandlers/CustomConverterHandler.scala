@@ -2,9 +2,9 @@ package app.handlers.converterHandlers
 
 import app.Commands
 import app.builders.AsciiConversionBuilder
-import app.handlers.Handler
 import app.inputParser.InputParser
 import app.models.conversionTables.CustomTable
+import handler.Handler
 
 class CustomConverterHandler(val builder: AsciiConversionBuilder,
 							 val parser: InputParser[String],

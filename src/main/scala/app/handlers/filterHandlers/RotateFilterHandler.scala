@@ -2,9 +2,10 @@ package app.handlers.filterHandlers
 
 import app.Commands
 import app.builders.FilterBuilder
-import app.filters.specific.{RotateFilter, VariableFilter}
-import app.handlers.Handler
+import app.filters.VariableFilter
+import app.filters.specific.RotateFilter
 import app.inputParser.InputParser
+import handler.Handler
 
 class RotateFilterHandler(val filterBuilder: FilterBuilder,
 						  val parser: InputParser[String],
