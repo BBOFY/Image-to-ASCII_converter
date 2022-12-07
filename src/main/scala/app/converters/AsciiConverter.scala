@@ -5,7 +5,7 @@ import app.models.image.{Image, ImageAscii, ImageGrey}
 import app.models.pixel.{Pixel, PixelAscii}
 
 
-class AsciiConverter(protected val table: ConversionTable[Int, Char] = new BourkeTable(255))
+class AsciiConverter(protected val table: ConversionTable[Int, Char] = new BourkeTable)
   extends Converter[ImageGrey, ImageAscii] {
 	
 	override def convert(image: ImageGrey): ImageAscii = {

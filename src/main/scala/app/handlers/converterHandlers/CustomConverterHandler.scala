@@ -8,7 +8,7 @@ import handler.Handler
 
 class CustomConverterHandler(val builder: AsciiConversionBuilder,
 							 val parser: InputParser[String],
-							 val conversionTable: CustomTable = new CustomTable(255)
+							 val conversionTable: CustomTable = CustomTable()
 							)
   extends ConverterHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {

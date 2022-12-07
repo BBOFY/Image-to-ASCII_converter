@@ -8,7 +8,7 @@ import handler.Handler
 
 class BourkeConverterHandler(val builder: AsciiConversionBuilder,
 							 val parser: InputParser[String],
-							 val table: BourkeTable = new BourkeTable(255)
+							 val table: BourkeTable = BourkeTable()
 							)
   extends ConverterHandler {
 

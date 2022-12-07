@@ -8,7 +8,7 @@ import handler.Handler
 
 class ConstantConverterHandler(val builder: AsciiConversionBuilder,
 							   val parser: InputParser[String],
-							   val table: ConstantTable = new ConstantTable(255)
+							   val table: ConstantTable = ConstantTable()
 							  )
   extends ConverterHandler {
 
