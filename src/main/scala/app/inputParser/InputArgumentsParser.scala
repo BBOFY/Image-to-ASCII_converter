@@ -27,9 +27,7 @@ class InputArgumentsParser(private val args: Array[String], private val cmds: Co
 		newList
 	}
 
-	override def getFirstElement: String = {
-		_args.head
-	}
+	override def getArgs: List[String] = _args
 
 //	sortArguments()
 	/*private def sortArguments(): Unit = {
