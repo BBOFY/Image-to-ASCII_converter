@@ -1,10 +1,8 @@
 package app.inputParser
 
-import app.inputParser.commands.DefaultCommands
 import org.scalatest.FunSuite
 
 class InputArgumentParserTests extends FunSuite {
-	val commandSet = new DefaultCommands
 
 	test("Valid 0") {}
 	test("Valid 1") {}

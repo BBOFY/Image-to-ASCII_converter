@@ -1,10 +1,12 @@
 package app.inputParser
 
 trait InputParser[T] {
-	def checkValidity: Boolean
+	def checkValidity(): Unit
 
 	def removeElements(count: Int): List[T]
 
 	def getArgs: List[T]
+
+	def checkResidue(): Unit
 
 }

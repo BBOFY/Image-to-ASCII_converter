@@ -2,13 +2,14 @@ package app.handlers.filterHandlers
 
 import app.Commands
 import app.builders.FilterBuilder
+import app.filters.ImageFilter
 import app.filters.specific.FlipXFilter
 import app.handlers.Handler
 import app.inputParser.InputParser
 
 class FlipXFilterHandler(val filterBuilder: FilterBuilder,
 						val parser: InputParser[String],
-						val filter: FlipXFilter = new FlipXFilter
+						val filter: ImageFilter = new FlipXFilter
 					   )
   extends FilterHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {

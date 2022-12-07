@@ -2,13 +2,14 @@ package app.handlers.filterHandlers
 
 import app.Commands
 import app.builders.FilterBuilder
+import app.filters.ImageFilter
 import app.filters.specific.InvertFilter
 import app.handlers.Handler
 import app.inputParser.InputParser
 
 class InvertFilterHandler(val filterBuilder: FilterBuilder,
 						  val parser: InputParser[String],
-						  val filter: InvertFilter = new InvertFilter
+						  val filter: ImageFilter = new InvertFilter
 						 )
 	extends FilterHandler {
 
