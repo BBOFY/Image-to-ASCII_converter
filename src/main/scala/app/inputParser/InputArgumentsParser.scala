@@ -1,8 +1,8 @@
 package app.inputParser
 
-import app.inputParser.commands.Commands
+import app.Commands
 
-class InputArgumentsParser(private val args: Array[String], private val cmds: Commands ) extends InputParser[String]{
+class InputArgumentsParser(private val args: Array[String]) extends InputParser[String]{
 
 	private var _args: List[String] = args.toList
 
@@ -10,9 +10,9 @@ class InputArgumentsParser(private val args: Array[String], private val cmds: Co
 		var importArgsCount = 0
 		var conversionArgsCount = 0
 		for (arg <- _args) {
-			if (arg == cmds.cmdImage || arg == cmds.cmdImageRandom)
+			if (arg == Commands.image || arg == Commands.imageRandom)
 				importArgsCount = importArgsCount + 1
-			else if (arg == cmds.cmdTable || arg == cmds.cmdTableCustom)
+			else if (arg == Commands.table || arg == Commands.tableCustom)
 				conversionArgsCount = conversionArgsCount + 1
 		}
 		if (importArgsCount != 1 || conversionArgsCount > 1)

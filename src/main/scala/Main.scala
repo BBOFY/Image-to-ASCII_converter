@@ -1,29 +1,24 @@
 
 import app.builders.{AsciiConversionBuilder, FilterBuilder}
-import app.converters.{AsciiConverter, GreyScaler}
+import app.converters.GreyScaler
 import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, ConverterHandler, CustomConverterHandler}
-import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
+import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipXFilterHandler, FlipYFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.importers.{ImporterJpg, ImporterPng, PrimitiveImageGenerator}
-import app.inputParser.commands.DefaultCommands
-import app.inputParser.{InputArgumentsParser, InputParser}
+import app.inputParser.InputArgumentsParser
 import app.processor.{ImageProcessor, ImageProcessorImpl}
 
-import scala.io.Source
-import java.io.{File, PrintStream}
-import javax.imageio.ImageIO
-import java.awt.image.BufferedImage
+import java.io.PrintStream
 
 object Main {
 
 	val outStream = new PrintStream(System.out)
-	val commands = new DefaultCommands
 
 	def main(args: Array[String]): Unit = {
 
 		// filter args
 
-		val inputParser = new InputArgumentsParser(args, commands)
+		val inputParser = new InputArgumentsParser(args)
 		val imageProcessor = new ImageProcessorImpl
 
 		val conversionBuilder = new AsciiConversionBuilder
@@ -62,9 +57,9 @@ object Main {
 
 	def importHandlers(imageProcessor: ImageProcessor, parser: InputArgumentsParser): ImportHandler = {
 
-		val importJpgHandler = new ImportJpgHandler(new ImporterJpg, imageProcessor, parser, commands)
-		val importPngHandler = new ImportPngHandler(new ImporterPng, imageProcessor, parser, commands)
-		val importRandomHandler = new ImportRandomHandler(new PrimitiveImageGenerator, imageProcessor, parser, commands)
+		val importJpgHandler = new ImportJpgHandler(imageProcessor, parser)
+		val importPngHandler = new ImportPngHandler(imageProcessor, parser)
+		val importRandomHandler = new ImportRandomHandler(imageProcessor, parser)
 
 		val initialImportHandler: ImportHandler = importJpgHandler
 		initialImportHandler
@@ -76,24 +71,26 @@ object Main {
 	}
 
 	def filterHandlers(filterBuilder: FilterBuilder, parser: InputArgumentsParser): FilterHandler = {
-		val brightnessFilterHandler = new BrightnessFilterHandler(filterBuilder, parser, commands)
-		val rotateFilterHandler = new RotateFilterHandler(filterBuilder, parser, commands)
-		val flipFilterHandler = new FlipFilterHandler(filterBuilder, parser, commands)
-		val invertFilterHandler = new InvertFilterHandler(filterBuilder, parser, commands)
+		val brightnessFilterHandler = new BrightnessFilterHandler(filterBuilder, parser)
+		val rotateFilterHandler = new RotateFilterHandler(filterBuilder, parser)
+		val flipXFilterHandler = new FlipXFilterHandler(filterBuilder, parser)
+		val flipYFilterHandler = new FlipYFilterHandler(filterBuilder, parser)
+		val invertFilterHandler = new InvertFilterHandler(filterBuilder, parser)
 
 		val initialFilterHandler: FilterHandler = brightnessFilterHandler
 		brightnessFilterHandler
 		  .setNext(rotateFilterHandler)
-		  .setNext(flipFilterHandler)
+		  .setNext(flipXFilterHandler)
+		  .setNext(flipYFilterHandler)
 		  .setNext(invertFilterHandler)
 
 		initialFilterHandler
 	}
 
 	def converterHandlers(converterBuilder: AsciiConversionBuilder, parser: InputArgumentsParser): ConverterHandler = {
-		val bourkeConverterHandler = new BourkeConverterHandler(converterBuilder, parser, commands)
-		val constantConverterHandler = new ConstantConverterHandler(converterBuilder, parser, commands)
-		val customConverterHandler = new CustomConverterHandler(converterBuilder, parser, commands)
+		val bourkeConverterHandler = new BourkeConverterHandler(converterBuilder, parser)
+		val constantConverterHandler = new ConstantConverterHandler(converterBuilder, parser)
+		val customConverterHandler = new CustomConverterHandler(converterBuilder, parser)
 
 		val initialConverterHandler: ConverterHandler = bourkeConverterHandler
 		bourkeConverterHandler
