@@ -5,6 +5,6 @@ trait InputParser[T] {
 
 	def removeElements(count: Int): List[T]
 
-	def getFirstElement: T
+	def getArgs: List[T]
 
 }

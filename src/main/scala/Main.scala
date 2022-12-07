@@ -1,7 +1,7 @@
 
 import app.builders.FilterBuilder
-import app.converters.AsciiConverter
-import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler}
+import app.converters.{AsciiConverter, GreyScaler}
+import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.importers.{ImporterJpg, ImporterPng, PrimitiveImageGenerator}
 import app.inputParser.commands.DefaultCommands
@@ -23,15 +23,21 @@ object Main {
 		// filter args
 		val inputParser = new InputArgumentsParser(args, commands)
 
+		val asciiConverter = new AsciiConverter
+
 		// todo builder for converter, similarly as filters
-		val imageProcessor = new ImageProcessorImpl(new AsciiConverter)
+		val imageProcessor = new ImageProcessorImpl
 		val filterBuilder = new FilterBuilder
+
+
+		val imageFilter = filterBuilder.build
+
 
 		// call import handler
 //		importHandlers(imageProcessor).handle(inputParser.getImageSource)
 
 		// change image to greyscale (can be as a filter at the beginning)
-		imageProcessor.greyScaleImage()
+
 
 
 		// sort args into pairs on as singles (defined by command) in input parser
@@ -41,6 +47,10 @@ object Main {
 		// call image processor's filtering
 		// call conversion specified in args
 		// call export handlers, image processor should only pass done image to exporters via handler
+
+		imageProcessor.greyScaleImage(new GreyScaler)
+		imageProcessor.filterImage(imageFilter)
+		imageProcessor.convertImage(asciiConverter)
 
 	}
 
@@ -59,10 +69,17 @@ object Main {
 		initialImportHandler
 	}
 
-	def filterHandlers(filterBuilder: FilterBuilder): FilterHandler = {
-		val brightnessFilterHandler = new BrightnessFilterHandler(filterBuilder, commands)
+	def filterHandlers(filterBuilder: FilterBuilder, parser: InputArgumentsParser): FilterHandler = {
+		val brightnessFilterHandler = new BrightnessFilterHandler(filterBuilder, parser, commands)
+		val rotateFilterHandler = new RotateFilterHandler(filterBuilder, parser, commands)
+		val flipFilterHandler = new FlipFilterHandler(filterBuilder, parser, commands)
+		val invertFilterHandler = new InvertFilterHandler(filterBuilder, parser, commands)
 
 		val initialFilterHandler: FilterHandler = brightnessFilterHandler
+		brightnessFilterHandler
+		  .setNext(rotateFilterHandler)
+		  .setNext(flipFilterHandler)
+		  .setNext(invertFilterHandler)
 
 		initialFilterHandler
 	}
