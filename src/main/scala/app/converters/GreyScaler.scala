@@ -19,7 +19,7 @@ class GreyScaler extends Converter[ImageRgb, ImageGrey] {
 	}
 
 	private def getGreyScale(pixelRgb: PixelRgb): PixelGrey = {
-		val greyValue = ((0.3 * pixelRgb.value_.r) + (0.59 * pixelRgb.value_.g) + (0.11 * pixelRgb.value_.b)).toInt
+		val greyValue = ((0.3 * pixelRgb.value.r) + (0.59 * pixelRgb.value.g) + (0.11 * pixelRgb.value.b)).toInt
 		PixelGrey(greyValue)
 	}
 }
