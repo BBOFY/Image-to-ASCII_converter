@@ -1,7 +1,6 @@
 package app.models.image
 
-import app.models.pixel.PixelRgb
-import app.models.utils.RgbValue
+import app.models.pixel.{PixelRgb, RgbValue}
 import org.scalatest.FunSuite
 
 class ImageRgbTests extends FunSuite {
