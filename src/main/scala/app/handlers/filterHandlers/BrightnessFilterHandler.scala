@@ -1,10 +1,9 @@
 package app.handlers.filterHandlers
 
 import app.builders.FilterBuilder
-import app.filters.ImageFilter
 import app.filters.specific.BrightnessFilter
 import app.handlers.Handler
-import app.models.commands.Commands
+import app.inputParser.commands.Commands
 
 class BrightnessFilterHandler(val filterBuilder: FilterBuilder, val cmds: Commands) extends FilterHandler {
 

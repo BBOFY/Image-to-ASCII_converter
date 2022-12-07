@@ -4,8 +4,8 @@ import app.converters.AsciiLinearConverter
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler}
 import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.importers.{ImporterJpg, ImporterPng, PrimitiveImageGenerator}
+import app.inputParser.commands.DefaultCommands
 import app.inputParser.{InputArgumentsParser, InputParser}
-import app.models.commands.DefaultCommands
 import app.processor.{ImageProcessor, ImageProcessorImpl}
 
 import scala.io.Source

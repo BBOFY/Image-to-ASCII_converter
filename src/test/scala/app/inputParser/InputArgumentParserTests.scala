@@ -1,6 +1,6 @@
 package app.inputParser
 
-import app.models.commands.DefaultCommands
+import app.inputParser.commands.DefaultCommands
 import org.scalatest.FunSuite
 
 class InputArgumentParserTests extends FunSuite {

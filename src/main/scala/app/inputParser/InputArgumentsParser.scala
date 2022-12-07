@@ -1,6 +1,6 @@
 package app.inputParser
 
-import app.models.commands.Commands
+import app.inputParser.commands.Commands
 
 class InputArgumentsParser(private val args: Array[String], val cmds: Commands ) extends InputParser[List[String]]{
 

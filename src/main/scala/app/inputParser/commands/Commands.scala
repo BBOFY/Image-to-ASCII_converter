@@ -1,4 +1,4 @@
-package app.models.commands
+package app.inputParser.commands
 
 trait Commands {
 

@@ -2,7 +2,7 @@ package app.handlers.importHandlers
 
 import app.handlers.{Handler, SimpleHandler}
 import app.importers.{ImporterImageIo, ImporterJpg}
-import app.models.commands.Commands
+import app.inputParser.commands.Commands
 import app.processor.{ImageProcessor, ImageProcessorImpl}
 
 class ImportJpgHandler(val importer: ImporterImageIo, val imgProcessor: ImageProcessor, val cmds: Commands) extends ImportHandler {

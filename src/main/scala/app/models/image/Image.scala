@@ -2,7 +2,7 @@ package app.models.image
 
 import app.models.pixel.Pixel
 
-abstract class Image[T](private val __grid: Vector[Vector[T]]) {
+abstract class Image[+T](private val __grid: Vector[Vector[T]]) {
 
 	protected val _grid: Vector[Vector[T]] = {
 		if (__grid.isEmpty) throw new IllegalArgumentException("Image must have at least 1x1 dimensions")

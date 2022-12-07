@@ -2,7 +2,7 @@ package app.handlers.importHandlers
 
 import app.handlers.Handler
 import app.importers.ImportRandom
-import app.models.commands.Commands
+import app.inputParser.commands.Commands
 import app.processor.ImageProcessor
 
 class ImportRandomHandler(val importer: ImportRandom, val imgProcessor: ImageProcessor, val cmds: Commands) extends ImportHandler {
