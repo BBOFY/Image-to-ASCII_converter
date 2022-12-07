@@ -1,6 +1,4 @@
-package app.filters.specific
-
-import app.filters.ImageFilter
+package app.filters
 
 trait VariableFilter extends ImageFilter {
 	def setValue(value: Int): Unit

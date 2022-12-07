@@ -1,6 +1,6 @@
 //package app.importers
 //
-//import app.handlers.Handler
+//import handlers.Handler
 //import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler}
 //import app.processor.ImageProcessorImpl
 //import org.scalatest.FunSuite
