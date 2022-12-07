@@ -4,6 +4,8 @@ import app.models.image.{Image, ImageGrey, ImageRgb}
 import app.models.pixel.{PixelGrey, PixelRgb}
 
 class GreyScaler extends Converter[ImageRgb, ImageGrey] {
+
+	@throws[IllegalArgumentException]
 	override def convert(image: ImageRgb): ImageGrey = {
 
 		var newGrid = Vector.fill(image.height, image.width)(PixelGrey(0))

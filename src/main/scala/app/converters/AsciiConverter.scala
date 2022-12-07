@@ -7,7 +7,8 @@ import app.models.pixel.{Pixel, PixelAscii}
 
 class AsciiConverter(protected val table: ConversionTable[Int, Char] = new BourkeTable)
   extends Converter[ImageGrey, ImageAscii] {
-	
+
+	@throws[IllegalArgumentException]
 	override def convert(image: ImageGrey): ImageAscii = {
 
 		var newGrid: Vector[Vector[PixelAscii]] = Vector.empty

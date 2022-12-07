@@ -5,13 +5,13 @@ import app.models.pixel.Pixel
 abstract class Image[+T](private val __grid: Vector[Vector[T]]) {
 
 	protected val _grid: Vector[Vector[T]] = {
-		if (__grid.isEmpty) throw new IllegalArgumentException("Image must have at least 1x1 dimensions")
+		if (__grid.isEmpty) throw new ExceptionInInitializerError("Image must have at least 1x1 dimensions")
 
 		val w = __grid.apply(0).length
 
 		__grid.foreach( row => {
-			if (row.isEmpty) throw new IllegalArgumentException("Rows must not be empty")
-			if (row.length != w) throw new IllegalArgumentException("Image must be rectangular")
+			if (row.isEmpty) throw new ExceptionInInitializerError("Rows must not be empty")
+			if (row.length != w) throw new ExceptionInInitializerError("Image must be rectangular")
 		} )
 		__grid
 	}
@@ -29,13 +29,10 @@ abstract class Image[+T](private val __grid: Vector[Vector[T]]) {
 	def height: Int = _height
 
 	def getPixel(x: Int, y: Int): T = {
-		if (x >= _width) throwArgEx("x")
-		if (y >= _height) throwArgEx("y")
+		if (x >= _width) throw new IndexOutOfBoundsException("Parameter \'x\' is out of bounds of image size")
+		if (y >= _height) throw new IndexOutOfBoundsException("Parameter \'y\' is out of bounds of image size")
 		_grid.apply(y).apply(x)
-	}
 
-	protected def throwArgEx(param: String): Unit = {
-		throw new IllegalArgumentException(s"Parameter $param is out of bounds of image size")
 	}
 
 	override def equals(o: Any): Boolean = o match {
@@ -43,7 +40,7 @@ abstract class Image[+T](private val __grid: Vector[Vector[T]]) {
 		case _ => false
 	}
 
-	override def hashCode: Int = __grid.hashCode
+	override def hashCode: Int = (_grid.hashCode * _width.hashCode * _height.hashCode).hashCode
 }
 
 
