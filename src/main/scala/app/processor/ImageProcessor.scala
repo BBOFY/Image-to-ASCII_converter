@@ -1,6 +1,6 @@
 package app.processor
 
-import app.converters.{AsciiLinearConverter, Converter}
+import app.converters.{AsciiConverter, Converter}
 import app.filters.ImageFilter
 import app.models.image.{Image, ImageAscii, ImageGrey}
 import app.models.pixel.Pixel

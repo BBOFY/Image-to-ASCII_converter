@@ -3,14 +3,14 @@ package app.builders
 import app.filters.{IdentityImageFilter, ImageFilter}
 import app.filters.mixed.MixedFilter
 
-class FilterBuilder {
+class FilterBuilder extends Builder[ImageFilter, ImageFilter] {
 
 	var filters: Seq[ImageFilter] = Seq(IdentityImageFilter)
 
-	def registerProperty(filter: ImageFilter): Unit = {
+	override def registerProperty(filter: ImageFilter): Unit = {
 		filters = filters.appended(filter)
 	}
 
-	def build: ImageFilter = new MixedFilter(filters)
+	override def build: ImageFilter = new MixedFilter(filters)
 
 }

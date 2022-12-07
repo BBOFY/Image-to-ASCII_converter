@@ -1,13 +1,10 @@
 package app.inputParser
 
 trait InputParser[T] {
+	def checkValidity: Boolean
 
-	def getImageSource: T
+	def removeElements(count: Int): List[T]
 
-	def getFilterArgs: T
-
-	def getConversionArgs: T
-
-	def getExportingArgs: T
+	def getFirstElement: T
 
 }

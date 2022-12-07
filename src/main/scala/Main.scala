@@ -1,6 +1,6 @@
 
 import app.builders.FilterBuilder
-import app.converters.AsciiLinearConverter
+import app.converters.AsciiConverter
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler}
 import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.importers.{ImporterJpg, ImporterPng, PrimitiveImageGenerator}
@@ -24,11 +24,11 @@ object Main {
 		val inputParser = new InputArgumentsParser(args, commands)
 
 		// todo builder for converter, similarly as filters
-		val imageProcessor = new ImageProcessorImpl(new AsciiLinearConverter)
+		val imageProcessor = new ImageProcessorImpl(new AsciiConverter)
 		val filterBuilder = new FilterBuilder
 
 		// call import handler
-		importHandlers(imageProcessor).handle(inputParser.getImageSource)
+//		importHandlers(imageProcessor).handle(inputParser.getImageSource)
 
 		// change image to greyscale (can be as a filter at the beginning)
 		imageProcessor.greyScaleImage()
@@ -44,11 +44,11 @@ object Main {
 
 	}
 
-	def importHandlers(imageProcessor: ImageProcessor): ImportHandler = {
+	def importHandlers(imageProcessor: ImageProcessor, parser: InputArgumentsParser): ImportHandler = {
 
-		val importJpgHandler = new ImportJpgHandler(new ImporterJpg, imageProcessor, commands)
-		val importPngHandler = new ImportPngHandler(new ImporterPng, imageProcessor, commands)
-		val importRandomHandler = new ImportRandomHandler(new PrimitiveImageGenerator, imageProcessor, commands)
+		val importJpgHandler = new ImportJpgHandler(new ImporterJpg, imageProcessor, parser, commands)
+		val importPngHandler = new ImportPngHandler(new ImporterPng, imageProcessor, parser, commands)
+		val importRandomHandler = new ImportRandomHandler(new PrimitiveImageGenerator, imageProcessor, parser, commands)
 
 		val initialImportHandler: ImportHandler = importJpgHandler
 		initialImportHandler

@@ -2,27 +2,37 @@ package app.inputParser
 
 import app.inputParser.commands.Commands
 
-class InputArgumentsParser(private val args: Array[String], val cmds: Commands ) extends InputParser[List[String]]{
+class InputArgumentsParser(private val args: Array[String], private val cmds: Commands ) extends InputParser[String]{
 
-	private var importArgs: List[String] = List.empty
-	private var filtersArgs: List[String] = List.empty
-	private var convertersArgs: List[String] = List.empty
-	private var exportArgs: List[String] = List.empty
+	private var _args: List[String] = args.toList
 
-	private var importArgsCount = 0
-	private var conversionArgsCount = 0
+	override def checkValidity: Boolean = {
+		var importArgsCount = 0
+		var conversionArgsCount = 0
+		for (arg <- _args) {
+			if (arg == cmds.cmdImage || arg == cmds.cmdImageRandom)
+				importArgsCount = importArgsCount + 1
+			else if (arg == cmds.cmdTable || arg == cmds.cmdTableCustom)
+				conversionArgsCount = conversionArgsCount + 1
+		}
+		if (importArgsCount != 1 || conversionArgsCount > 1)
+			false
+		else true
+	}
 
-	sortArguments()
+	override def removeElements(count: Int): List[String] = {
+		var newList = _args
+		for (c <- 1 to count)
+			newList = newList.tail
+		newList
+	}
 
-	override def getImageSource: List[String] = importArgs
+	override def getFirstElement: String = {
+		_args.head
+	}
 
-	override def getFilterArgs: List[String] = filtersArgs
-
-	override def getConversionArgs: List[String] = convertersArgs
-
-	override def getExportingArgs: List[String] = exportArgs
-
-	private def sortArguments(): Unit = {
+//	sortArguments()
+	/*private def sortArguments(): Unit = {
 		var argIndex = 0
 		while (argIndex < args.length) {
 			val arg = args.apply(argIndex)
@@ -78,6 +88,7 @@ class InputArgumentsParser(private val args: Array[String], val cmds: Commands )
 			if (conversionArgsCount > 1) throw new IllegalArgumentException("There must be at most one \"--table\" \"--custom-table\" argument")
 		}
 
-	}
+	}*/
+
 
 }

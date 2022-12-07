@@ -2,7 +2,7 @@ package app.handlers.converterHandlers
 
 import app.handlers.{Handler, SimpleHandler}
 
-abstract class ConvertsionHandler extends SimpleHandler[String] {
+trait ConvertsionHandler extends SimpleHandler[List[String]] {
 
-	def handle(convTable: String): Option[Handler[String]]
+	def handle(args: List[String]): Option[Handler[List[String]]]
 }
