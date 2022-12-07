@@ -27,10 +27,13 @@ class BrightnessFilter extends VariableFilter {
 	}
 
 	protected def brightenPixel(brightnessInc: Int, pixel: PixelGrey): PixelGrey = {
+		if (brightnessInc < -255) return PixelGrey(0)
+		if (brightnessInc > 255) return PixelGrey(255)
+
 		val newPixelValue = pixel.value_ + brightnessInc
 		newPixelValue match {
-			case x if x <= 0 => PixelGrey(0)
-			case x if x >= 0 => PixelGrey(255)
+			case x if x < 0 => PixelGrey(0)
+			case x if x > 255 => PixelGrey(255)
 			case _ => PixelGrey(newPixelValue)
 		}
 	}
