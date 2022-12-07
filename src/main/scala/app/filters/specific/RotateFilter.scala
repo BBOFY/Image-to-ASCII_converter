@@ -4,11 +4,13 @@ import app.filters.ImageFilter
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
 
-class RotateFilter(val rotation: Int) extends ImageFilter {
+class RotateFilter extends VariableFilter {
+
+	private var _rotation: Int = 0
 
 	override def apply(image: ImageGrey): ImageGrey = {
 
-		rotation % 360 match {
+		_rotation % 360 match {
 			case 0 => image
 			case 90 | -270 =>
 				rotateClockVise90(image)
@@ -44,4 +46,6 @@ class RotateFilter(val rotation: Int) extends ImageFilter {
 		}
 		new ImageGrey(newGrid)
 	}
+
+	override def setValue(rotation: Int): Unit = _rotation = rotation
 }

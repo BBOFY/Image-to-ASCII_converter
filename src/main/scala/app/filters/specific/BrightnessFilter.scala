@@ -5,7 +5,9 @@ import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
 
 
-class BrightnessFilter(private val increment: Int) extends ImageFilter {
+class BrightnessFilter extends VariableFilter {
+
+	private var _increment: Int = 0
 
 	override def apply(image: ImageGrey): ImageGrey = {
 
@@ -14,7 +16,7 @@ class BrightnessFilter(private val increment: Int) extends ImageFilter {
 		for (row <- image.getGrid) {
 			var newRow: Vector[PixelGrey] = Vector.empty
 			for (pixel <- row) {
-				val brightenedPixel = brightenPixel(increment, pixel)
+				val brightenedPixel = brightenPixel(_increment, pixel)
 				newRow = newRow.appended(brightenedPixel)
 			}
 			newGrid = newGrid.appended(newRow)
@@ -32,5 +34,7 @@ class BrightnessFilter(private val increment: Int) extends ImageFilter {
 			case _ => PixelGrey(newPixelValue)
 		}
 	}
+
+	override def setValue(increment: Int): Unit = _increment = increment
 }
 

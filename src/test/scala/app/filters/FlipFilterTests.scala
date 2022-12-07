@@ -1,14 +1,14 @@
 package app.filters
 
-import app.filters.specific.FlipFilter
+import app.filters.specific.{FlipXFilter, FlipYFilter}
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
 import org.scalatest.FunSuite
 
 class FlipFilterTests extends FunSuite {
 
-	val flipperX = new FlipFilter("x")
-	val flipperY = new FlipFilter("y")
+	val flipperX = new FlipXFilter
+	val flipperY = new FlipYFilter
 
 	val testImg = new ImageGrey(
 		Vector(
