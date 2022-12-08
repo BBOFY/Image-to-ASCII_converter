@@ -11,12 +11,12 @@ class StdOutputHandler(val exporterBuilder: ExporterBuilder,
 					  )
   extends ExporterHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
-		if (args.head == Commands.outputConsole) {
+		if (args.nonEmpty && args.head == Commands.outputConsole) {
 			val exporter = new StdOutputExporter
 			exporterBuilder.registerProperty(exporter)
 			parser.removeElements(1)
-			None
+			return None
 		}
-		else nextHandler
+		nextHandler
 	}
 }
