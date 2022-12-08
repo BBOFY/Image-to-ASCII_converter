@@ -2,7 +2,7 @@ package app.models.conversionTables
 
 import org.scalatest.FunSuite
 
-class ConversionTableTests extends FunSuite {
+abstract class ConversionTableTests extends FunSuite {
 
 	protected def validValueTest(table: AsciiTable, initial: Int, expected: Char): Unit = {
 		test(s"Valid value $initial") {
