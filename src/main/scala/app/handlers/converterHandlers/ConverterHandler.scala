@@ -1,8 +1,6 @@
 package app.handlers.converterHandlers
 
-import handler.{Handler, SimpleHandler}
+import app.handlers.CommandHandler
 
-trait ConverterHandler extends SimpleHandler[List[String]] {
-
-	def handle(args: List[String]): Option[Handler[List[String]]]
+trait ConverterHandler extends CommandHandler {
 }

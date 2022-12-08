@@ -1,8 +1,8 @@
 package app.handlers.importHandlers
 
+import app.handlers.CommandHandler
 import handler.{Handler, SimpleHandler}
 
-trait ImportHandler extends SimpleHandler[List[String]] {
+trait ImportHandler extends CommandHandler {
 
-	def handle(args: List[String]): Option[Handler[List[String]]]
 }

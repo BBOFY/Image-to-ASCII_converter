@@ -1,7 +1,7 @@
 package app.handlers.filterHandlers
 
-import handler.{Handler, SimpleHandler}
+import app.handlers.CommandHandler
 
-trait FilterHandler extends SimpleHandler[List[String]] {
+trait FilterHandler extends CommandHandler {
 
 }
