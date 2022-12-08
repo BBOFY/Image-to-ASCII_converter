@@ -32,18 +32,18 @@ class FlipFilterTests extends FilterTests {
 
 	test("Flip X regular") {
 		val flippedImg = flipperX.apply(_testImg0)
-		assert(refImgFlippedX == flippedImg)
+		assert(refImgFlippedX.getGrid == flippedImg.getGrid)
 	}
 
 	test("Flip Y regular") {
 		val flippedImg = flipperY.apply(_testImg0)
-		assert(refImgFlippedY == flippedImg)
+		assert(refImgFlippedY.getGrid == flippedImg.getGrid)
 	}
 
 	test("Flip X and Y regular") {
 		val flippedXImg = flipperX.apply(_testImg0)
 		val flippedYImg = flipperY.apply(flippedXImg)
-		assert(refImgFlippedXY == flippedYImg)
+		assert(refImgFlippedXY.getGrid == flippedYImg.getGrid)
 	}
 
 
@@ -55,12 +55,12 @@ class FlipFilterTests extends FilterTests {
 
 	test("FlipX 1x1") {
 		val flippedSmallImg = flipperX.apply(testImgSmall)
-		assert(flippedSmallImg == testImgSmall)
+		assert(flippedSmallImg.getGrid == testImgSmall.getGrid)
 	}
 
 	test("FlipY 1x1") {
 		val flippedSmallImg = flipperY.apply(testImgSmall)
-		assert(flippedSmallImg == testImgSmall)
+		assert(flippedSmallImg.getGrid == testImgSmall.getGrid)
 	}
 
 	val testImgLong = new ImageGrey(
@@ -81,12 +81,12 @@ class FlipFilterTests extends FilterTests {
 
 	test("FlipX Long") {
 		val testImgLongFlipX = flipperX.apply(testImgLong)
-		assert(testImgLongFlipX == refImgLongFlippedX)
+		assert(testImgLongFlipX.getGrid == refImgLongFlippedX.getGrid)
 	}
 
 	test("FlipY Long") {
 		val testImgLongFlipY = flipperY.apply(testImgLong)
-		assert(testImgLongFlipY == refImgLongFlippedY)
+		assert(testImgLongFlipY.getGrid == refImgLongFlippedY.getGrid)
 	}
 
 	val testImgTall = new ImageGrey(
@@ -134,12 +134,12 @@ class FlipFilterTests extends FilterTests {
 
 	test("FlipX Tall") {
 		val testImgTallFlipX = flipperX.apply(testImgTall)
-		assert(testImgTallFlipX == refImgTallFlippedX)
+		assert(testImgTallFlipX.getGrid == refImgTallFlippedX.getGrid)
 	}
 
 	test("FlipY Tall") {
 		val testImgTallFlipY = flipperY.apply(testImgTall)
-		assert(testImgTallFlipY == refImgTallFlippedY)
+		assert(testImgTallFlipY.getGrid == refImgTallFlippedY.getGrid)
 	}
 
 }
