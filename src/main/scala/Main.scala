@@ -1,60 +1,31 @@
 
-import app.builders.{AsciiConversionBuilder, FilterBuilder}
-import app.converters.GreyScaler
+import app.builders.{AsciiConversionBuilder, ExporterBuilder, FilterBuilder}
 import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, ConverterHandler, CustomConverterHandler}
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipXFilterHandler, FlipYFilterHandler, InvertFilterHandler, RotateFilterHandler}
-import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
-import app.importers.{ImporterJpg, ImporterPng, ReallyPrimitiveImageGenerator}
+import app.handlers.importHandlers.{ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.inputParser.InputArgumentsParser
 import app.processor.{ImageProcessor, ImageProcessorImpl}
 
-import java.io.PrintStream
-
 object Main {
 
-	val vec: Vector[Int] = Vector(1, 2, 3)
-
-
-	val outStream = new PrintStream(System.out)
-
 	def main(args: Array[String]): Unit = {
-
-		// filter args
 
 		val inputParser = new InputArgumentsParser(args)
 		val imageProcessor = new ImageProcessorImpl
 
-		val conversionBuilder = new AsciiConversionBuilder
 		val filterBuilder = new FilterBuilder
-
-		// todo builder for converter, similarly as filters
-
+		val conversionBuilder = new AsciiConversionBuilder
+		val exporterBuilder = new ExporterBuilder
 
 		val imageFilter = filterBuilder.build
+		val imageConvrter = conversionBuilder.build
+		val imageExporter = exporterBuilder.build
 
-
-		// call import handler
-//		importHandlers(imageProcessor).handle(inputParser.getImageSource)
-
-		// change image to greyscale (can be as a filter at the beginning)
-
-
-
-		// sort args into pairs on as singles (defined by command) in input parser
-		// create mixed filter with parsed args and insert it to image processor
-		// call input handler
-		// call greyscale conversion
-		// call image processor's filtering
-		// call conversion specified in args
-		// call export handlers, image processor should only pass done image to exporters via handler
-
-
-		val converter = conversionBuilder.build
-
-		imageProcessor.greyScaleImage(new GreyScaler)
-		imageProcessor.filterImage(imageFilter)
-		imageProcessor.convertImage(converter)
-
+		imageProcessor.activatePipeline(
+			imageFilter,
+			imageConvrter,
+			imageExporter
+		)
 
 	}
 
@@ -68,7 +39,6 @@ object Main {
 		initialImportHandler
 		  .setNext(importPngHandler)
 		  .setNext(importRandomHandler)
-		  .setNext(new ImportErrorHandler(outStream))
 
 		initialImportHandler
 	}
@@ -98,7 +68,7 @@ object Main {
 		val initialConverterHandler: ConverterHandler = bourkeConverterHandler
 		bourkeConverterHandler
 		  .setNext(constantConverterHandler)
-		  .setNext(initialConverterHandler)
+		  .setNext(customConverterHandler)
 
 		initialConverterHandler
 	}

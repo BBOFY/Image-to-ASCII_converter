@@ -5,7 +5,7 @@ import app.filters.mixed.MixedFilter
 
 class FilterBuilder extends Builder[ImageFilter, ImageFilter] {
 
-	var filters: Seq[ImageFilter] = Seq(IdentityImageFilter)
+	private var filters: Seq[ImageFilter] = Seq(IdentityImageFilter)
 
 	override def registerProperty(filter: ImageFilter): Unit = {
 		filters = filters.appended(filter)

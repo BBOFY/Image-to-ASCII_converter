@@ -1,24 +1,17 @@
 package app.processor
 
-import app.converters.{AsciiConverter, Converter, GreyScaler}
+import app.converters.{AsciiConverter, GreyScaler, TextConverter}
 import app.filters.ImageFilter
-import app.models.image.{Image, ImageAscii, ImageGrey, ImageRgb}
-import app.models.pixel.Pixel
-import filter.Filter
+import app.models.image.ImageRgb
+import exporter.text.TextExporter
 
 trait ImageProcessor {
 	def loadImage(img: ImageRgb): Unit
 
-	def greyScaleImage(greyScaleConverter: GreyScaler): Unit
-
-	def filterImage(filter: ImageFilter): Unit
-
-	def convertImage(converter: AsciiConverter): Unit
-
-	/**
-	 * I am not using this form of method, because variation does not work
-	 */
-//	def convertImage(conversion: Converter[Image[Pixel], Image[Pixel]]): Unit
-
-	def getDoneImage: ImageAscii
+	def activatePipeline(filter: ImageFilter,
+						 asciiConverter: AsciiConverter,
+						 exporter: TextExporter,
+						 greyScaler: GreyScaler,
+						 textConverter: TextConverter
+						): Unit
 }
