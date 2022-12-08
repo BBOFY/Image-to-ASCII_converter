@@ -4,7 +4,7 @@ import app.converters.GreyScaler
 import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, ConverterHandler, CustomConverterHandler}
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipXFilterHandler, FlipYFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.handlers.importHandlers.{ImportErrorHandler, ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
-import app.importers.{ImporterJpg, ImporterPng, PrimitiveImageGenerator}
+import app.importers.{ImporterJpg, ImporterPng, ReallyPrimitiveImageGenerator}
 import app.inputParser.InputArgumentsParser
 import app.processor.{ImageProcessor, ImageProcessorImpl}
 
