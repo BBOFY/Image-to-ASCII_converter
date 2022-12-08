@@ -1,9 +1,9 @@
 package app.filters.mixed
 
-import app.filters.ImageFilter
+import app.filters.{IdentityImageFilter, ImageFilter}
 import app.models.image.ImageGrey
 
-class MixedFilter (filters: Seq[ImageFilter]) extends ImageFilter {
+class MixedFilter (filters: Seq[ImageFilter] = Seq(IdentityImageFilter)) extends ImageFilter {
 	/**
 	 * Iterates over given filters and applies them on given item
 	 *
