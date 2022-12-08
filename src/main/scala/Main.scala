@@ -12,6 +12,9 @@ import java.io.PrintStream
 
 object Main {
 
+	val vec: Vector[Int] = Vector(1, 2, 3)
+
+
 	val outStream = new PrintStream(System.out)
 
 	def main(args: Array[String]): Unit = {
