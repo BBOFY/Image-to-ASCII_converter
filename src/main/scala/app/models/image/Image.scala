@@ -1,7 +1,5 @@
 package app.models.image
 
-import app.models.pixel.Pixel
-
 abstract class Image[+T](private val __grid: Vector[Vector[T]]) {
 
 	protected val _grid: Vector[Vector[T]] = {
@@ -32,15 +30,7 @@ abstract class Image[+T](private val __grid: Vector[Vector[T]]) {
 		if (x >= _width) throw new IndexOutOfBoundsException("Parameter \'x\' is out of bounds of image size")
 		if (y >= _height) throw new IndexOutOfBoundsException("Parameter \'y\' is out of bounds of image size")
 		_grid.apply(y).apply(x)
-
 	}
-
-	override def equals(o: Any): Boolean = o match {
-		case that: Image[_] => that.getGrid == this.getGrid
-		case _ => false
-	}
-
-	override def hashCode: Int = (_grid.hashCode * _width.hashCode * _height.hashCode).hashCode
 }
 
 

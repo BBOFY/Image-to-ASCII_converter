@@ -47,5 +47,9 @@ class RotateFilter extends VariableFilter {
 		new ImageGrey(newGrid)
 	}
 
-	override def setValue(rotation: Int): Unit = _rotation = rotation
+	override def setValue(rotation: Int): Unit = {
+		if (rotation % 90 != 0)
+			throw new IllegalArgumentException("Rotation amount must be divisible by 90")
+		_rotation = rotation
+	}
 }

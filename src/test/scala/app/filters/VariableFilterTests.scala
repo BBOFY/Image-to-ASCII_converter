@@ -1,9 +1,8 @@
 package app.filters
 
 import app.models.image.ImageGrey
-import org.scalatest.FunSuite
 
-abstract class VariableFilterTests extends FunSuite {
+abstract class VariableFilterTests extends FilterTests {
 	protected def validFilterTest(name: String,
 								  filter: VariableFilter,
 								  orgImg: ImageGrey,
@@ -13,7 +12,7 @@ abstract class VariableFilterTests extends FunSuite {
 		test(name) {
 			filter.setValue(value)
 			val img = filter.apply(orgImg)
-			assert(img == refImg)
+			assert(img.getGrid == refImg.getGrid)
 		}
 	}
 }

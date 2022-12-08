@@ -1,4 +1,4 @@
-package app.filters
+package app.filters.mixed
 
 class MixedFilterTests {
 

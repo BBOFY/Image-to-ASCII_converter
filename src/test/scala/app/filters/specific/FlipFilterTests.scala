@@ -1,37 +1,29 @@
-package app.filters
+package app.filters.specific
 
-import app.filters.specific.{FlipXFilter, FlipYFilter}
+import app.filters.FilterTests
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
-import org.scalatest.FunSuite
 
-class FlipFilterTests extends FunSuite {
+class FlipFilterTests extends FilterTests {
 
-	val flipperX = new FlipXFilter
-	val flipperY = new FlipYFilter
+	protected val flipperX = new FlipXFilter
+	protected val flipperY = new FlipYFilter
 
-	val testImg = new ImageGrey(
-		Vector(
-			Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
-			Vector(PixelGrey(3), PixelGrey(4), PixelGrey(5))
-		)
-	)
-
-	val refImgFlippedX = new ImageGrey(
+	protected val refImgFlippedX = new ImageGrey(
 		Vector(
 			Vector(PixelGrey(3), PixelGrey(4), PixelGrey(5)),
 			Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2))
 		)
 	)
 
-	val refImgFlippedY = new ImageGrey(
+	protected val refImgFlippedY = new ImageGrey(
 		Vector(
 			Vector(PixelGrey(2), PixelGrey(1), PixelGrey(0)),
 			Vector(PixelGrey(5), PixelGrey(4), PixelGrey(3))
 		)
 	)
 
-	val refImgFlippedXY = new ImageGrey(
+	protected val refImgFlippedXY = new ImageGrey(
 		Vector(
 			Vector(PixelGrey(5), PixelGrey(4), PixelGrey(3)),
 			Vector(PixelGrey(2), PixelGrey(1), PixelGrey(0))
@@ -39,23 +31,23 @@ class FlipFilterTests extends FunSuite {
 	)
 
 	test("Flip X regular") {
-		val flippedImg = flipperX.apply(testImg)
+		val flippedImg = flipperX.apply(_testImg0)
 		assert(refImgFlippedX == flippedImg)
 	}
 
 	test("Flip Y regular") {
-		val flippedImg = flipperY.apply(testImg)
+		val flippedImg = flipperY.apply(_testImg0)
 		assert(refImgFlippedY == flippedImg)
 	}
 
 	test("Flip X and Y regular") {
-		val flippedXImg = flipperX.apply(testImg)
+		val flippedXImg = flipperX.apply(_testImg0)
 		val flippedYImg = flipperY.apply(flippedXImg)
 		assert(refImgFlippedXY == flippedYImg)
 	}
 
 
-	val testImgSmall = new ImageGrey(
+	protected val testImgSmall = new ImageGrey(
 		Vector(
 			Vector(PixelGrey(42))
 		)

@@ -82,6 +82,17 @@ class ImageGreyTests extends FunSuite {
 		}
 	}
 
+	test("Invalid image 2") {
+		val gridEmptyRow = Vector(
+			Vector(),
+			Vector(),
+			Vector()
+		)
+		assertThrows[ExceptionInInitializerError] {
+			new ImageGrey(gridEmptyRow)
+		}
+	}
+
 	test("Irregular image 0") {
 		val irregularGrid = Vector(
 			Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
@@ -106,12 +117,24 @@ class ImageGreyTests extends FunSuite {
 		}
 	}
 
-	test("Empty row") {
+	test("Empty row 0") {
 		val withEmptyRow = Vector(
 			Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
 			Vector(PixelGrey(3), PixelGrey(4), PixelGrey(5)),
 			Vector(PixelGrey(6), PixelGrey(7), PixelGrey(8)),
 			Vector.empty,
+			Vector(PixelGrey(6), PixelGrey(7), PixelGrey(8))
+		)
+		assertThrows[ExceptionInInitializerError] {
+			new ImageGrey(withEmptyRow)
+		}
+	}
+
+	test("Empty row 1") {
+		val withEmptyRow = Vector(
+			Vector(PixelGrey(0), PixelGrey(1), PixelGrey(2)),
+			Vector(),
+			Vector(PixelGrey(6), PixelGrey(7), PixelGrey(8)),
 			Vector(PixelGrey(6), PixelGrey(7), PixelGrey(8))
 		)
 		assertThrows[ExceptionInInitializerError] {
