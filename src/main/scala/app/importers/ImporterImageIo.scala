@@ -7,7 +7,7 @@ import java.io.{File, IOException}
 import javax.imageio.ImageIO
 
 
-abstract class ImporterImageIo extends ImageImporter[ImageRgb] {
+abstract class ImporterImageIo extends ImageImporter {
 
 	@throws[IOException]
 	override def doImport(): ImageRgb = {

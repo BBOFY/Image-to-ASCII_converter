@@ -1,7 +1,7 @@
 package app.importers
-import app.models.image.Image
+import app.models.image.{Image, ImageRgb}
 import importer._
 
-trait ImageImporter[T<:Image[_]] extends Importer[Image[_]] {
-
+trait ImageImporter extends Importer[ImageRgb] {
+	override def doImport(): ImageRgb
 }
