@@ -12,8 +12,10 @@ class CustomConverterHandler(val builder: AsciiConversionBuilder,
 							)
   extends ConverterHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
-		if (args.head == Commands.tableCustom) {
-			val table = args.apply(1)
+		if (args.nonEmpty
+		  && args.tail.nonEmpty
+		  && args.head == Commands.tableCustom) {
+			val table = args.tail.head
 			conversionTable.setValue(table)
 			builder.registerProperty(conversionTable)
 			parser.removeElements(2)

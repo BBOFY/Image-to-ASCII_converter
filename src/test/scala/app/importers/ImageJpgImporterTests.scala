@@ -2,7 +2,6 @@ package app.importers
 
 import app.models.image.ImageRgb
 import app.models.pixel.PixelRgb
-import org.scalatest.FunSuite
 
 import java.io.IOException
 

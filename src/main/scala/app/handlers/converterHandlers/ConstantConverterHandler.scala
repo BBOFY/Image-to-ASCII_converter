@@ -13,7 +13,10 @@ class ConstantConverterHandler(val builder: AsciiConversionBuilder,
   extends ConverterHandler {
 
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
-		if (args.head == Commands.table && args.apply(1) == Commands.conversionConstant) {
+		if (args.nonEmpty
+		  && args.tail.nonEmpty
+		  && args.head == Commands.table
+		  && args.tail.head == Commands.conversionConstant) {
 			builder.registerProperty(table)
 			parser.removeElements(2)
 			None

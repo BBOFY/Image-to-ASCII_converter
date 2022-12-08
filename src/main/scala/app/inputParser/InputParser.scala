@@ -7,6 +7,6 @@ trait InputParser[T] {
 
 	def getArgs: List[T]
 
-	def checkResidue(): Unit
+	def argsStatus(): String
 
 }

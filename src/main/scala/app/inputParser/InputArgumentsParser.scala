@@ -30,8 +30,10 @@ class InputArgumentsParser(private val args: Array[String]) extends InputParser[
 
 	override def getArgs: List[String] = _args
 
-	override def checkResidue(): Unit = {
+	override def argsStatus(): String = {
 		if (_args.nonEmpty)
-			throw new IllegalArgumentException(s"Unknown command \'${_args.head}'")
+			s"Unknown command '${_args.head}'\n"
+		else
+			"Commands processed\n"
 	}
 }
