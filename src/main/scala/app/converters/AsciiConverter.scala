@@ -11,19 +11,20 @@ class AsciiConverter(protected val table: ConversionTable[Int, Char] = new Bourk
 	@throws[IllegalArgumentException]
 	override def convert(image: ImageGrey): ImageAscii = {
 
+		val orgGrid = image.getGrid
 		var newGrid: Vector[Vector[PixelAscii]] = Vector.empty
 
-		for (rowIdx <- 0 until image.height) {
+		for (row <- orgGrid) {
 			var newRow: Vector[PixelAscii] = Vector.empty
-			for (columnIdx <- 0 until image.width) {
-				val pixelValue = image.getPixel(columnIdx, rowIdx).value
-				newRow = newRow.appended(PixelAscii(
-					table.getTableValue(pixelValue)
+			for (pixel <- row) {
+				val pixelValue = pixel.value
+				newRow = newRow.appended(
+					PixelAscii(
+						table.getTableValue(pixelValue)
 				))
 			}
 			newGrid = newGrid.appended(newRow)
 		}
-
 		new ImageAscii(newGrid)
 	}
 }
