@@ -2,43 +2,23 @@ package app.models.conversionTables
 
 import org.scalatest.FunSuite
 
-class BourkeTableTests extends FunSuite {
+class BourkeTableTests extends ConversionTableTests {
 	private val table = BourkeTable.apply()
 
-	validValueTest(0, '$')
-	validValueTest(11, 'B')
-	validValueTest(42, 'a')
-	validValueTest(79, 'O')
-	validValueTest(100, 'U')
-	validValueTest(148, '/')
-	validValueTest(193, '_')
-	validValueTest(218, '!')
-	validValueTest(255, ' ')
+	validValueTest(table, 0, '$')
+	validValueTest(table, 11, 'B')
+	validValueTest(table, 42, 'a')
+	validValueTest(table, 79, 'O')
+	validValueTest(table, 100, 'U')
+	validValueTest(table, 148, '/')
+	validValueTest(table, 193, '_')
+	validValueTest(table, 218, '!')
+	validValueTest(table, 255, ' ')
 
+	invalidValueTest(table, -2)
+	invalidValueTest(table, 195318)
+	invalidValueTest(table, Int.MaxValue)
+	invalidValueTest(table, Int.MinValue)
 
-	invalidValueTest(-2)
-	invalidValueTest(195318)
-	invalidValueTest(Int.MaxValue)
-	invalidValueTest(Int.MinValue)
-
-	test("Whole image") {
-
-	}
-
-	private def validValueTest(initial: Int, expected: Char): Unit = {
-		test(s"Valid value $initial") {
-			assertResult(expected) {
-				table.getTableValue(initial)
-			}
-		}
-	}
-
-	private def invalidValueTest(initial: Int): Unit = {
-		test(s"Invalid value $initial") {
-			assertThrows[IllegalArgumentException] {
-				table.getTableValue(initial)
-			}
-		}
-	}
 
 }
