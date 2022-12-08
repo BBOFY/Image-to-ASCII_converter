@@ -16,7 +16,7 @@ class TextConverterTests extends FunSuite {
 		Vector(PixelAscii(')'))
 	))
 
-	protected val refDefaultResult = "aL`\n1bt"
+	protected val refDefaultResult: String = "aL`\n1bt"
 	protected val refSmallResult = ")"
 
 	test("Regular image") {
