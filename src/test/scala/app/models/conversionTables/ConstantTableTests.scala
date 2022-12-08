@@ -1,7 +1,5 @@
 package app.models.conversionTables
 
-import org.scalatest.FunSuite
-
 class ConstantTableTests extends ConversionTableTests {
 
 	private val table = ConstantTable.apply()

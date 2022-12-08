@@ -1,7 +1,5 @@
 package app.models.conversionTables
 
-import org.scalatest.FunSuite
-
 class BourkeTableTests extends ConversionTableTests {
 	private val table = BourkeTable.apply()
 
