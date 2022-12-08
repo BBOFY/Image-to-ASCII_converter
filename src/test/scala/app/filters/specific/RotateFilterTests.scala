@@ -22,89 +22,89 @@ class RotateFilterTests extends VariableFilterTests {
 		Vector(PixelGrey(4), PixelGrey(1)),
 		Vector(PixelGrey(5), PixelGrey(2))
 	))
-// ### 0° #########################
+// ### 0 deg #########################
 	validFilterTest(
-		"Rotate 0°",
+		"Rotate 0 deg",
 		rotateFilter,
 		_testImg0,
 		_testImg0,
 		0
 	)
 	validFilterTest(
-		"Rotate 360°",
+		"Rotate 360 deg",
 		rotateFilter,
 		_testImg0,
 		_testImg0,
 		360
 	)
 	validFilterTest(
-		"Rotate -720°",
+		"Rotate -720 deg",
 		rotateFilter,
 		_testImg0,
 		_testImg0,
 		-720
 	)
-// ### 90° ########################
+// ### 90 deg ########################
 	validFilterTest(
-		"Rotate 90°",
+		"Rotate 90 deg",
 		rotateFilter,
 		_testImg0,
 		refImgRotated90,
 		90
 	)
 	validFilterTest(
-		"Rotate -2070°",
+		"Rotate -2070 deg",
 		rotateFilter,
 		_testImg0,
 		refImgRotated90,
 		-2070
 	)
 	validFilterTest(
-		"Rotate 4050°",
+		"Rotate 4050 deg",
 		rotateFilter,
 		_testImg0,
 		refImgRotated90,
 		4050
 	)
-// ### 180° #######################
+// ### 180 deg #######################
 	validFilterTest(
-	"Rotate 180°",
+	"Rotate 180 deg",
 		rotateFilter,
 		_testImg0,
 		refImgRotated180,
 		180
 	)
 	validFilterTest(
-		"Rotate -540°",
+		"Rotate -540 deg",
 		rotateFilter,
 		_testImg0,
 		refImgRotated180,
 		-540
 	)
 	validFilterTest(
-		"Rotate 11700°",
+		"Rotate 11700 deg",
 		rotateFilter,
 		_testImg0,
 		refImgRotated180,
 		11700
 	)
-// ### 270° ######################
+// ### 270 deg ######################
 	validFilterTest(
-		"Rotate 270°",
+		"Rotate 270 deg",
 		rotateFilter,
 		_testImg0,
 		refImgRotated270,
 		270
 	)
 	validFilterTest(
-		"Rotate -90°",
+		"Rotate -90 deg",
 		rotateFilter,
 		_testImg0,
 		refImgRotated270,
 		-90
 	)
 	validFilterTest(
-		"Rotate 2430°",
+		"Rotate 2430 deg",
 		rotateFilter,
 		_testImg0,
 		refImgRotated270,
@@ -112,16 +112,16 @@ class RotateFilterTests extends VariableFilterTests {
 	)
 // ### Custom ################
 	protected val imgSmall = new ImageGrey(Vector(Vector(PixelGrey(5))))
-	validFilterTest("Rotate small 0°", rotateFilter,
+	validFilterTest("Rotate small 0 deg", rotateFilter,
 		imgSmall, imgSmall, 0
 	)
-	validFilterTest("Rotate small 90°", rotateFilter,
+	validFilterTest("Rotate small 90 deg", rotateFilter,
 		imgSmall, imgSmall, 90
 	)
-	validFilterTest("Rotate small 180°", rotateFilter,
+	validFilterTest("Rotate small 180 deg", rotateFilter,
 		imgSmall, imgSmall, 180
 	)
-	validFilterTest("Rotate small 270°", rotateFilter,
+	validFilterTest("Rotate small 270 deg", rotateFilter,
 		imgSmall, imgSmall, 270
 	)
 
