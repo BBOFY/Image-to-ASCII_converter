@@ -14,16 +14,22 @@ class FlipXFilterHandler(val filterBuilder: FilterBuilder,
   extends FilterHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
-		if (args.nonEmpty
-		  && args.tail.nonEmpty
-		  && args.head == Commands.filterFlip
-		  && args.tail.head == Commands.axisX
+		if (args.isEmpty)
+			return None
+
+		if (args.head != Commands.filterFlip.toString)
+			return super.handle(args)
+
+		if (args.tail.isEmpty
+		  || !args.tail.head.matches(Commands.axisX.toString)
 		) {
-			filterBuilder.registerProperty(filter)
-			parser.removeElements(2)
-			None
+			parser.removeElements(1)
+			return None
 		}
-		else super.handle(args)
+
+		filterBuilder.registerProperty(filter)
+		parser.removeElements(2)
+		None
 
 	}
 }

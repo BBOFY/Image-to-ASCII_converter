@@ -18,7 +18,7 @@ class BrightnessFilterHandler(val filterBuilder: FilterBuilder,
 		if (args.isEmpty)
 			return None
 
-		if (args.head != Commands.filterBright)
+		if (args.head != Commands.filterBright.toString)
 			return super.handle(args)
 
 		if (args.tail.isEmpty

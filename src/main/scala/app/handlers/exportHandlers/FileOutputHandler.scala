@@ -13,7 +13,7 @@ class FileOutputHandler(val exporterBuilder: ExporterBuilder,
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 		if (args.nonEmpty
 		  && args.tail.nonEmpty
-		  && args.head == Commands.outputFile
+		  && args.head == Commands.outputFile.toString
 		) {
 			val path = args.tail.head
 			val exporter: TextExporter = new FileOutputExporter(path)

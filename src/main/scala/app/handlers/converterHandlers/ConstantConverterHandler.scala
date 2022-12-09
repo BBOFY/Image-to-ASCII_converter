@@ -15,8 +15,8 @@ class ConstantConverterHandler(val builder: AsciiConversionBuilder,
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 		if (args.nonEmpty
 		  && args.tail.nonEmpty
-		  && args.head == Commands.table
-		  && args.tail.head == Commands.conversionConstant) {
+		  && args.head == Commands.table.toString
+		  && args.tail.head == Commands.conversionConstant.toString) {
 			builder.registerProperty(table)
 			parser.removeElements(2)
 			None

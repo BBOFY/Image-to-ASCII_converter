@@ -18,7 +18,7 @@ class RotateFilterHandler(val filterBuilder: FilterBuilder,
 		if (args.isEmpty)
 			return None
 
-		if (args.head != Commands.filterRotate)
+		if (args.head != Commands.filterRotate.toString)
 			return super.handle(args)
 
 		if (args.tail.isEmpty

@@ -133,7 +133,7 @@ class FilterHandlersTests extends HandlerTests {
 		assert(!parser.argsEmpty())
 		callArgs(handlers, parser)
 		assert(!parser.argsEmpty())
-		assert(parser.getArgs == Seq("--flip", "--invert"))
+		assert(parser.getArgs == Seq("--invert"))
 		assert(builder.counter == 1)
 		assert(builder.filters == refFilters6)
 	}

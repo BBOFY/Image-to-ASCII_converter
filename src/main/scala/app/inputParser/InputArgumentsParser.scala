@@ -10,9 +10,9 @@ class InputArgumentsParser(private val args: Seq[String]) extends InputParser[St
 		var importArgsCount = 0
 		var conversionArgsCount = 0
 		for (arg <- _args) {
-			if (arg == Commands.image || arg == Commands.imageRandom)
+			if (arg == Commands.image.toString || arg == Commands.imageRandom.toString)
 				importArgsCount = importArgsCount + 1
-			else if (arg == Commands.table || arg == Commands.tableCustom)
+			else if (arg == Commands.table.toString || arg == Commands.tableCustom.toString)
 				conversionArgsCount = conversionArgsCount + 1
 		}
 		if (importArgsCount != 1)

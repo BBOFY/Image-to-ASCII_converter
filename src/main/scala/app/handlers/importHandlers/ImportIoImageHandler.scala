@@ -19,7 +19,7 @@ abstract class ImportIoImageHandler(private val importer: ImporterImageIo,
 
 		if (args.nonEmpty
 		  && args.tail.nonEmpty
-		  && args.head == Commands.image
+		  && args.head == Commands.image.toString
 		  && validPostfixes.exists(postfix => args.tail.head.endsWith(postfix))
 		) {
 			importer.setPath(args.tail.head)

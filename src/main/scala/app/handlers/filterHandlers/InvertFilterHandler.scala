@@ -18,7 +18,7 @@ class InvertFilterHandler(val filterBuilder: FilterBuilder,
 		if (args.isEmpty)
 			return None
 
-		if (args.head != Commands.filterInv)
+		if (args.head != Commands.filterInv.toString)
 			return super.handle(args)
 
 		filterBuilder.registerProperty(filter)
