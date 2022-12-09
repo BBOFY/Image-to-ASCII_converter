@@ -27,6 +27,7 @@ class FilterHandlersTests extends HandlerTests {
 	private val args4: Seq[String] = Seq("--flip", "x", "y")
 	private val args5: Seq[String] = Seq("--rotate", "91", "--invert")
 	private val args6: Seq[String] = Seq("--invert", "--flip", "--invert")
+	private val args7: Seq[String] = Seq("--brightness", "p")
 
 	private val rotateFilter90 = new RotateFilter
 	rotateFilter90.setValue(90)
@@ -42,6 +43,7 @@ class FilterHandlersTests extends HandlerTests {
 	private val refFilters4: Seq[ImageFilter] = Seq(new FlipXFilter)
 	private val refFilters5: Seq[ImageFilter] = Seq.empty
 	private val refFilters6: Seq[ImageFilter] = Seq(new InvertFilter)
+	private val refFilters7: Seq[ImageFilter] = Seq.empty
 
 
 	test("Valid input 0") {
@@ -134,6 +136,19 @@ class FilterHandlersTests extends HandlerTests {
 		assert(parser.getArgs == Seq("--flip", "--invert"))
 		assert(builder.counter == 1)
 		assert(builder.filters == refFilters6)
+	}
+	test("Input with invalid argument") {
+		builder.counter = 0
+		builder.filters = Seq.empty
+		val parser = new InputArgumentsParser(args7)
+		val handlers = filterHandlers(parser)
+
+		assert(!parser.argsEmpty())
+		callArgs(handlers, parser)
+		assert(!parser.argsEmpty())
+		assert(parser.getArgs == Seq("p"))
+		assert(builder.counter == 0)
+		assert(builder.filters == refFilters7)
 	}
 
 
