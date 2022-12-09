@@ -18,21 +18,69 @@ class ExportHandlersTests extends HandlerTests {
 	}
 
 	private val args0: Seq[String] = Seq("--output-file", "src/main/resources/test.txt")
-	private val args1: Seq[String] = Seq("--output-console", "whatever", "--image-random")
-	private val args2: Seq[String] = Seq("--output-file", "src/main/resources/test.gif", "--output-console")
+	private val args1: Seq[String] = Seq("--output-console", "whatever", "--output-console")
+	private val args2: Seq[String] = Seq("--output-file", "src/main/resources/test.txt", "--output-console")
 	private val args3: Seq[String] = Seq("--output-console", "--output-file", "src/main/resources/test.txt", "whatever", "src/main/resources/test.jpg", "--output-console")
 
 	private val builder = new DummyExporterBuilder
 
 
+	test("Simple input") {
+		builder.counter = 0
+		val parser = new InputArgumentsParser(args0)
+		val handlers = exportHandlers(parser)
+
+		assert(!parser.argsEmpty())
+		callArgs(handlers, parser)
+		assert(parser.argsEmpty())
+		assert(parser.getArgs == Seq.empty)
+		assert(builder.counter == 1)
+	}
+
+	test("Simple input with invalid command") {
+		builder.counter = 0
+		val parser = new InputArgumentsParser(args1)
+		val handlers = exportHandlers(parser)
+
+		assert(!parser.argsEmpty())
+		callArgs(handlers, parser)
+		assert(!parser.argsEmpty())
+		assert(parser.getArgs == Seq("whatever", "--output-console"))
+		assert(builder.counter == 1)
+	}
+
+	test("Valid input with multiple outputs") {
+		builder.counter = 0
+		val parser = new InputArgumentsParser(args2)
+		val handlers = exportHandlers(parser)
+
+		assert(!parser.argsEmpty())
+		callArgs(handlers, parser)
+		assert(parser.argsEmpty())
+		assert(parser.getArgs == Seq.empty)
+		assert(builder.counter == 2)
+	}
+
+	test("Input partially correct") {
+		builder.counter = 0
+		val parser = new InputArgumentsParser(args3)
+		val handlers = exportHandlers(parser)
+
+		assert(!parser.argsEmpty())
+		callArgs(handlers, parser)
+		assert(!parser.argsEmpty())
+		assert(parser.getArgs == Seq("whatever", "src/main/resources/test.jpg", "--output-console"))
+		assert(builder.counter == 2)
+	}
+
 	private def exportHandlers(parser: InputArgumentsParser): ExportHandler = {
 
-		val exportConsole = new StdOutputHandler(builder, parser)
-		val exportFile = new FileOutputHandler(builder, parser)
+		val exportConsoleHandler = new StdOutputHandler(builder, parser)
+		val exportFileHandler = new FileOutputHandler(builder, parser)
 
-		val initialImportHandler: ExportHandler = exportConsole
+		val initialImportHandler: ExportHandler = exportConsoleHandler
 		initialImportHandler
-		  .setNext(exportFile)
+		  .setNext(exportFileHandler)
 
 		initialImportHandler
 	}
