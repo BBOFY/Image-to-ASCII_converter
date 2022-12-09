@@ -22,8 +22,10 @@ class BrightnessFilterHandler(val filterBuilder: FilterBuilder,
 			return super.handle(args)
 
 		if (args.tail.isEmpty
-		  || !args.tail.head.matches( "^[+-]?\\d+$")
-		) {
+		  || Commands.isCommand(args.tail.head))
+			return None
+
+		if (!args.tail.head.matches( "^[+-]?\\d+$")) {
 			parser.removeElements(1)
 			return None
 		}
