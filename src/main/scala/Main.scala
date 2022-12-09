@@ -10,7 +10,7 @@ import app.inputParser.InputArgumentsParser
 import app.models.image.ImageRgb
 import app.models.pixel.PixelRgb
 import app.processor.{ImageProcessor, ImageProcessorImpl}
-import exporter.text.{MixedExporter, StdOutputExporter}
+import exporter.text.{FileOutputExporter, MixedExporter, StdOutputExporter}
 import handler.Handler
 
 object Main {
@@ -21,6 +21,16 @@ object Main {
 		val stdOutput = new StdOutputExporter
 
 		val inputParser = new InputArgumentsParser(args)
+
+		try {
+			inputParser.checkValidity()
+		}
+		catch {
+			case e: IllegalArgumentException => stdOutput.`export`(e.getMessage)
+			case _ => stdOutput.`export`("Unknown error")
+		}
+
+
 		val imageProcessor = new ImageProcessorImpl
 
 		val filterBuilder = new FilterBuilder
@@ -43,9 +53,13 @@ object Main {
 		callArgs(converterHandler, inputParser)
 		callArgs(exporterHandler, inputParser)
 
-		inputParser.argsEmptiness()
+		if (!inputParser.argsEmpty()) {
+			stdOutput.`export`(s"Unknown command '${inputParser.getArgs.head}'")
+			return
+		}
 
-		imageExporter = new MixedExporter(Seq(new StdOutputExporter))
+
+		imageExporter = new MixedExporter(Seq(new FileOutputExporter("src/main/resources/test.txt")))
 
 		imageProcessor.activatePipeline(
 			imageFilter,

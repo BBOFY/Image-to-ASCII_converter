@@ -7,6 +7,6 @@ trait InputParser[T] {
 
 	def getArgs: List[T]
 
-	def argsEmptiness(): T
+	def argsEmpty(): Boolean
 
 }

@@ -54,7 +54,7 @@ class InputArgumentsParserTests extends FunSuite {
 		assert(orgArgs.toList == parser.getArgs)
 
 		assert(
-			parser.argsEmptiness() != ""
+			!parser.argsEmpty()
 		)
 
 		parser.checkValidity()
@@ -85,14 +85,18 @@ class InputArgumentsParserTests extends FunSuite {
 			parser.removeElements(1)
 		}
 
-		parser.argsEmptiness()
+		assert(
+			parser.argsEmpty()
+		)
 
 	}
 
 	test("Emptiness valid") {
 		val emptyArgs = Seq.empty
 		val parser = new InputArgumentsParser(emptyArgs)
-		parser.argsEmptiness()
+		assert(
+			parser.argsEmpty()
+		)
 	}
 
 	test("Emptiness invalid") {
@@ -100,7 +104,7 @@ class InputArgumentsParserTests extends FunSuite {
 		val parser = new InputArgumentsParser(invalidArgs)
 
 		assert(
-			parser.argsEmptiness() == ".empty"
+			!parser.argsEmpty()
 		)
 	}
 

@@ -31,13 +31,8 @@ class InputArgumentsParser(private val args: Seq[String]) extends InputParser[St
 
 	override def getArgs: List[String] = _args
 
-	/**
-	 * @return empty string if _args is empty, otherwise the first element of _args
-	 */
-	override def argsEmptiness(): String = {
-		if (_args.nonEmpty)
-			_args.head
-		else
-			""
+	override def argsEmpty(): Boolean = {
+		_args.isEmpty
+
 	}
 }
