@@ -9,7 +9,7 @@ import handler.Handler
 class StdOutputHandler(val exporterBuilder: ExporterBuilder,
 					   val parser: InputParser[String]
 					  )
-  extends ExporterHandler {
+  extends ExportHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 		if (args.nonEmpty && args.head == Commands.outputConsole) {
 			val exporter = new StdOutputExporter

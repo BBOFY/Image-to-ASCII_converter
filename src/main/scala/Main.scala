@@ -2,7 +2,7 @@
 import app.builders.{AsciiConversionBuilder, ExporterBuilder, FilterBuilder}
 import app.handlers.CommandHandler
 import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, ConverterHandler, CustomConverterHandler}
-import app.handlers.exportHandlers.{ExporterHandler, FileOutputHandler, StdOutputHandler}
+import app.handlers.exportHandlers.{ExportHandler, FileOutputHandler, StdOutputHandler}
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipXFilterHandler, FlipYFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.handlers.importHandlers.{ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.inputParser.InputArgumentsParser
@@ -123,11 +123,11 @@ object Main {
 		initialConverterHandler
 	}
 
-	def exporterHandlers(exporterBuilder: ExporterBuilder, parser: InputArgumentsParser): ExporterHandler = {
+	def exporterHandlers(exporterBuilder: ExporterBuilder, parser: InputArgumentsParser): ExportHandler = {
 		val stdOutputHandler = new StdOutputHandler(exporterBuilder, parser)
 		val fileOutputHandler = new FileOutputHandler(exporterBuilder, parser)
 
-		val initialExporterHandler: ExporterHandler = stdOutputHandler
+		val initialExporterHandler: ExportHandler = stdOutputHandler
 		initialExporterHandler
 		  .setNext(fileOutputHandler)
 		initialExporterHandler

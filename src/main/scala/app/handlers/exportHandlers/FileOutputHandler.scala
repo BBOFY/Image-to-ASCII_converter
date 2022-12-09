@@ -9,7 +9,7 @@ import handler.Handler
 class FileOutputHandler(val exporterBuilder: ExporterBuilder,
 						val parser: InputParser[String]
 					   )
-  extends ExporterHandler {
+  extends ExportHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 		if (args.nonEmpty && args.tail.nonEmpty && args.head == Commands.outputFile) {
 			val path = args.tail.head

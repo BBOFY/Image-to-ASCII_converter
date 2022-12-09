@@ -4,11 +4,11 @@ import exporter.text.TextExporter
 
 class ExporterBuilder extends Builder[TextExporter, Seq[TextExporter]] {
 
-	protected var exporters: Seq[TextExporter] = Seq.empty
+	protected var _exporters: Seq[TextExporter] = Seq.empty
 
 	override def registerProperty(exporter: TextExporter): Unit = {
-		exporters = exporters.appended(exporter)
+		_exporters = _exporters.appended(exporter)
 	}
 
-	override def build: Seq[TextExporter] = exporters
+	override def build: Seq[TextExporter] = _exporters
 }
