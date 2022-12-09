@@ -6,11 +6,11 @@ import org.scalatest.FunSuite
 class InputArgumentsParserTests extends FunSuite {
 
 	protected val cmds: Commands.type = Commands
-	protected val validInputs: Seq[Array[String]] = Seq(
-		Array(cmds.image, "path", cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole),
-		Array(cmds.imageRandom, cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole),
-		Array(cmds.image, "path"),
-		Array(cmds.outputFile, "path", cmds.image, "path", cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole)
+	protected val validInputs: Seq[Seq[String]] = Seq(
+		Seq(cmds.image, "path", cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole),
+		Seq(cmds.imageRandom, cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole),
+		Seq(cmds.image, "path"),
+		Seq(cmds.outputFile, "path", cmds.image, "path", cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole)
 	)
 
 	for (i <- validInputs.indices) {
@@ -20,17 +20,17 @@ class InputArgumentsParserTests extends FunSuite {
 
 			parser.removeElements(2)
 			assert(
-				parser.getArgs == validInputs.apply(i).tail.tail.toSeq
+				parser.getArgs == validInputs.apply(i).tail.tail
 			)
 		}
 	}
 
-	protected val invalidInputs: Seq[Array[String]] = Seq(
-		Array(cmds.image, "path", cmds.filterFlip, cmds.axisX, cmds.imageRandom, cmds.outputConsole),
-		Array(cmds.image, "path", cmds.table, cmds.conversionBourke, cmds.filterFlip, cmds.axisX, cmds.imageRandom, cmds.table, cmds.conversionConstant, cmds.outputConsole),
-		Array(cmds.table, cmds.conversionBourke),
-		Array(),
-		Array(cmds.filterFlip, cmds.axisX, cmds.tableCustom, "table", cmds.imageRandom, cmds.table, cmds.conversionBourke),
+	protected val invalidInputs: Seq[Seq[String]] = Seq(
+		Seq(cmds.image, "path", cmds.filterFlip, cmds.axisX, cmds.imageRandom, cmds.outputConsole),
+		Seq(cmds.image, "path", cmds.table, cmds.conversionBourke, cmds.filterFlip, cmds.axisX, cmds.imageRandom, cmds.table, cmds.conversionConstant, cmds.outputConsole),
+		Seq(cmds.table, cmds.conversionBourke),
+		Seq(),
+		Seq(cmds.filterFlip, cmds.axisX, cmds.tableCustom, "table", cmds.imageRandom, cmds.table, cmds.conversionBourke),
 	)
 
 	for (i <- invalidInputs.indices) {
@@ -44,11 +44,11 @@ class InputArgumentsParserTests extends FunSuite {
 	}
 
 	test("Correct args") {
-		val orgArgs: Array[String] = Array(cmds.image, "path", cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole)
-		val refArgsRemove1: Array[String] = Array(cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole)
-		val refArgsRemove2: Array[String] = Array(cmds.filterInv, cmds.outputConsole)
-		val refArgsRemove3: Array[String] = Array(cmds.outputConsole)
-		val refArgsRemove4: Array[String] = Array()
+		val orgArgs: Seq[String] = Seq(cmds.image, "path", cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole)
+		val refArgsRemove1: Seq[String] = Seq(cmds.filterFlip, cmds.axisX, cmds.filterInv, cmds.outputConsole)
+		val refArgsRemove2: Seq[String] = Seq(cmds.filterInv, cmds.outputConsole)
+		val refArgsRemove3: Seq[String] = Seq(cmds.outputConsole)
+		val refArgsRemove4: Seq[String] = Seq()
 
 		val parser = new InputArgumentsParser(orgArgs)
 		assert(orgArgs.toList == parser.getArgs)
