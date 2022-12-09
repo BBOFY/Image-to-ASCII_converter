@@ -14,12 +14,6 @@ object Main {
 
 	def main(args: Array[String]): Unit = {
 
-
-
-
-
-
-/*
 		val stdOutput = new StdOutputExporter
 
 		val inputParser = new InputArgumentsParser(args)
@@ -32,43 +26,44 @@ object Main {
 			case _: Throwable => stdOutput.`export`("Unknown error")
 		}
 
-
 		val imageProcessor = new ImageProcessorImpl
 
 		val filterBuilder = new FilterBuilder
 		val conversionBuilder = new AsciiConversionBuilder
 		val exporterBuilder = new ExporterBuilder
 
-		val imageFilter = filterBuilder.build
-		val imageConverter = conversionBuilder.build
-//		val imageExporters = exporterBuilder.build
-		var imageExporters = exporterBuilder.build
-
 		val importHandler = importHandlers(imageProcessor, inputParser)
 		val filterHandler = filterHandlers(filterBuilder, inputParser)
 		val converterHandler = converterHandlers(conversionBuilder, inputParser)
 		val exporterHandler = exporterHandlers(exporterBuilder, inputParser)
-
 
 		callArgs(importHandler, inputParser)
 		callArgs(filterHandler, inputParser)
 		callArgs(converterHandler, inputParser)
 		callArgs(exporterHandler, inputParser)
 
+
+		val imageFilter = filterBuilder.build
+		val imageConverter = conversionBuilder.build
+		val imageExporters = exporterBuilder.build
+
 		if (!inputParser.argsEmpty()) {
 			stdOutput.`export`(s"Unknown command '${inputParser.getArgs.head}'")
 			return
 		}
 
-
-		imageExporters = Seq(new FileOutputExporter("src/main/resources/test.txt"))
+		if (imageExporters.isEmpty) {
+			stdOutput.`export`("No output specified. Skipping conversion")
+			return
+		}
 
 		imageProcessor.activatePipeline(
 			imageFilter,
 			imageConverter,
 			imageExporters
 		)
-		*/
+
+
 	}
 
 	def callArgs(handler: CommandHandler, parser: InputArgumentsParser): Unit = {
