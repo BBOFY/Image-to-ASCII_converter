@@ -15,6 +15,11 @@ object Main {
 	def main(args: Array[String]): Unit = {
 
 
+
+
+
+
+/*
 		val stdOutput = new StdOutputExporter
 
 		val inputParser = new InputArgumentsParser(args)
@@ -63,7 +68,7 @@ object Main {
 			imageConverter,
 			imageExporters
 		)
-
+		*/
 	}
 
 	def callArgs(handler: CommandHandler, parser: InputArgumentsParser): Unit = {

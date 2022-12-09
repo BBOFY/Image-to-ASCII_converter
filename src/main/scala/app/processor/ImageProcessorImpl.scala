@@ -8,9 +8,9 @@ import exporter.text.TextExporter
 
 class ImageProcessorImpl extends ImageProcessor {
 
-	private var importedImage: ImageRgb = new ImageRgb(Vector(Vector(PixelRgb(0, 0, 0))))
+	protected var _importedImage: ImageRgb = new ImageRgb(Vector(Vector(PixelRgb(0, 0, 0))))
 
-	override def loadImage(img: ImageRgb): Unit = importedImage = img
+	override def loadImage(img: ImageRgb): Unit = _importedImage = img
 
 	def activatePipeline(filter: ImageFilter,
 						 asciiConverter: AsciiConverter,
@@ -22,7 +22,7 @@ class ImageProcessorImpl extends ImageProcessor {
 			asciiConverter.convert(
 				filter.apply(
 					greyScaler.convert(
-						importedImage
+						_importedImage
 					)
 				)
 			)

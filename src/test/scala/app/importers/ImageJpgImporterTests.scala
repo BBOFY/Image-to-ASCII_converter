@@ -10,7 +10,7 @@ import java.io.IOException
  */
 class ImageJpgImporterTests extends ImporterTests {
 
-	val validPath = "src/main/resources/test_jpg.jpg"
+	val validPath = "src/main/resources/test.jpg"
 	val invalidPath = "src/main/resources/test"
 	val importer: ImporterImageIo = new ImporterJpg
 

@@ -7,7 +7,7 @@ import java.io.IOException
 
 class ImagePngImporterTests extends ImporterTests {
 
-	val validPath = "src/main/resources/test_png.png"
+	val validPath = "src/main/resources/test.png"
 	val invalidPath = "/dev/null/bob.png"
 	val importer: ImporterImageIo = new ImporterPng
 
