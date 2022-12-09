@@ -2,18 +2,31 @@ package app.handlers
 
 import app.handlers.importHandlers.{ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.inputParser.InputArgumentsParser
+import app.models.image.ImageRgb
 import app.models.pixel.PixelRgb
+import app.processor.ImageProcessorImpl
 
 class ImporterHandlersTests extends HandlerTests {
+
+	class DummyProcessor extends ImageProcessorImpl {
+		var image: ImageRgb = _importedImage
+		var counter = 0
+
+		override def loadImage(img: ImageRgb): Unit = {
+			counter = counter + 1
+			image = img
+		}
+	}
 
 	private val args0: Seq[String] = Seq("--image", "src/main/resources/test.png")
 	private val args1: Seq[String] = Seq("--image-random", "whatever", "--image-random")
 	private val args2: Seq[String] = Seq("--image", "src/main/resources/test.gif", "--image", "src/main/resources/test.jpg", "--image")
 	private val args3: Seq[String] = Seq("--image", "src/main/resources/test.jpg", "--image-random", "--image", "src/main/resources/test.gif")
 
-	private val imageProcessor = new DummyProcessor
+	private val processor = new DummyProcessor
 
 	test("Simple input") {
+		processor.counter = 0
 		val parser = new InputArgumentsParser(args0)
 		val handlers = importHandlers(parser)
 
@@ -21,8 +34,8 @@ class ImporterHandlersTests extends HandlerTests {
 		callArgs(handlers, parser)
 		assert(parser.argsEmpty())
 		assert(parser.getArgs == Seq.empty)
-		assert(imageProcessor.counter == 1)
-		assert(imageProcessor.image.getGrid == Vector(
+		assert(processor.counter == 1)
+		assert(processor.image.getGrid == Vector(
 			Vector(PixelRgb(255, 0, 0), PixelRgb(0, 255, 0), PixelRgb(0, 0, 255), PixelRgb(255, 255, 255)),
 			Vector(PixelRgb(255, 255, 0), PixelRgb(255, 0, 255), PixelRgb(0, 255, 255), PixelRgb(255, 255, 255)),
 			Vector(PixelRgb(0, 0, 0), PixelRgb(63, 63, 63), PixelRgb(127, 127, 127), PixelRgb(191, 191, 191))
@@ -30,6 +43,7 @@ class ImporterHandlersTests extends HandlerTests {
 	}
 
 	test("Simple input with invalid command") {
+		processor.counter = 0
 		val parser = new InputArgumentsParser(args1)
 		val handlers = importHandlers(parser)
 
@@ -37,11 +51,12 @@ class ImporterHandlersTests extends HandlerTests {
 		callArgs(handlers, parser)
 		assert(!parser.argsEmpty())
 		assert(parser.getArgs == Seq("whatever", "--image-random"))
-		assert(imageProcessor.counter == 1)
-		assert(imageProcessor.image.getGrid == Vector(Vector(PixelRgb(42, 6, 9))))
+		assert(processor.counter == 1)
+		assert(processor.image.getGrid == Vector(Vector(PixelRgb(42, 6, 9))))
 	}
 
 	test("Input with unsupported extension") {
+		processor.counter = 0
 		val parser = new InputArgumentsParser(args2)
 		val handlers = importHandlers(parser)
 
@@ -49,11 +64,12 @@ class ImporterHandlersTests extends HandlerTests {
 		callArgs(handlers, parser)
 		assert(!parser.argsEmpty())
 		assert(parser.getArgs == args2)
-		assert(imageProcessor.counter == 0)
+		assert(processor.counter == 0)
 
 	}
 
 	test("Input partially correct") {
+		processor.counter = 0
 		val parser = new InputArgumentsParser(args3)
 		val handlers = importHandlers(parser)
 
@@ -61,15 +77,15 @@ class ImporterHandlersTests extends HandlerTests {
 		callArgs(handlers, parser)
 		assert(!parser.argsEmpty())
 		assert(parser.getArgs == Seq("--image", "src/main/resources/test.gif"))
-		assert(imageProcessor.counter == 2)
+		assert(processor.counter == 2)
 
 	}
 
 	private def importHandlers(parser: InputArgumentsParser): ImportHandler = {
 
-		val importJpgHandler = new ImportJpgHandler(imageProcessor, parser)
-		val importPngHandler = new ImportPngHandler(imageProcessor, parser)
-		val importRandomHandler = new ImportRandomHandler(imageProcessor, parser)
+		val importJpgHandler = new ImportJpgHandler(processor, parser)
+		val importPngHandler = new ImportPngHandler(processor, parser)
+		val importRandomHandler = new ImportRandomHandler(processor, parser)
 
 		val initialImportHandler: ImportHandler = importJpgHandler
 		initialImportHandler
