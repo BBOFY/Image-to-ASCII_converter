@@ -10,7 +10,7 @@ trait ImageProcessor {
 
 	def activatePipeline(filter: ImageFilter,
 						 asciiConverter: AsciiConverter,
-						 exporter: TextExporter,
+						 exporters: Seq[TextExporter],
 						 greyScaler: GreyScaler,
 						 textConverter: TextConverter
 						): Unit

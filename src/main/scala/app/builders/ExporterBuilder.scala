@@ -1,14 +1,14 @@
 package app.builders
 
-import exporter.text.{MixedExporter, TextExporter}
+import exporter.text.TextExporter
 
-class ExporterBuilder extends Builder[TextExporter, TextExporter] {
+class ExporterBuilder extends Builder[TextExporter, Seq[TextExporter]] {
 
-	private var exporters: Seq[TextExporter] = Seq.empty
+	protected var exporters: Seq[TextExporter] = Seq.empty
 
 	override def registerProperty(exporter: TextExporter): Unit = {
 		exporters = exporters.appended(exporter)
 	}
 
-	override def build: TextExporter = new MixedExporter(exporters)
+	override def build: Seq[TextExporter] = exporters
 }

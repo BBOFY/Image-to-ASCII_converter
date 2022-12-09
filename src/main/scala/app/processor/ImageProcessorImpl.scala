@@ -14,22 +14,22 @@ class ImageProcessorImpl extends ImageProcessor {
 
 	def activatePipeline(filter: ImageFilter,
 						 asciiConverter: AsciiConverter,
-						 exporter: TextExporter,
+						 exporters: Seq[TextExporter],
 						 greyScaler: GreyScaler = new GreyScaler,
 						 textConverter: TextConverter = new TextConverter,
 	): Unit = {
-		exporter.`export`(
-		textConverter.convert(
-				asciiConverter.convert(
-					filter.apply(
-						greyScaler.convert(
-							importedImage
-						)
+		val imageInText = textConverter.convert(
+			asciiConverter.convert(
+				filter.apply(
+					greyScaler.convert(
+						importedImage
 					)
 				)
 			)
 		)
+
+		for (exporter <- exporters) {
+			exporter.`export`(imageInText)
+		}
 	}
-
-
 }

@@ -5,12 +5,9 @@ import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverter
 import app.handlers.exportHandlers.{ExporterHandler, FileOutputHandler, StdOutputHandler}
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipXFilterHandler, FlipYFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.handlers.importHandlers.{ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
-import app.importers.ImporterPng
 import app.inputParser.InputArgumentsParser
-import app.models.image.ImageRgb
-import app.models.pixel.PixelRgb
 import app.processor.{ImageProcessor, ImageProcessorImpl}
-import exporter.text.{FileOutputExporter, MixedExporter, StdOutputExporter}
+import exporter.text.{FileOutputExporter, StdOutputExporter}
 import handler.Handler
 
 object Main {
@@ -27,7 +24,7 @@ object Main {
 		}
 		catch {
 			case e: IllegalArgumentException => stdOutput.`export`(e.getMessage)
-			case _ => stdOutput.`export`("Unknown error")
+			case _: Throwable => stdOutput.`export`("Unknown error")
 		}
 
 
@@ -39,8 +36,8 @@ object Main {
 
 		val imageFilter = filterBuilder.build
 		val imageConverter = conversionBuilder.build
-//		val imageExporter = exporterBuilder.build
-		var imageExporter = exporterBuilder.build
+//		val imageExporters = exporterBuilder.build
+		var imageExporters = exporterBuilder.build
 
 		val importHandler = importHandlers(imageProcessor, inputParser)
 		val filterHandler = filterHandlers(filterBuilder, inputParser)
@@ -59,12 +56,12 @@ object Main {
 		}
 
 
-		imageExporter = new MixedExporter(Seq(new FileOutputExporter("src/main/resources/test.txt")))
+		imageExporters = Seq(new FileOutputExporter("src/main/resources/test.txt"))
 
 		imageProcessor.activatePipeline(
 			imageFilter,
 			imageConverter,
-			imageExporter
+			imageExporters
 		)
 
 	}
