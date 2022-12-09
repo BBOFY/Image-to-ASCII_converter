@@ -1,5 +1,5 @@
 package app.handlers.filterHandlers
 
-class VariableFilterHandler {
+abstract class VariableFilterHandler extends FilterHandler {
 
 }
