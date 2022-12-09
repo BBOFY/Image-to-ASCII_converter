@@ -27,6 +27,7 @@ class ExportHandlersTests extends HandlerTests {
 
 	test("Simple input") {
 		builder.counter = 0
+		builder.exporters = Seq.empty
 		val parser = new InputArgumentsParser(args0)
 		val handlers = exportHandlers(parser)
 
@@ -35,10 +36,12 @@ class ExportHandlersTests extends HandlerTests {
 		assert(parser.argsEmpty())
 		assert(parser.getArgs == Seq.empty)
 		assert(builder.counter == 1)
+		assert(builder.exporters.length == 1)
 	}
 
 	test("Simple input with invalid command") {
 		builder.counter = 0
+		builder.exporters = Seq.empty
 		val parser = new InputArgumentsParser(args1)
 		val handlers = exportHandlers(parser)
 
@@ -47,10 +50,12 @@ class ExportHandlersTests extends HandlerTests {
 		assert(!parser.argsEmpty())
 		assert(parser.getArgs == Seq("whatever", "--output-console"))
 		assert(builder.counter == 1)
+		assert(builder.exporters.length == 1)
 	}
 
 	test("Valid input with multiple outputs") {
 		builder.counter = 0
+		builder.exporters = Seq.empty
 		val parser = new InputArgumentsParser(args2)
 		val handlers = exportHandlers(parser)
 
@@ -59,10 +64,12 @@ class ExportHandlersTests extends HandlerTests {
 		assert(parser.argsEmpty())
 		assert(parser.getArgs == Seq.empty)
 		assert(builder.counter == 2)
+		assert(builder.exporters.length == 2)
 	}
 
 	test("Input partially correct") {
 		builder.counter = 0
+		builder.exporters = Seq.empty
 		val parser = new InputArgumentsParser(args3)
 		val handlers = exportHandlers(parser)
 
@@ -71,6 +78,7 @@ class ExportHandlersTests extends HandlerTests {
 		assert(!parser.argsEmpty())
 		assert(parser.getArgs == Seq("whatever", "src/main/resources/test.jpg", "--output-console"))
 		assert(builder.counter == 2)
+		assert(builder.exporters.length == 2)
 	}
 
 	private def exportHandlers(parser: InputArgumentsParser): ExportHandler = {
