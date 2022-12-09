@@ -1,7 +1,7 @@
 package app.handlers.filterHandlers
 
-import app.Commands
 import app.builders.FilterBuilder
+import app.enums.Commands
 import app.filters.ImageFilter
 import app.filters.specific.InvertFilter
 import app.inputParser.InputParser

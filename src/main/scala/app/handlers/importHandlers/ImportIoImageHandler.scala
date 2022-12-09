@@ -1,6 +1,6 @@
 package app.handlers.importHandlers
 
-import app.Commands
+import app.enums.Commands
 import app.importers.ImporterImageIo
 import app.inputParser.InputParser
 import app.processor.ImageProcessor

@@ -1,7 +1,7 @@
 package app.handlers.filterHandlers
 
-import app.Commands
 import app.builders.FilterBuilder
+import app.enums.Commands
 import app.filters.VariableFilter
 import app.filters.specific.BrightnessFilter
 import app.inputParser.InputParser

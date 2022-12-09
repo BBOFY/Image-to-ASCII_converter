@@ -1,6 +1,6 @@
 package app.inputParser
 
-import app.Commands
+import app.enums.Commands
 
 class InputArgumentsParser(private val args: Seq[String]) extends InputParser[String]{
 

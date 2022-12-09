@@ -1,7 +1,7 @@
 package app.handlers.converterHandlers
 
-import app.Commands
 import app.builders.AsciiConversionBuilder
+import app.enums.Commands
 import app.inputParser.InputParser
 import app.models.conversionTables.CustomTable
 import handler.Handler

@@ -1,15 +1,16 @@
 package app.handlers.filterHandlers
 
-import app.Commands
 import app.builders.FilterBuilder
+import app.enums.{Axes, Commands}
 import app.filters.ImageFilter
-import app.filters.specific.FlipXFilter
+import app.filters.specific.{FlipXFilter, FlipYFilter}
 import app.inputParser.InputParser
 import handler.Handler
 
-class FlipXFilterHandler(val filterBuilder: FilterBuilder,
+class FlipFilterHandler(val filterBuilder: FilterBuilder,
 						val parser: InputParser[String],
-						val filter: ImageFilter = new FlipXFilter
+						val flipperX: ImageFilter = new FlipXFilter,
+						val flipperY: ImageFilter = new FlipYFilter
 					   )
   extends FilterHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
@@ -21,13 +22,18 @@ class FlipXFilterHandler(val filterBuilder: FilterBuilder,
 			return super.handle(args)
 
 		if (args.tail.isEmpty
-		  || !args.tail.head.matches(Commands.axisX.toString)
-		) {
+		  || Commands.isCommand(args.tail.head))
+			return None
+
+		if (!Axes.isAxis(args.tail.head)) {
 			parser.removeElements(1)
 			return None
 		}
 
-		filterBuilder.registerProperty(filter)
+		if (args.tail.head == Axes.x.toString)
+			filterBuilder.registerProperty(flipperX)
+		else
+			filterBuilder.registerProperty(flipperY)
 		parser.removeElements(2)
 		None
 

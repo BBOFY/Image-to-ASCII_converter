@@ -1,7 +1,7 @@
 package app.handlers.converterHandlers
 
-import app.Commands
 import app.builders.AsciiConversionBuilder
+import app.enums.{Commands, Tables}
 import app.inputParser.InputParser
 import app.models.conversionTables.BourkeTable
 import handler.Handler
@@ -16,7 +16,7 @@ class BourkeConverterHandler(val builder: AsciiConversionBuilder,
 		if (args.nonEmpty
 		  && args.tail.nonEmpty
 		  && args.head == Commands.table.toString
-		  && args.tail.head == Commands.conversionBourke.toString) {
+		  && args.tail.head == Tables.conversionBourke.toString) {
 			builder.registerProperty(table)
 			parser.removeElements(2)
 			None

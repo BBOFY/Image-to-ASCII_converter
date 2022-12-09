@@ -1,7 +1,7 @@
 package app.handlers.converterHandlers
 
-import app.Commands
 import app.builders.AsciiConversionBuilder
+import app.enums.{Commands, Tables}
 import app.inputParser.InputParser
 import app.models.conversionTables.ConstantTable
 import handler.Handler
@@ -16,7 +16,7 @@ class ConstantConverterHandler(val builder: AsciiConversionBuilder,
 		if (args.nonEmpty
 		  && args.tail.nonEmpty
 		  && args.head == Commands.table.toString
-		  && args.tail.head == Commands.conversionConstant.toString) {
+		  && args.tail.head == Tables.conversionConstant.toString) {
 			builder.registerProperty(table)
 			parser.removeElements(2)
 			None

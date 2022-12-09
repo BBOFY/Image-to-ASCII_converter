@@ -3,7 +3,7 @@ package app.handlers
 import app.builders.FilterBuilder
 import app.filters.ImageFilter
 import app.filters.specific.{BrightnessFilter, FlipXFilter, FlipYFilter, InvertFilter, RotateFilter}
-import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipXFilterHandler, FlipYFilterHandler, InvertFilterHandler, RotateFilterHandler}
+import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.inputParser.InputArgumentsParser
 
 class FilterHandlersTests extends HandlerTests {
@@ -80,6 +80,7 @@ class FilterHandlersTests extends HandlerTests {
 
 		assert(!parser.argsEmpty())
 		callArgs(handlers, parser)
+		println(parser.getArgs)
 		assert(parser.argsEmpty())
 		assert(parser.getArgs == Seq.empty)
 		assert(builder.counter == 3)
@@ -133,7 +134,7 @@ class FilterHandlersTests extends HandlerTests {
 		assert(!parser.argsEmpty())
 		callArgs(handlers, parser)
 		assert(!parser.argsEmpty())
-		assert(parser.getArgs == Seq("--invert"))
+		assert(parser.getArgs == Seq("--flip", "--invert"))
 		assert(builder.counter == 1)
 		assert(builder.filters == refFilters6)
 	}
@@ -156,15 +157,13 @@ class FilterHandlersTests extends HandlerTests {
 
 		val brightnessFilterHandler = new BrightnessFilterHandler(builder, parser)
 		val rotateFilterHandler = new RotateFilterHandler(builder, parser)
-		val flipXFilterHandler = new FlipXFilterHandler(builder, parser)
-		val flipYFilterHandler = new FlipYFilterHandler(builder, parser)
+		val flipFilterHandler = new FlipFilterHandler(builder, parser)
 		val invertFilterHandler = new InvertFilterHandler(builder, parser)
 
 		val initialFilterHandler: FilterHandler = brightnessFilterHandler
 		brightnessFilterHandler
 		  .setNext(rotateFilterHandler)
-		  .setNext(flipXFilterHandler)
-		  .setNext(flipYFilterHandler)
+		  .setNext(flipFilterHandler)
 		  .setNext(invertFilterHandler)
 
 		initialFilterHandler

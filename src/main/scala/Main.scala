@@ -3,7 +3,7 @@ import app.builders.{AsciiConversionBuilder, ExporterBuilder, FilterBuilder}
 import app.handlers.CommandHandler
 import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, ConverterHandler, CustomConverterHandler}
 import app.handlers.exportHandlers.{ExportHandler, FileOutputHandler, StdOutputHandler}
-import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipXFilterHandler, FlipYFilterHandler, InvertFilterHandler, RotateFilterHandler}
+import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.handlers.importHandlers.{ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.inputParser.InputArgumentsParser
 import app.processor.{ImageProcessor, ImageProcessorImpl}
@@ -91,15 +91,13 @@ object Main {
 	def filterHandlers(filterBuilder: FilterBuilder, parser: InputArgumentsParser): FilterHandler = {
 		val brightnessFilterHandler = new BrightnessFilterHandler(filterBuilder, parser)
 		val rotateFilterHandler = new RotateFilterHandler(filterBuilder, parser)
-		val flipXFilterHandler = new FlipXFilterHandler(filterBuilder, parser)
-		val flipYFilterHandler = new FlipYFilterHandler(filterBuilder, parser)
+		val flipFilterHandler = new FlipFilterHandler(filterBuilder, parser)
 		val invertFilterHandler = new InvertFilterHandler(filterBuilder, parser)
 
 		val initialFilterHandler: FilterHandler = brightnessFilterHandler
 		brightnessFilterHandler
 		  .setNext(rotateFilterHandler)
-		  .setNext(flipXFilterHandler)
-		  .setNext(flipYFilterHandler)
+		  .setNext(flipFilterHandler)
 		  .setNext(invertFilterHandler)
 
 		initialFilterHandler
