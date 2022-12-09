@@ -39,5 +39,12 @@ class BrightnessFilter extends VariableFilter {
 	}
 
 	override def setValue(increment: Int): Unit = _increment = increment
+
+	override def equals(obj: Any): Boolean = {
+		obj match {
+			case that: BrightnessFilter => that._increment == this._increment
+			case _ => false
+		}
+	}
 }
 

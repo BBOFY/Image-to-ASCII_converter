@@ -17,4 +17,11 @@ class FlipYFilter extends ImageFilter {
 		new ImageGrey(newGrid)
 
 	}
+
+	override def equals(obj: Any): Boolean = {
+		obj match {
+			case _: FlipYFilter => true
+			case _ => false
+		}
+	}
 }

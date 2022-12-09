@@ -1,6 +1,6 @@
 package app.filters.specific
 
-import app.filters.VariableFilterTests
+import app.filters.{ImageFilter, VariableFilter, VariableFilterTests}
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
 
@@ -155,5 +155,31 @@ class BrightnessFilterTests extends VariableFilterTests {
 		_testImg1,
 		-0
 	)
+
+	test("Equality") {
+		val otherBrightFilter: VariableFilter = new BrightnessFilter
+		otherBrightFilter.setValue(19)
+		brightnessFilter.setValue(19)
+		assert(otherBrightFilter == brightnessFilter)
+	}
+
+	test("Inequality 0") {
+		val otherBrightFilter: VariableFilter = new BrightnessFilter
+		otherBrightFilter.setValue(196)
+		brightnessFilter.setValue(100)
+		assert(otherBrightFilter != brightnessFilter)
+	}
+
+	test("Inequality 1") {
+		val otherFilter: ImageFilter = new FlipXFilter
+		assert(otherFilter != brightnessFilter)
+	}
+
+	test("Inequality 2") {
+		val rotateFilter: VariableFilter = new RotateFilter
+		rotateFilter.setValue(180)
+		brightnessFilter.setValue(180)
+		assert(rotateFilter != brightnessFilter)
+	}
 
 }

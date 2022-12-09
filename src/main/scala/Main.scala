@@ -13,6 +13,9 @@ object Main {
 
 	def main(args: Array[String]): Unit = {
 
+
+		/* <-- Just comment this line
+
 		val stdOutput = new StdOutputExporter
 
 		val inputParser = new InputArgumentsParser(args)
@@ -109,5 +112,9 @@ object Main {
 		initialExporterHandler
 		  .setNext(fileOutputHandler)
 		initialExporterHandler
+	}
+
+	*/
+
 	}
 }

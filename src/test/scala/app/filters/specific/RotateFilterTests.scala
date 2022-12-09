@@ -1,6 +1,6 @@
 package app.filters.specific
 
-import app.filters.VariableFilterTests
+import app.filters.{ImageFilter, VariableFilter, VariableFilterTests}
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
 
@@ -138,6 +138,39 @@ class RotateFilterTests extends VariableFilterTests {
 		assertThrows[IllegalArgumentException](
 			rotateFilter.setValue(-798451)
 		)
+	}
+
+	test("Equality 0") {
+		val otherRotateFilter: VariableFilter = new RotateFilter
+		otherRotateFilter.setValue(360)
+		rotateFilter.setValue(360)
+		assert(otherRotateFilter == rotateFilter)
+	}
+
+	test("Equality 1") {
+		val otherRotateFilter: VariableFilter = new RotateFilter
+		otherRotateFilter.setValue(18810)
+		rotateFilter.setValue(-17550)
+		assert(otherRotateFilter == rotateFilter)
+	}
+
+	test("Inequality 0") {
+		val otherRotateFilter: VariableFilter = new RotateFilter
+		otherRotateFilter.setValue(-270)
+		rotateFilter.setValue(270)
+		assert(otherRotateFilter != rotateFilter)
+	}
+
+	test("Inequality 1") {
+		val otherFilter: ImageFilter = new FlipYFilter
+		assert(otherFilter != rotateFilter)
+	}
+
+	test("Inequality 2") {
+		val brightnessFilter: VariableFilter = new BrightnessFilter
+		brightnessFilter.setValue(180)
+		rotateFilter.setValue(180)
+		assert(rotateFilter != brightnessFilter)
 	}
 
 }

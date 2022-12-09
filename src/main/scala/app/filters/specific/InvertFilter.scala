@@ -29,4 +29,11 @@ class InvertFilter extends ImageFilter {
 		val newVal = 255 - pix.value
 		PixelGrey(newVal)
 	}
+
+	override def equals(obj: Any): Boolean = {
+		obj match {
+			case _: InvertFilter => true
+			case _ => false
+		}
+	}
 }

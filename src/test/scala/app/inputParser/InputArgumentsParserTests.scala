@@ -90,13 +90,13 @@ class InputArgumentsParserTests extends FunSuite {
 	}
 
 	test("Emptiness valid") {
-		val emptyArgs = Array.empty
+		val emptyArgs = Seq.empty
 		val parser = new InputArgumentsParser(emptyArgs)
 		parser.argsEmptiness()
 	}
 
 	test("Emptiness invalid") {
-		val invalidArgs = Array(".empty", "den", "")
+		val invalidArgs = Seq(".empty", "den", "")
 		val parser = new InputArgumentsParser(invalidArgs)
 
 		val caught = intercept[IllegalStateException] {

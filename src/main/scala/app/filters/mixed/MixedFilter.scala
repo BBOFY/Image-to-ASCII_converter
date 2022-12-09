@@ -3,18 +3,22 @@ package app.filters.mixed
 import app.filters.{IdentityImageFilter, ImageFilter}
 import app.models.image.ImageGrey
 
-class MixedFilter (filters: Seq[ImageFilter] = Seq(IdentityImageFilter)) extends ImageFilter {
-	/**
-	 * Iterates over given filters and applies them on given item
-	 *
-	 * @param item on which filter will be applied
-	 * @return item with applied filter
-	 */
+class MixedFilter (val filters: Seq[ImageFilter] = Seq(IdentityImageFilter)) extends ImageFilter {
+
+	protected val _filters: Seq[ImageFilter] = filters
+
 	override def apply(item: ImageGrey): ImageGrey = {
 		var image = item
-		filters.foreach(filter => {
+		_filters.foreach(filter => {
 			image = filter.apply(image)
 		})
 		image
+	}
+
+	override def equals(obj: Any): Boolean = {
+		obj match {
+			case that: MixedFilter => that._filters == this._filters
+			case _ => false
+		}
 	}
 }

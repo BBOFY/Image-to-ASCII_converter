@@ -62,6 +62,7 @@ class AsciiConversionBuilderTests extends FunSuite {
 		)
 	}
 
+
 	test("With custom builder") {
 		builder.registerProperty(tableCustom)
 		val converter = builder.build

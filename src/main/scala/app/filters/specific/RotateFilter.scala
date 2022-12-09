@@ -12,13 +12,13 @@ class RotateFilter extends VariableFilter {
 
 		_rotation % 360 match {
 			case 0 => image
-			case 90 | -270 =>
+			case 90 =>
 				rotateClockVise90(image)
 
-			case 180 | -180 =>
+			case 180 =>
 				rotateClockVise90(rotateClockVise90(image))
 
-			case 270 | -90 =>
+			case 270 =>
 				rotateAntiClockVise90(image)
 		}
 	}
@@ -50,6 +50,13 @@ class RotateFilter extends VariableFilter {
 	override def setValue(rotation: Int): Unit = {
 		if (rotation % 90 != 0)
 			throw new IllegalArgumentException("Rotation amount must be divisible by 90")
-		_rotation = rotation
+		_rotation = (rotation % 360 + 360) % 360
+	}
+
+	override def equals(obj: Any): Boolean = {
+		obj match {
+			case that: RotateFilter => that._rotation == this._rotation
+			case _ => false
+		}
 	}
 }
