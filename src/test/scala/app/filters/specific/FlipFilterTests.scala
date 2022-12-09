@@ -1,6 +1,6 @@
 package app.filters.specific
 
-import app.filters.FilterTests
+import app.filters.{FilterTests, IdentityImageFilter, ImageFilter, VariableFilter}
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
 
@@ -140,6 +140,34 @@ class FlipFilterTests extends FilterTests {
 	test("FlipY Tall") {
 		val testImgTallFlipY = flipperY.apply(testImgTall)
 		assert(testImgTallFlipY.getGrid == refImgTallFlippedY.getGrid)
+	}
+
+
+	test("Equality X") {
+		val otherInvFilter: ImageFilter = new FlipXFilter
+		assert(otherInvFilter == flipperX)
+	}
+
+	test("Equality Y") {
+		val otherInvFilter: ImageFilter = new FlipYFilter
+		assert(otherInvFilter == flipperY)
+	}
+
+	test("Inequality XY") {
+		assert(flipperX != flipperY)
+	}
+
+	test("Inequality 0") {
+		val otherFilter: VariableFilter = new BrightnessFilter
+		otherFilter.setValue(-270)
+		assert(otherFilter != flipperX)
+		assert(otherFilter != flipperY)
+	}
+
+	test("Inequality 1") {
+		val otherFilter: ImageFilter = IdentityImageFilter
+		assert(otherFilter != flipperX)
+		assert(otherFilter != flipperY)
 	}
 
 }

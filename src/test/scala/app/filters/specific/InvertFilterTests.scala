@@ -1,6 +1,6 @@
 package app.filters.specific
 
-import app.filters.FilterTests
+import app.filters.{FilterTests, IdentityImageFilter, ImageFilter, VariableFilter}
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
 
@@ -47,5 +47,26 @@ class InvertFilterTests extends FilterTests {
 		assert(
 			img.getGrid == refImg.getGrid
 		)
+	}
+
+	test("Equality") {
+		val otherInvFilter: ImageFilter = new InvertFilter
+		assert(otherInvFilter == invertFilter)
+	}
+
+	test("Inequality 0") {
+		val otherFilter: VariableFilter = new RotateFilter
+		otherFilter.setValue(-270)
+		assert(otherFilter != invertFilter)
+	}
+
+	test("Inequality 1") {
+		val otherFilter: ImageFilter = new FlipYFilter
+		assert(otherFilter != invertFilter)
+	}
+
+	test("Inequality 2") {
+		val otherFilter: ImageFilter = IdentityImageFilter
+		assert(otherFilter != invertFilter)
 	}
 }
