@@ -144,13 +144,13 @@ class FlipFilterTests extends FilterTests {
 
 
 	test("Equality X") {
-		val otherInvFilter: ImageFilter = new FlipXFilter
-		assert(otherInvFilter == flipperX)
+		val otherFlipXFilter: ImageFilter = new FlipXFilter
+		assert(otherFlipXFilter == flipperX)
 	}
 
 	test("Equality Y") {
-		val otherInvFilter: ImageFilter = new FlipYFilter
-		assert(otherInvFilter == flipperY)
+		val otherFlipYFilter: ImageFilter = new FlipYFilter
+		assert(otherFlipYFilter == flipperY)
 	}
 
 	test("Inequality XY") {

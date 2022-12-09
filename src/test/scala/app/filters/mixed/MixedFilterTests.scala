@@ -1,7 +1,7 @@
 package app.filters.mixed
 
 import app.filters.specific.{BrightnessFilter, FlipXFilter, FlipYFilter, InvertFilter, RotateFilter}
-import app.filters.{FilterTests, IdentityImageFilter, ImageFilter}
+import app.filters.{FilterTests, IdentityImageFilter, ImageFilter, VariableFilter}
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
 
@@ -108,5 +108,31 @@ class MixedFilterTests extends FilterTests {
 	}
 
 
+	test("Equality 0") {
+		val otherMixFilter: ImageFilter = new MixedFilter
+		assert(otherMixFilter == emptyMF)
+	}
+
+	test("Equality 1") {
+		val otherMixFilter: ImageFilter = new MixedFilter(flipRotateFilters)
+		assert(otherMixFilter == flipRotateMF)
+	}
+
+	test("Equality 2") {
+		val otherMixFilter: ImageFilter = new MixedFilter(flipRotateInvertRotateFlipFilters)
+		assert(otherMixFilter == flipRotateInvertRotateFlipMF)
+	}
+
+	test("Inequality 0") {
+		assert(brightnessInvertMF != flipRotateInvertRotateFlipMF)
+	}
+
+	test("Inequality 1") {
+		assert(rotationMF != rotator90)
+	}
+
+	test("Inequality 2") {
+		assert(inverter != invertMF)
+	}
 
 }
