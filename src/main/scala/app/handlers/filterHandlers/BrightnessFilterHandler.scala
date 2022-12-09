@@ -14,9 +14,11 @@ class BrightnessFilterHandler(val filterBuilder: FilterBuilder,
   extends FilterHandler {
 
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
-
-		if (args.head == Commands.filterBright) {
-			filter.setValue(args.apply(1).toInt)
+		if (args.nonEmpty
+		  && args.tail.nonEmpty
+		  && args.head == Commands.filterBright
+		) {
+			filter.setValue(args.tail.head.toInt)
 			filterBuilder.registerProperty(filter)
 			parser.removeElements(2)
 			None

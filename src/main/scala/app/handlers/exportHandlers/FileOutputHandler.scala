@@ -11,7 +11,10 @@ class FileOutputHandler(val exporterBuilder: ExporterBuilder,
 					   )
   extends ExportHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
-		if (args.nonEmpty && args.tail.nonEmpty && args.head == Commands.outputFile) {
+		if (args.nonEmpty
+		  && args.tail.nonEmpty
+		  && args.head == Commands.outputFile
+		) {
 			val path = args.tail.head
 			val exporter: TextExporter = new FileOutputExporter(path)
 			exporterBuilder.registerProperty(exporter)

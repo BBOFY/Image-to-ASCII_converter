@@ -15,7 +15,9 @@ class InvertFilterHandler(val filterBuilder: FilterBuilder,
 
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
-		if (args.head == Commands.filterInv) {
+		if (args.nonEmpty
+		  && args.head == Commands.filterInv
+		) {
 			filterBuilder.registerProperty(filter)
 			parser.removeElements(1)
 			None

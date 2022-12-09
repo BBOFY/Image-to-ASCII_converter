@@ -14,7 +14,11 @@ class FlipYFilterHandler(val filterBuilder: FilterBuilder,
   extends FilterHandler {
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
-		if (args.head == Commands.filterFlip && args.apply(1) == Commands.axisY) {
+		if (args.nonEmpty
+		  && args.tail.nonEmpty
+		  && args.head == Commands.filterFlip
+		  && args.tail.head == Commands.axisY
+		) {
 			filterBuilder.registerProperty(filter)
 			parser.removeElements(2)
 			None

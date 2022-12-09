@@ -13,7 +13,9 @@ class ImportRandomHandler(val imgProcessor: ImageProcessor,
   extends ImportHandler {
 
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
-		if (args.head == Commands.imageRandom) {
+		if (args.nonEmpty
+		  && args.head == Commands.imageRandom
+		) {
 			imgProcessor.loadImage(importer.doImport())
 			parser.removeElements(1)
 			None

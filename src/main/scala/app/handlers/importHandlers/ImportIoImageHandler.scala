@@ -15,9 +15,12 @@ abstract class ImportIoImageHandler(private val importer: ImporterImageIo,
 
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
-		if (args.head == Commands.image
-		  && validPostfixes.exists(postfix => args.apply(1).endsWith(postfix))) {
-			importer.setPath(args.apply(1))
+		if (args.nonEmpty
+		  && args.tail.nonEmpty
+		  && args.head == Commands.image
+		  && validPostfixes.exists(postfix => args.tail.head.endsWith(postfix))
+		) {
+			importer.setPath(args.tail.head)
 			imgProcessor.loadImage(importer.doImport())
 			parser.removeElements(2)
 			None
