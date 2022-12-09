@@ -31,8 +31,13 @@ class InputArgumentsParser(private val args: Seq[String]) extends InputParser[St
 
 	override def getArgs: List[String] = _args
 
-	override def argsEmptiness(): Unit = {
+	/**
+	 * @return empty string if _args is empty, otherwise the first element of _args
+	 */
+	override def argsEmptiness(): String = {
 		if (_args.nonEmpty)
-			throw new IllegalStateException(s"Unknown command '${_args.head}'")
+			_args.head
+		else
+			""
 	}
 }

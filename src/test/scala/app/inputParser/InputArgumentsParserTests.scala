@@ -53,9 +53,9 @@ class InputArgumentsParserTests extends FunSuite {
 		val parser = new InputArgumentsParser(orgArgs)
 		assert(orgArgs.toList == parser.getArgs)
 
-		assertThrows[IllegalStateException] {
-			parser.argsEmptiness()
-		}
+		assert(
+			parser.argsEmptiness() != ""
+		)
 
 		parser.checkValidity()
 
@@ -99,13 +99,9 @@ class InputArgumentsParserTests extends FunSuite {
 		val invalidArgs = Seq(".empty", "den", "")
 		val parser = new InputArgumentsParser(invalidArgs)
 
-		val caught = intercept[IllegalStateException] {
-			parser.argsEmptiness()
-		}
-
-		assertResult("Unknown command '.empty'") {
-			caught.getMessage
-		}
+		assert(
+			parser.argsEmptiness() == ".empty"
+		)
 	}
 
 }
