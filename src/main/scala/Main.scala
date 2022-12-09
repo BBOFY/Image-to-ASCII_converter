@@ -38,7 +38,7 @@ object Main {
 		callArgs(exporterHandler, inputParser)
 
 
-		stdOutput.`export`(inputParser.argsStatus())
+//		stdOutput.`export`(inputParser.argsStatus())
 
 
 		imageProcessor.activatePipeline(
