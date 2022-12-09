@@ -21,6 +21,6 @@ class BourkeConverterHandler(val builder: AsciiConversionBuilder,
 			parser.removeElements(2)
 			None
 		}
-		else nextHandler
+		else super.handle(args)
 	}
 }

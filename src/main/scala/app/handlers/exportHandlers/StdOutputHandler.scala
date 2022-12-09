@@ -15,8 +15,8 @@ class StdOutputHandler(val exporterBuilder: ExporterBuilder,
 			val exporter = new StdOutputExporter
 			exporterBuilder.registerProperty(exporter)
 			parser.removeElements(1)
-			return None
+			None
 		}
-		nextHandler
+		else super.handle(args)
 	}
 }

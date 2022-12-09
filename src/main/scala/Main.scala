@@ -5,16 +5,18 @@ import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverter
 import app.handlers.exportHandlers.{ExporterHandler, FileOutputHandler, StdOutputHandler}
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipXFilterHandler, FlipYFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.handlers.importHandlers.{ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
+import app.importers.ImporterPng
 import app.inputParser.InputArgumentsParser
+import app.models.image.ImageRgb
+import app.models.pixel.PixelRgb
 import app.processor.{ImageProcessor, ImageProcessorImpl}
-import exporter.text.StdOutputExporter
+import exporter.text.{MixedExporter, StdOutputExporter}
+import handler.Handler
 
 object Main {
 
 	def main(args: Array[String]): Unit = {
 
-
-		/* <-- Just comment this line
 
 		val stdOutput = new StdOutputExporter
 
@@ -27,7 +29,8 @@ object Main {
 
 		val imageFilter = filterBuilder.build
 		val imageConverter = conversionBuilder.build
-		val imageExporter = exporterBuilder.build
+//		val imageExporter = exporterBuilder.build
+		var imageExporter = exporterBuilder.build
 
 		val importHandler = importHandlers(imageProcessor, inputParser)
 		val filterHandler = filterHandlers(filterBuilder, inputParser)
@@ -40,9 +43,9 @@ object Main {
 		callArgs(converterHandler, inputParser)
 		callArgs(exporterHandler, inputParser)
 
+		inputParser.argsEmptiness()
 
-//		stdOutput.`export`(inputParser.argsStatus())
-
+		imageExporter = new MixedExporter(Seq(new StdOutputExporter))
 
 		imageProcessor.activatePipeline(
 			imageFilter,
@@ -56,7 +59,7 @@ object Main {
 		var lastProcessedArgs: List[String] = List.empty
 		while (parser.getArgs.nonEmpty && lastProcessedArgs != parser.getArgs) {
 			lastProcessedArgs = parser.getArgs
-			handler.handle(lastProcessedArgs)
+			Handler.handleAll(handler, lastProcessedArgs)
 		}
 	}
 
@@ -114,7 +117,6 @@ object Main {
 		initialExporterHandler
 	}
 
-	*/
 
-	}
+
 }

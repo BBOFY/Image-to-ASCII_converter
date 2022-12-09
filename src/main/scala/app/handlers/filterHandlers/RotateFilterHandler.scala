@@ -21,7 +21,7 @@ class RotateFilterHandler(val filterBuilder: FilterBuilder,
 			parser.removeElements(2)
 			None
 		}
-		else nextHandler
+		else super.handle(args)
 
 	}
 }

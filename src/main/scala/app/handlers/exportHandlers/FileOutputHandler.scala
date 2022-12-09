@@ -18,6 +18,6 @@ class FileOutputHandler(val exporterBuilder: ExporterBuilder,
 			parser.removeElements(2)
 			None
 		}
-		else nextHandler
+		else super.handle(args)
 	}
 }

@@ -20,7 +20,7 @@ class InvertFilterHandler(val filterBuilder: FilterBuilder,
 			parser.removeElements(1)
 			None
 		}
-		else nextHandler
+		else super.handle(args)
 
 	}
 }

@@ -11,7 +11,7 @@ abstract class ImportIoImageHandler(private val importer: ImporterImageIo,
 									private val parser: InputParser[String])
   extends ImportHandler {
 
-	protected def validPostfixes: Seq[String]
+	protected val validPostfixes: Seq[String]
 
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
@@ -22,6 +22,6 @@ abstract class ImportIoImageHandler(private val importer: ImporterImageIo,
 			parser.removeElements(2)
 			None
 		}
-		else nextHandler
+		else super.handle(args)
 	}
 }

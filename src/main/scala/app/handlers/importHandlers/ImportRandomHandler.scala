@@ -18,6 +18,6 @@ class ImportRandomHandler(val imgProcessor: ImageProcessor,
 			parser.removeElements(1)
 			None
 		}
-		else nextHandler
+		else super.handle(args)
 	}
 }
