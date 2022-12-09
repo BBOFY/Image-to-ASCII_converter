@@ -120,7 +120,7 @@ class FilterHandlersTests extends HandlerTests {
 		assert(!parser.argsEmpty())
 		callArgs(handlers, parser)
 		assert(!parser.argsEmpty())
-		assert(parser.getArgs == Seq("--rotate", "91", "--invert"))
+		assert(parser.getArgs == Seq("91", "--invert"))
 		assert(builder.counter == 0)
 		assert(builder.filters == refFilters5)
 	}

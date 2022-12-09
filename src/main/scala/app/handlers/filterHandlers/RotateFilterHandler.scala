@@ -15,17 +15,24 @@ class RotateFilterHandler(val filterBuilder: FilterBuilder,
 
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
-		if (args.nonEmpty
-		  && args.tail.nonEmpty
-		  && args.head == Commands.filterRotate
-		  && args.tail.head.toInt % 90 == 0
+		if (args.isEmpty)
+			return None
+
+		if (args.head != Commands.filterRotate)
+			return super.handle(args)
+
+		if (args.tail.isEmpty
+		  || !args.tail.head.matches("^[+-]?\\d+$")
+		  || args.tail.head.toInt % 90 != 0
 		) {
-			filter.setValue(args.tail.head.toInt)
-			filterBuilder.registerProperty(filter)
-			parser.removeElements(2)
-			None
+			parser.removeElements(1)
+			return None
 		}
-		else super.handle(args)
+
+		filter.setValue(args.tail.head.toInt)
+		filterBuilder.registerProperty(filter)
+		parser.removeElements(2)
+		None
 
 	}
 }

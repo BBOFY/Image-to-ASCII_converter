@@ -7,7 +7,7 @@ import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, Flip
 import app.handlers.importHandlers.{ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.inputParser.InputArgumentsParser
 import app.processor.{ImageProcessor, ImageProcessorImpl}
-import exporter.text.{FileOutputExporter, StdOutputExporter}
+import exporter.text.StdOutputExporter
 import handler.Handler
 
 object Main {

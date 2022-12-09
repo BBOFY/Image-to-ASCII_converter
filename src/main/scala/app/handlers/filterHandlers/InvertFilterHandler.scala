@@ -15,14 +15,15 @@ class InvertFilterHandler(val filterBuilder: FilterBuilder,
 
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
-		if (args.nonEmpty
-		  && args.head == Commands.filterInv
-		) {
-			filterBuilder.registerProperty(filter)
-			parser.removeElements(1)
-			None
-		}
-		else super.handle(args)
+		if (args.isEmpty)
+			return None
+
+		if (args.head != Commands.filterInv)
+			return super.handle(args)
+
+		filterBuilder.registerProperty(filter)
+		parser.removeElements(1)
+		None
 
 	}
 }
