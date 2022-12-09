@@ -5,16 +5,16 @@ import app.filters.mixed.MixedFilter
 
 class FilterBuilder extends Builder[ImageFilter, ImageFilter] {
 
-	private var filters: Seq[ImageFilter] = Seq.empty
+	protected var _filters: Seq[ImageFilter] = Seq.empty
 
 	override def registerProperty(filter: ImageFilter): Unit = {
-		filters = filters.appended(filter)
+		_filters = _filters.appended(filter)
 	}
 
 	override def build: ImageFilter = {
-		if (filters.isEmpty)
-			filters = Seq(IdentityImageFilter)
-		new MixedFilter(filters)
+		if (_filters.isEmpty)
+			_filters = Seq(IdentityImageFilter)
+		new MixedFilter(_filters)
 	}
 
 }
