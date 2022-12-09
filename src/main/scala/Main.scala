@@ -16,7 +16,7 @@ object Main {
 
 		val stdOutput = new StdOutputExporter
 
-		val inputParser = new InputArgumentsParser(args)
+		val inputParser = new InputArgumentsParser(args.toSeq)
 
 		try {
 			inputParser.checkValidity()

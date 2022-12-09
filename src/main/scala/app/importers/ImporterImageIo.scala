@@ -1,15 +1,15 @@
 package app.importers
 
-import app.models.image.{Image, ImageRgb}
+import app.models.image.ImageRgb
 import app.models.pixel.PixelRgb
 
-import java.io.{File, IOException}
-import javax.imageio.ImageIO
+import java.io.File
+import javax.imageio.{IIOException, ImageIO}
 
 
 abstract class ImporterImageIo extends ImageImporter {
 
-	@throws[IOException]
+	@throws[IIOException]
 	override def doImport(): ImageRgb = {
 		val img = ImageIO.read(new File(_path))
 

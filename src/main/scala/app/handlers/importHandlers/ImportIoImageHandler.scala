@@ -6,6 +6,8 @@ import app.inputParser.InputParser
 import app.processor.ImageProcessor
 import handler.Handler
 
+import javax.imageio.IIOException
+
 abstract class ImportIoImageHandler(private val importer: ImporterImageIo,
 									private val imgProcessor: ImageProcessor,
 									private val parser: InputParser[String])
@@ -21,7 +23,13 @@ abstract class ImportIoImageHandler(private val importer: ImporterImageIo,
 		  && validPostfixes.exists(postfix => args.tail.head.endsWith(postfix))
 		) {
 			importer.setPath(args.tail.head)
-			imgProcessor.loadImage(importer.doImport())
+			try {
+				imgProcessor.loadImage(importer.doImport())
+			}
+			catch {
+				case _: IIOException => return None
+			}
+
 			parser.removeElements(2)
 			None
 		}

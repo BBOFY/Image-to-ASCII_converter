@@ -22,6 +22,8 @@ class ImporterHandlersTests extends HandlerTests {
 	private val args1: Seq[String] = Seq("--image-random", "whatever", "--image-random")
 	private val args2: Seq[String] = Seq("--image", "src/main/resources/test.gif", "--image", "src/main/resources/test.jpg", "--image")
 	private val args3: Seq[String] = Seq("--image", "src/main/resources/test.jpg", "--image-random", "--image", "src/main/resources/test.gif")
+	private val args4: Seq[String] = Seq("--image", "src/main/resources/nonExistent.png")
+	private val args5: Seq[String] = Seq("--image", "src/main/resources/nonExistent.jpg")
 
 	private val processor = new DummyProcessor
 
@@ -65,7 +67,6 @@ class ImporterHandlersTests extends HandlerTests {
 		assert(!parser.argsEmpty())
 		assert(parser.getArgs == args2)
 		assert(processor.counter == 0)
-
 	}
 
 	test("Input partially correct") {
@@ -78,8 +79,31 @@ class ImporterHandlersTests extends HandlerTests {
 		assert(!parser.argsEmpty())
 		assert(parser.getArgs == Seq("--image", "src/main/resources/test.gif"))
 		assert(processor.counter == 2)
-
 	}
+
+	test("Not existing png") {
+		processor.counter = 0
+		val parser = new InputArgumentsParser(args4)
+		val handlers = importHandlers(parser)
+
+		assert(!parser.argsEmpty())
+		callArgs(handlers, parser)
+		assert(!parser.argsEmpty())
+		assert(parser.getArgs == Seq("--image", "src/main/resources/nonExistent.png"))
+		assert(processor.counter == 0)
+	}
+	test("Not existing jpg") {
+		processor.counter = 0
+		val parser = new InputArgumentsParser(args5)
+		val handlers = importHandlers(parser)
+
+		assert(!parser.argsEmpty())
+		callArgs(handlers, parser)
+		assert(!parser.argsEmpty())
+		assert(parser.getArgs == Seq("--image", "src/main/resources/nonExistent.jpg"))
+		assert(processor.counter == 0)
+	}
+
 
 	private def importHandlers(parser: InputArgumentsParser): ImportHandler = {
 
