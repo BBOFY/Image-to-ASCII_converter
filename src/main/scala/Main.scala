@@ -16,9 +16,13 @@ object Main {
 
 	def main(args: Array[String]): Unit = {
 
+		// Class for one-way communication with the user
 		val stdOutput = new StdOutputExporter
+
+		// Creates arguments parser
 		val argsParser = new InputArgumentsParser(args.toSeq)
 
+		// Check validity of arguments and
 		try {
 			argsParser.checkValidity()
 		}
@@ -27,11 +31,13 @@ object Main {
 			case _: Throwable => stdOutput.`export`("Unknown error\n")
 		}
 
+		// Creates builder called by respective handlers
 		val imageProcessor = new ImageProcessorImpl
 		val filterBuilder = new FilterBuilder
 		val conversionBuilder = new AsciiConversionBuilder
 		val exporterBuilder = new ExporterBuilder
 
+		// Creates handle chain for reading arguments
 		val commandHandler =
 			handlers(
 				imageProcessor,
@@ -41,8 +47,10 @@ object Main {
 				argsParser
 			)
 
+		// Calls handle chain
 		callArgs(commandHandler, argsParser)
 
+		// Checks, if
 		if (argsParser.getArgs.nonEmpty) {
 			stdOutput.`export`(s"Unknown command or invalid argument: '${argsParser.getArgs.head}'\n")
 			return
@@ -57,6 +65,7 @@ object Main {
 			return
 		}
 
+		// Start the whole conversion process
 		imageProcessor.activatePipeline(
 			imageFilter,
 			imageConverter,
@@ -65,6 +74,11 @@ object Main {
 
 	}
 
+	/**
+	 * Calls handle chain for each individual command insertet in parser
+	 * @param handler Initial handler of handle chain
+	 * @param parser Parser, which holds handled arguments
+	 */
 	def callArgs(handler: CommandHandler, parser: InputArgumentsParser): Unit = {
 		var lastProcessedArgs: List[String] = List.empty
 		while (parser.getArgs.nonEmpty && lastProcessedArgs != parser.getArgs) {
@@ -73,30 +87,43 @@ object Main {
 		}
 	}
 
+	/**
+	 * Creates handle pipeline
+	 * @param imageProcessor Image processor
+	 * @param filterBuilder Builder for filters
+	 * @param converterBuilder Builder for conversion table
+	 * @param exporterBuilder Builder for exporters
+	 * @param parser Parser, which holds handled arguments
+	 * @return Initial command handler of handling chain
+	 */
 	def handlers(imageProcessor: ImageProcessor,
 				 filterBuilder: FilterBuilder,
 				 converterBuilder: AsciiConversionBuilder,
 				 exporterBuilder: ExporterBuilder,
 				 parser: InputArgumentsParser): CommandHandler = {
 
+		// Import handlers
 		val importJpgHandler = new ImportJpgHandler(imageProcessor, parser)
 		val importPngHandler = new ImportPngHandler(imageProcessor, parser)
 		val importRandomHandler = new ImportRandomHandler(imageProcessor, parser)
 
+		// Filter handlers
 		val brightnessFilterHandler = new BrightnessFilterHandler(filterBuilder, parser)
 		val rotateFilterHandler = new RotateFilterHandler(filterBuilder, parser)
 		val flipFilterHandler = new FlipFilterHandler(filterBuilder, parser)
 		val invertFilterHandler = new InvertFilterHandler(filterBuilder, parser)
 
+		// Conversion handlers
 		val bourkeConverterHandler = new BourkeConverterHandler(converterBuilder, parser)
 		val constantConverterHandler = new ConstantConverterHandler(converterBuilder, parser)
 		val customConverterHandler = new CustomConverterHandler(converterBuilder, parser)
 
+		// Export handlers
 		val stdOutputHandler = new StdOutputHandler(exporterBuilder, parser)
 		val fileOutputHandler = new FileOutputHandler(exporterBuilder, parser)
 
+		// Building handle chain
 		val initialHandler: CommandHandler = importJpgHandler
-
 		initialHandler
 		  .setNext(importPngHandler)
 		  .setNext(importRandomHandler)
@@ -109,7 +136,6 @@ object Main {
 		  .setNext(customConverterHandler)
 		  .setNext(stdOutputHandler)
 		  .setNext(fileOutputHandler)
-
 		initialHandler
 	}
 
