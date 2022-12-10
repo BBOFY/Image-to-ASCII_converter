@@ -54,7 +54,6 @@ class ImporterHandlersTests extends HandlerTests {
 		assert(!parser.argsEmpty())
 		assert(parser.getArgs == Seq("whatever", "--image-random"))
 		assert(processor.counter == 1)
-		assert(processor.image.getGrid == Vector(Vector(PixelRgb(42, 6, 9))))
 	}
 
 	test("Input with unsupported extension") {
