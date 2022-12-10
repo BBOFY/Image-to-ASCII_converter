@@ -1,7 +1,7 @@
 package app.handlers
 
 import app.builders.AsciiConversionBuilder
-import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, ConverterHandler, CustomConverterHandler}
+import app.handlers.converterHandlers.{PredefinedConverterHandler, ConverterHandler, CustomConverterHandler}
 import app.inputParser.InputArgumentsParser
 import app.models.conversionTables.{AsciiTable, BourkeTable, ConstantTable, CustomTable}
 
@@ -82,8 +82,8 @@ class ConverterHandlersTests extends HandlerTests {
 
 	private def conversionHandlers(parser: InputArgumentsParser): ConverterHandler = {
 
-		val bourkeConverterHandler = new BourkeConverterHandler(builder, parser)
-		val constantConverterHandler = new ConstantConverterHandler(builder, parser)
+		val bourkeConverterHandler = new PredefinedConverterHandler(builder, parser)
+		val constantConverterHandler = new PredefinedConverterHandler(builder, parser)
 		val customConverterHandler = new CustomConverterHandler(builder, parser)
 
 		val initialImportHandler: ConverterHandler = bourkeConverterHandler

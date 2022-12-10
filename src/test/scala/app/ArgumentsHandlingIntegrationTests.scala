@@ -3,7 +3,7 @@ package app
 import app.builders.{AsciiConversionBuilder, ExporterBuilder, FilterBuilder}
 import app.enums.{Axes, Commands, Tables}
 import app.handlers.CommandHandler
-import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, CustomConverterHandler}
+import app.handlers.converterHandlers.{PredefinedConverterHandler, CustomConverterHandler}
 import app.handlers.exportHandlers.{FileOutputHandler, StdOutputHandler}
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.handlers.importHandlers.{ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
@@ -161,8 +161,7 @@ class ArgumentsHandlingIntegrationTests extends FunSuite {
 		val flipFilterHandler = new FlipFilterHandler(filterBuilder, parser)
 		val invertFilterHandler = new InvertFilterHandler(filterBuilder, parser)
 
-		val bourkeConverterHandler = new BourkeConverterHandler(converterBuilder, parser)
-		val constantConverterHandler = new ConstantConverterHandler(converterBuilder, parser)
+		val predefinedConverterHandler = new PredefinedConverterHandler(converterBuilder, parser)
 		val customConverterHandler = new CustomConverterHandler(converterBuilder, parser)
 
 		val stdOutputHandler = new StdOutputHandler(exporterBuilder, parser)
@@ -177,8 +176,7 @@ class ArgumentsHandlingIntegrationTests extends FunSuite {
 		  .setNext(rotateFilterHandler)
 		  .setNext(flipFilterHandler)
 		  .setNext(invertFilterHandler)
-		  .setNext(bourkeConverterHandler)
-		  .setNext(constantConverterHandler)
+		  .setNext(predefinedConverterHandler)
 		  .setNext(customConverterHandler)
 		  .setNext(stdOutputHandler)
 		  .setNext(fileOutputHandler)

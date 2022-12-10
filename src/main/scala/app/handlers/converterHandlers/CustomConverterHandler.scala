@@ -11,6 +11,12 @@ class CustomConverterHandler(val builder: AsciiConversionBuilder,
 							 val conversionTable: CustomTable = CustomTable()
 							)
   extends ConverterHandler {
+
+	/**
+	 *  Checks, if args contain command for custom table and for its definition by user
+	 *  @param args Arguments to choose from to handle
+	 *  @return The next handler or none if argument found
+	 */
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
 		if (args.isEmpty)

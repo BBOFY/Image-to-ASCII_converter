@@ -1,7 +1,7 @@
 
 import app.builders.{AsciiConversionBuilder, ExporterBuilder, FilterBuilder}
 import app.handlers.CommandHandler
-import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, CustomConverterHandler}
+import app.handlers.converterHandlers.{PredefinedConverterHandler, CustomConverterHandler}
 import app.handlers.exportHandlers.{FileOutputHandler, StdOutputHandler}
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
 import app.handlers.importHandlers.{ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
@@ -114,8 +114,7 @@ object Main {
 		val invertFilterHandler = new InvertFilterHandler(filterBuilder, parser)
 
 		// Conversion handlers
-		val bourkeConverterHandler = new BourkeConverterHandler(converterBuilder, parser)
-		val constantConverterHandler = new ConstantConverterHandler(converterBuilder, parser)
+		val predefinedConverterHandler = new PredefinedConverterHandler(converterBuilder, parser)
 		val customConverterHandler = new CustomConverterHandler(converterBuilder, parser)
 
 		// Export handlers
@@ -131,8 +130,7 @@ object Main {
 		  .setNext(rotateFilterHandler)
 		  .setNext(flipFilterHandler)
 		  .setNext(invertFilterHandler)
-		  .setNext(bourkeConverterHandler)
-		  .setNext(constantConverterHandler)
+		  .setNext(predefinedConverterHandler)
 		  .setNext(customConverterHandler)
 		  .setNext(stdOutputHandler)
 		  .setNext(fileOutputHandler)

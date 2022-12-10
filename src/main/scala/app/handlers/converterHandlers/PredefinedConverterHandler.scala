@@ -3,15 +3,19 @@ package app.handlers.converterHandlers
 import app.builders.AsciiConversionBuilder
 import app.enums.{Commands, Tables}
 import app.inputParser.InputParser
-import app.models.conversionTables.BourkeTable
+import app.models.conversionTables.{BourkeTable, ConstantTable}
 import handler.Handler
 
-class BourkeConverterHandler(val builder: AsciiConversionBuilder,
-							 val parser: InputParser[String],
-							 val table: BourkeTable = BourkeTable()
+class PredefinedConverterHandler(val builder: AsciiConversionBuilder,
+								 val parser: InputParser[String]
 							)
   extends ConverterHandler {
 
+	/**
+	 * 	Checks, if args contain command for table and for its name as argument
+	 * 	@param args Arguments to choose from to handle
+	 * 	@return The next handler or none if argument found
+	 */
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
 		if (args.isEmpty)
@@ -30,10 +34,17 @@ class BourkeConverterHandler(val builder: AsciiConversionBuilder,
 		}
 
 		if (args.tail.head == Tables.conversionBourke.toString) {
-			builder.registerProperty(table)
+			builder.registerProperty(BourkeTable())
+			parser.removeElements(2)
+			return None
+		}
+
+		if (args.tail.head == Tables.conversionConstant.toString) {
+			builder.registerProperty(ConstantTable())
 			parser.removeElements(2)
 			None
 		}
+
 		else super.handle(args)
 
 	}
