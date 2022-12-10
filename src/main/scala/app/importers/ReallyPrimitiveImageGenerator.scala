@@ -9,10 +9,12 @@ class ReallyPrimitiveImageGenerator extends ImportRandom {
 
 		var grid: Vector[Vector[PixelRgb]] = Vector.empty
 
+		val width = Random.between(0, 400)
+		val height = Random.between(0, 400)
 
-		for (y <- 0 to Random.between(0, 400)) {
-			var row: Vector[Vector[PixelRgb]] = Vector.empty
-			for (x <- 0 to Random.between(0, 400)) {
+		for (y <- 0 to height) {
+			var row: Vector[PixelRgb] = Vector.empty
+			for (x <- 0 to width) {
 				val r = Random.between(0, 256)
 				val g = Random.between(0, 256)
 				val b = Random.between(0, 256)

@@ -1,7 +1,8 @@
-package app.handlers
+package app
 
 import app.builders.{AsciiConversionBuilder, ExporterBuilder, FilterBuilder}
 import app.enums.{Axes, Commands, Tables}
+import app.handlers.CommandHandler
 import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, CustomConverterHandler}
 import app.handlers.exportHandlers.{FileOutputHandler, StdOutputHandler}
 import app.handlers.filterHandlers.{BrightnessFilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
