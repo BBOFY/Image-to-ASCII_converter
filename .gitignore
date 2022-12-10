@@ -18,3 +18,4 @@ project/
 sbt.json
 
 code_gen.py
+*.txt
