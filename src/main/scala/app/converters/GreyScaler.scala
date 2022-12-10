@@ -2,6 +2,7 @@ package app.converters
 
 import app.models.image.{Image, ImageGrey, ImageRgb}
 import app.models.pixel.{PixelGrey, PixelRgb}
+import converter.Converter
 
 class GreyScaler extends Converter[ImageRgb, ImageGrey] {
 

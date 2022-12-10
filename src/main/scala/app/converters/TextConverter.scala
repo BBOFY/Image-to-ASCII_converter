@@ -1,6 +1,7 @@
 package app.converters
 
 import app.models.image.ImageAscii
+import converter.Converter
 
 class TextConverter extends Converter[ImageAscii, String] {
 

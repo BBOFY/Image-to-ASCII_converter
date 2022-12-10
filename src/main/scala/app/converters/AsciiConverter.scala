@@ -3,6 +3,7 @@ package app.converters
 import app.models.conversionTables.{BourkeTable, ConversionTable}
 import app.models.image.{Image, ImageAscii, ImageGrey}
 import app.models.pixel.{Pixel, PixelAscii}
+import converter.Converter
 
 
 class AsciiConverter(protected val table: ConversionTable[Int, Char] = new BourkeTable)

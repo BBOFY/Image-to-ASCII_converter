@@ -1,11 +1,11 @@
 package converter
 
-trait Converter[-T, +S] {
+trait Converter[-C, +P] {
 
 	/**
 	 * Converts an item
 	 * @param item Item to convert
 	 * @return Converted item
 	 */
-	def convert(item: T): S
+	def convert(item: C): P
 }
