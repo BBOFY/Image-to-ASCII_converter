@@ -15,6 +15,9 @@ import org.scalatest.FunSuite
 import scala.language.postfixOps
 import scala.util.Random
 
+/**
+ * In a way also includes ImageProcessor testing
+ */
 class ArgumentsHandlingIntegrationTests extends FunSuite {
 
 	private val processor = new ImageProcessorImpl
