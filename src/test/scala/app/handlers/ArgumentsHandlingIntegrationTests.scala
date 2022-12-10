@@ -1,6 +1,14 @@
 package app.handlers
 
+import app.builders.{AsciiConversionBuilder, ExporterBuilder, FilterBuilder}
 import app.enums.{Axes, Commands, Tables}
+import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, CustomConverterHandler}
+import app.handlers.exportHandlers.{FileOutputHandler, StdOutputHandler}
+import app.handlers.filterHandlers.{BrightnessFilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
+import app.handlers.importHandlers.{ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
+import app.inputParser.InputArgumentsParser
+import app.processor.{ImageProcessor, ImageProcessorImpl}
+import handler.Handler
 import org.scalatest.FunSuite
 
 import scala.language.postfixOps
@@ -8,11 +16,47 @@ import scala.util.Random
 
 class ArgumentsHandlingIntegrationTests extends FunSuite {
 
+	private val processor = new ImageProcessorImpl
+	private val filterBuilder = new FilterBuilder
+	private val conversionBuilder = new AsciiConversionBuilder
+	private val exporterBuilder = new ExporterBuilder
 
 
+	// Just for visualization of test progress
+	private val nOfTests = Random.between(1, 5000)
+	println(s"[info] - Running $nOfTests valid random args tests:")
+	private val step = (nOfTests / 50.0).ceil.toInt
 
 
+	for (i <- 1 to nOfTests) {
+		if (i % step == 0)
+			print(".")
+		val args = validArgsGenerator
+		val parser = new InputArgumentsParser(args)
+		val handler = handlers(
+			processor,
+			filterBuilder,
+			conversionBuilder,
+			exporterBuilder,
+			parser
+		)
+		callArgs(handler, parser)
 
+		test(s"Valid random args $i") {
+			assert(
+				parser.argsEmpty()
+			)
+		}
+	}
+	println(".")
+
+	private def callArgs(handler: CommandHandler, parser: InputArgumentsParser): Unit = {
+		var lastProcessedArgs: List[String] = List.empty
+		while (parser.getArgs.nonEmpty && lastProcessedArgs != parser.getArgs) {
+			lastProcessedArgs = parser.getArgs
+			Handler.handleAll(handler, lastProcessedArgs)
+		}
+	}
 
 
 	private def validArgsGenerator: Seq[String] = {
@@ -31,7 +75,8 @@ class ArgumentsHandlingIntegrationTests extends FunSuite {
 	private def inputArgsGenerator: Seq[Seq[String]] = {
 
 		var returnSeq: Seq[Seq[String]] = Seq.empty
-		val testFiles: Seq[String] = Seq("test.jpg", "test.png")
+
+		val testFiles: Seq[String] = Seq("src/main/resources/test.jpg", "src/main/resources/test.png")
 		val fileNameIdx = Random.between(0, testFiles.length)
 
 		val commands = Seq(
@@ -49,7 +94,7 @@ class ArgumentsHandlingIntegrationTests extends FunSuite {
 		var returnSeq: Seq[Seq[String]] = Seq.empty
 
 		for (i <- 1 to Random.nextInt(16)) {
-			val randomRotation = 90 + 90 * Random.between(Int.MinValue, Int.MaxValue)
+			val randomRotation = 90 + 90 * Random.between(-200, 200)
 			val randomBrightness = Random.between(Int.MinValue, Int.MaxValue)
 
 			val commands = Seq(
@@ -89,17 +134,54 @@ class ArgumentsHandlingIntegrationTests extends FunSuite {
 		var returnSeq: Seq[Seq[String]] = Seq.empty
 
 		for (i <- 1 to Random.nextInt(16)) {
-			val randomStringLen = Random.between(1, 100)
-			val randomString = Random.alphanumeric take randomStringLen mkString
-
 			val commands = Seq(
 				Seq(Commands.outputConsole.toString),
-				Seq(Commands.outputFile.toString, randomString)
+				Seq(Commands.outputFile.toString, "src/main/resources/dummy.txt")
 			)
 
 			val idx = Random.between(0, commands.length)
 			returnSeq = returnSeq.appended(commands.apply(idx))
 		}
 		returnSeq
+	}
+
+	private def handlers(imageProcessor: ImageProcessor,
+				 filterBuilder: FilterBuilder,
+				 converterBuilder: AsciiConversionBuilder,
+				 exporterBuilder: ExporterBuilder,
+				 parser: InputArgumentsParser): CommandHandler = {
+
+		val importJpgHandler = new ImportJpgHandler(imageProcessor, parser)
+		val importPngHandler = new ImportPngHandler(imageProcessor, parser)
+		val importRandomHandler = new ImportRandomHandler(imageProcessor, parser)
+
+		val brightnessFilterHandler = new BrightnessFilterHandler(filterBuilder, parser)
+		val rotateFilterHandler = new RotateFilterHandler(filterBuilder, parser)
+		val flipFilterHandler = new FlipFilterHandler(filterBuilder, parser)
+		val invertFilterHandler = new InvertFilterHandler(filterBuilder, parser)
+
+		val bourkeConverterHandler = new BourkeConverterHandler(converterBuilder, parser)
+		val constantConverterHandler = new ConstantConverterHandler(converterBuilder, parser)
+		val customConverterHandler = new CustomConverterHandler(converterBuilder, parser)
+
+		val stdOutputHandler = new StdOutputHandler(exporterBuilder, parser)
+		val fileOutputHandler = new FileOutputHandler(exporterBuilder, parser)
+
+		val initialHandler: CommandHandler = importJpgHandler
+
+		initialHandler
+		  .setNext(importPngHandler)
+		  .setNext(importRandomHandler)
+		  .setNext(brightnessFilterHandler)
+		  .setNext(rotateFilterHandler)
+		  .setNext(flipFilterHandler)
+		  .setNext(invertFilterHandler)
+		  .setNext(bourkeConverterHandler)
+		  .setNext(constantConverterHandler)
+		  .setNext(customConverterHandler)
+		  .setNext(stdOutputHandler)
+		  .setNext(fileOutputHandler)
+
+		initialHandler
 	}
 }
