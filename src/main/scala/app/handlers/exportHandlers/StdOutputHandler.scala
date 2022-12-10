@@ -10,6 +10,12 @@ class StdOutputHandler(val exporterBuilder: ExporterBuilder,
 					   val parser: InputParser[String]
 					  )
   extends ExportHandler {
+
+	/**
+	 * Checks, if args contain command for console output
+	 * @param args Arguments to choose from to handle
+	 * @return The next handler or none if argument found
+	 */
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
 		if (args.isEmpty)
