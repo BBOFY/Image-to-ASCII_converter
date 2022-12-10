@@ -1,6 +1,6 @@
 package converter
 
-trait Converter[T, S] {
+trait Converter[-T, +S] {
 
 	/**
 	 * Converts an item
