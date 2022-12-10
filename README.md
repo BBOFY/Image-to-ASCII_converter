@@ -4,7 +4,7 @@
 Insert all desired commands after `run` command as arguments in sbt shell.
 Individual commands can be inserted in any order whatsoever, but their corresponding arguments must be right behind them.
 
-- `--image <path>` imports image, where _**path**_ is the path to image to import
+- `--image <path>` imports image, where _**path**_ is the path to image to import. Supported formats are **jpg** and **png**
 - `--image-random` generates random image
 - `--table <table>` sets conversion table, where supporting ***table***s are: `bourke` and `constant`
 - `--custom-table <table>` sets custom conversion table, where _**table**_ is some text, preferably in quotation marks, if white characters need to be part of the table
