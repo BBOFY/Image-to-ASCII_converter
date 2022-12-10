@@ -13,7 +13,7 @@ Individual commands can be inserted in any order whatsoever, but their correspon
 - `--flip <axis>` flips the image by inserted _**axis**_. Valid values for _**axis**_ are `x` xor `y`
 - `--brightness <value>` changes the brightness of image by given _**value**_ for each pixel
 - `--output-console` sets output of converted image to console
-- `--output-file <path>` sets output of converted image to file with location defined in _**path**_
+- `--output-file <path>` sets output of converted image to file with location defined in _**path**_ argument
 
 There must be exactly one `--image <path>` xor `--image-random` command and at most one `--table <table>` xor `--custom-table <table>` command.
 Since type of output is not mandatory command, it can miss out. But then the image will not go through conversion for optimization, since the resulting image cannot be seen in any way.
@@ -21,5 +21,7 @@ Since type of output is not mandatory command, it can miss out. But then the ima
 If multiple output console commands are specified, multiple same images will output to console.
 
 If no table is specified, Bourke table will be used as default.
+
+Filter will be applied on image in order of their position as arguments at program call, regardless of other commands.
 
 Be aware, bigger images (400x400 pixels and above), or with too many filters, could take some time to process, counting in minutes.
