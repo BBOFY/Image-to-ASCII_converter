@@ -2,6 +2,10 @@ package exporter.text
 
 import java.io.OutputStream
 
+/**
+ * Exporter for exporting text into desired output stream
+ * @param outputStream Stream where text will be outputted
+ */
 class StreamTextExporter(outputStream: OutputStream) extends TextExporter {
   private var closed = false
 

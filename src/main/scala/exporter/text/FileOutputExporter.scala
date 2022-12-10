@@ -2,6 +2,10 @@ package exporter.text
 
 import java.io.{File, FileOutputStream}
 
+/**
+ * Exports text into file
+ * @param path Path of file, where text would be exported
+ */
 class FileOutputExporter(path: String)
   extends StreamTextExporter(new FileOutputStream(new File(path))) {
 
