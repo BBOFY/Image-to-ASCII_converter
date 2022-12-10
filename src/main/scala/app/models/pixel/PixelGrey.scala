@@ -1,5 +1,11 @@
 package app.models.pixel
 
+/**
+ * Class holding data about grey pixel
+ *
+ * @param _value Value of the grey pixel
+ * @throws ExceptionInInitializerError If parameter is smaller than 0 or greater than 255
+ */
 final case class PixelGrey(private val _value: Int) extends Pixel {
 
 	@throws (classOf[ExceptionInInitializerError])
