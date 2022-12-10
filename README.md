@@ -1,7 +1,9 @@
 # BI-OOP Semestral work - ASCII Art
 
 ### Supported commands:
-Insert all desired commands after `run` command as arguments in sbt shell. 
+Insert all desired commands after `run` command as arguments in sbt shell.
+Individual commands can be inserted in any order whatsoever, but their corresponding arguments must be right behind them.
+
 - `--image <path>` imports image, where _**path**_ is the path to image to import
 - `--image-random` generates random image
 - `--table <table>` sets conversion table, where supporting ***table***s are: `bourke` and `constant`
@@ -16,6 +18,8 @@ Insert all desired commands after `run` command as arguments in sbt shell.
 There must be exactly one `--image <path>` xor `--image-random` command and at most one `--table <table>` xor `--custom-table <table>` command.
 Since type of output is not mandatory command, it can miss out. But then the image will not go through conversion for optimization, since the resulting image cannot be seen in any way.
 
-If multiple output commands are specified, multiple same images can be output to console.
+If multiple output console commands are specified, multiple same images will output to console.
 
 If no table is specified, Bourke table will be used as default.
+
+Be aware, bigger images (400x400 pixels and above), or with too many filters, could take some time to process, counting in minutes.
