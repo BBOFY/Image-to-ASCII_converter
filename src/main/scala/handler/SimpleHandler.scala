@@ -1,6 +1,10 @@
 package handler
 
 class SimpleHandler[T] extends Handler[T] {
+
+	/**
+	 * Default next handler is always None
+	 */
 	var nextHandler: Option[Handler[T]] = None
 
 	override def handle(item: T): Option[Handler[T]] = nextHandler
