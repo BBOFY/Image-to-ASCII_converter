@@ -1,5 +1,8 @@
 package app.enums
 
+/**
+ * Enum holding all valid command values the user can input as commands into program
+ */
 object Commands extends Enumeration {
 	type Command = Value
 

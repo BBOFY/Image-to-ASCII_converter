@@ -1,5 +1,8 @@
 package app.enums
 
+/**
+ * Enum holding all valid table names the user can input as argument for '--table' command
+ */
 object Tables extends Enumeration {
 
 	type Table = Value

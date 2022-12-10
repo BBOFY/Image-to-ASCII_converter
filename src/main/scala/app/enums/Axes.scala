@@ -1,5 +1,8 @@
 package app.enums
 
+/**
+ * Enum holding all valid axis values the user can input as argument for '--flip' command
+ */
 object Axes extends Enumeration {
 	type Axis = Value
 
