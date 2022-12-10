@@ -16,10 +16,10 @@ object Main {
 
 		val stdOutput = new StdOutputExporter
 
-		val inputParser = new InputArgumentsParser(args.toSeq)
+		val argsParser = new InputArgumentsParser(args.toSeq)
 
 		try {
-			inputParser.checkValidity()
+			argsParser.checkValidity()
 		}
 		catch {
 			case e: IllegalArgumentException => stdOutput.`export`(e.getMessage)
@@ -32,25 +32,25 @@ object Main {
 		val conversionBuilder = new AsciiConversionBuilder
 		val exporterBuilder = new ExporterBuilder
 
-		val importHandler = importHandlers(imageProcessor, inputParser)
-		val filterHandler = filterHandlers(filterBuilder, inputParser)
-		val converterHandler = converterHandlers(conversionBuilder, inputParser)
-		val exporterHandler = exporterHandlers(exporterBuilder, inputParser)
+		val filterHandler = filterHandlers(filterBuilder, argsParser)
+		val importHandler = importHandlers(imageProcessor, argsParser)
+		val converterHandler = converterHandlers(conversionBuilder, argsParser)
+		val exporterHandler = exporterHandlers(exporterBuilder, argsParser)
 
-		callArgs(importHandler, inputParser)
-		callArgs(filterHandler, inputParser)
-		callArgs(converterHandler, inputParser)
-		callArgs(exporterHandler, inputParser)
+		callArgs(importHandler, argsParser)
+		callArgs(filterHandler, argsParser)
+		callArgs(converterHandler, argsParser)
+		callArgs(exporterHandler, argsParser)
 
+		if (argsParser.getArgs.nonEmpty) {
+			stdOutput.`export`(s"Unknown command or invalid argument: '${argsParser.getArgs.head}'\n")
+			return
+		}
 
 		val imageFilter = filterBuilder.build
 		val imageConverter = conversionBuilder.build
 		val imageExporters = exporterBuilder.build
 
-		if (!inputParser.argsEmpty()) {
-			stdOutput.`export`(s"Unknown command '${inputParser.getArgs.head}'")
-			return
-		}
 
 		if (imageExporters.isEmpty) {
 			stdOutput.`export`("No output specified. Skipping conversion")
@@ -62,7 +62,6 @@ object Main {
 			imageConverter,
 			imageExporters
 		)
-
 
 	}
 
@@ -125,7 +124,5 @@ object Main {
 		  .setNext(fileOutputHandler)
 		initialExporterHandler
 	}
-
-
 
 }
