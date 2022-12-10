@@ -1,14 +1,19 @@
 package app.filters.specific
 
-import app.filters.{ImageFilter, VariableFilter}
+import app.filters.VariableFilter
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
-
 
 class BrightnessFilter extends VariableFilter {
 
 	private var _increment: Int = 0
 
+	/**
+	 *  Changes value of all pixels of imputed image by previously defined value.
+	 *  The resulting value of each pixel would be in range from 0 inclusive to 256 exclusive
+	 *  @param image Image to brighten or dim
+	 *  @return Brighter or dimmer image (or same as imputed, if increment is zero)
+	 */
 	override def apply(image: ImageGrey): ImageGrey = {
 
 		var newGrid: Vector[Vector[PixelGrey]] = Vector.empty
@@ -26,6 +31,12 @@ class BrightnessFilter extends VariableFilter {
 
 	}
 
+	/**
+	 * Changes value of pixel by increment
+	 * @param brightnessInc Value by which the value of pixel would be changed
+	 * @param pixel Pixel with altered value
+	 * @return
+	 */
 	protected def brightenPixel(brightnessInc: Int, pixel: PixelGrey): PixelGrey = {
 		if (brightnessInc < -255) return PixelGrey(0)
 		if (brightnessInc > 255) return PixelGrey(255)

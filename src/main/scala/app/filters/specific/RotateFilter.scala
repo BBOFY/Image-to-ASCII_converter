@@ -1,13 +1,19 @@
 package app.filters.specific
 
-import app.filters.{ImageFilter, VariableFilter}
+import app.filters.VariableFilter
 import app.models.image.ImageGrey
 import app.models.pixel.PixelGrey
+
 
 class RotateFilter extends VariableFilter {
 
 	private var _rotation: Int = 0
 
+	/**
+	 * 	Rotates the image by previously defined value divisible by 90 in degrees
+	 *  @param image Image to rotate
+	 *  @return Rotated image
+	 */
 	override def apply(image: ImageGrey): ImageGrey = {
 
 		_rotation % 360 match {

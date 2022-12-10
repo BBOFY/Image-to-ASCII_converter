@@ -6,6 +6,11 @@ import app.models.pixel.PixelGrey
 
 class FlipYFilter extends ImageFilter {
 
+	/**
+	 *  Flips image by Y axis
+	 *  @param image Image to flip
+	 *  @return Flipped image
+	 */
 	override def apply(image: ImageGrey): ImageGrey = {
 		val grid = image.getGrid
 		var newGrid: Vector[Vector[PixelGrey]] = Vector.empty

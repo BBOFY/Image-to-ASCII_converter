@@ -6,10 +6,9 @@ import app.models.pixel.PixelGrey
 
 class InvertFilter extends ImageFilter {
 	/**
-	 * Applies the specific filter on inserted image
-	 *
-	 * @param image on which filter will be applied
-	 * @return item with applied filter
+	 * Inverts value of all pixels in given image
+	 * @param image Image to inverts its pixels on
+	 * @return Altered image
 	 */
 	override def apply(image: ImageGrey): ImageGrey = {
 		var newGrid: Vector[Vector[PixelGrey]] = Vector.empty
