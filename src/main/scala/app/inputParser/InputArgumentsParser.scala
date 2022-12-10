@@ -16,9 +16,9 @@ class InputArgumentsParser(private val args: Seq[String]) extends InputParser[St
 				conversionArgsCount = conversionArgsCount + 1
 		}
 		if (importArgsCount != 1)
-			throw new IllegalArgumentException("There must be exactly one \'--image*\' command")
+			throw new IllegalArgumentException("There must be exactly one \'--image*\' command\n")
 		if (conversionArgsCount > 1)
-			throw new IllegalArgumentException("There must be at most one \'--table\' and \'--custom-table\' command")
+			throw new IllegalArgumentException("There must be at most one \'--table\' and \'--custom-table\' command\n")
 
 	}
 

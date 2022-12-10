@@ -10,6 +10,8 @@ import app.processor.{ImageProcessor, ImageProcessorImpl}
 import exporter.text.StdOutputExporter
 import handler.Handler
 
+import scala.language.postfixOps
+
 object Main {
 
 	def main(args: Array[String]): Unit = {
@@ -22,7 +24,7 @@ object Main {
 		}
 		catch {
 			case e: IllegalArgumentException => stdOutput.`export`(e.getMessage)
-			case _: Throwable => stdOutput.`export`("Unknown error")
+			case _: Throwable => stdOutput.`export`("Unknown error\n")
 		}
 
 		val imageProcessor = new ImageProcessorImpl
@@ -51,7 +53,7 @@ object Main {
 		val imageExporters = exporterBuilder.build
 
 		if (imageExporters.isEmpty) {
-			stdOutput.`export`("No output specified. Skipping conversion")
+			stdOutput.`export`("No output specified. Skipping conversion\n")
 			return
 		}
 
