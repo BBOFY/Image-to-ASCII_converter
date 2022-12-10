@@ -9,6 +9,11 @@ import javax.imageio.{IIOException, ImageIO}
 
 abstract class ImporterImageIo extends ImageImporter {
 
+	/**
+	 * 	Imports RGB image from file using ImageIO library
+	 *  @throws IIOException if file to import from does not exist
+	 *  @return imported image as ImageRgb
+	 */
 	@throws[IIOException]
 	override def doImport(): ImageRgb = {
 		val img = ImageIO.read(new File(_path))
@@ -28,8 +33,17 @@ abstract class ImporterImageIo extends ImageImporter {
 
 	protected var _path: String = ""
 
+	/**
+	 * Sets path to file to import from
+	 * @param path Path of file to import from
+	 */
 	def setPath(path: String): Unit = _path = path
 
+	/**
+	 * Converts rgb value for custom pixel PixelRgb from value used in images inImageIO library
+	 * @param rgb Hexadecimal value (format 0xAARRGGBB) of rgb pixel from image from ImageIO library
+	 * @return PixelRgb with corresponding rgb value
+	 */
 	protected def processRgbValue(rgb: Int): PixelRgb = {
 		val r: Int = (rgb & 0x00_ff_00_00) >>> 16
 		val g: Int = (rgb & 0x00_00_ff_00) >>> 8

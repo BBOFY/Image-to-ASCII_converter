@@ -4,6 +4,9 @@ import app.models.pixel.PixelRgb
 
 import scala.util.Random
 
+/**
+ * Generates ImageRgb with random width and height and with random individual pixels
+ */
 class ReallyPrimitiveImageGenerator extends ImportRandom {
 	override def doImport(): ImageRgb = {
 
