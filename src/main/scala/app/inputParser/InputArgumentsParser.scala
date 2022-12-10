@@ -6,6 +6,11 @@ class InputArgumentsParser(private val args: Seq[String]) extends InputParser[St
 
 	private var _args: List[String] = args.toList
 
+	/**
+	 * Checks validity of parsed input. If input is invalid, an exception is thrown, otherwise nothing happens
+	 * @throws IllegalArgumentException if in input isn't exactly one image-type argument or there is more than one table-type argument
+	 */
+	@throws[IllegalArgumentException]
 	override def checkValidity(): Unit = {
 		var importArgsCount = 0
 		var conversionArgsCount = 0
@@ -22,6 +27,10 @@ class InputArgumentsParser(private val args: Seq[String]) extends InputParser[St
 
 	}
 
+	/**
+	 * Remove desired number of arguments from parsing input
+	 * @param count Number of arguments to remove
+	 */
 	override def removeElements(count: Int): Unit = {
 		if (count > _args.length || count < 0)
 			throw new IllegalArgumentException("There are not enough elements to remove")
@@ -29,8 +38,15 @@ class InputArgumentsParser(private val args: Seq[String]) extends InputParser[St
 			_args = _args.tail
 	}
 
+	/**
+	 * Gets list of arguments in current parsing state
+	 * @return List of currently parsing arguments
+	 */
 	override def getArgs: List[String] = _args
 
+	/**
+	 * @return True, if parsed input is empty, otherwise false
+	 */
 	override def argsEmpty(): Boolean = {
 		_args.isEmpty
 
