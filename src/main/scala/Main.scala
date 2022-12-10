@@ -1,10 +1,10 @@
 
 import app.builders.{AsciiConversionBuilder, ExporterBuilder, FilterBuilder}
 import app.handlers.CommandHandler
-import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, ConverterHandler, CustomConverterHandler}
-import app.handlers.exportHandlers.{ExportHandler, FileOutputHandler, StdOutputHandler}
-import app.handlers.filterHandlers.{BrightnessFilterHandler, FilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
-import app.handlers.importHandlers.{ImportHandler, ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
+import app.handlers.converterHandlers.{BourkeConverterHandler, ConstantConverterHandler, CustomConverterHandler}
+import app.handlers.exportHandlers.{FileOutputHandler, StdOutputHandler}
+import app.handlers.filterHandlers.{BrightnessFilterHandler, FlipFilterHandler, InvertFilterHandler, RotateFilterHandler}
+import app.handlers.importHandlers.{ImportJpgHandler, ImportPngHandler, ImportRandomHandler}
 import app.inputParser.InputArgumentsParser
 import app.processor.{ImageProcessor, ImageProcessorImpl}
 import exporter.text.StdOutputExporter
@@ -15,7 +15,6 @@ object Main {
 	def main(args: Array[String]): Unit = {
 
 		val stdOutput = new StdOutputExporter
-
 		val argsParser = new InputArgumentsParser(args.toSeq)
 
 		try {
@@ -27,20 +26,20 @@ object Main {
 		}
 
 		val imageProcessor = new ImageProcessorImpl
-
 		val filterBuilder = new FilterBuilder
 		val conversionBuilder = new AsciiConversionBuilder
 		val exporterBuilder = new ExporterBuilder
 
-		val filterHandler = filterHandlers(filterBuilder, argsParser)
-		val importHandler = importHandlers(imageProcessor, argsParser)
-		val converterHandler = converterHandlers(conversionBuilder, argsParser)
-		val exporterHandler = exporterHandlers(exporterBuilder, argsParser)
+		val commandHandler =
+			handlers(
+				imageProcessor,
+				filterBuilder,
+				conversionBuilder,
+				exporterBuilder,
+				argsParser
+			)
 
-		callArgs(importHandler, argsParser)
-		callArgs(filterHandler, argsParser)
-		callArgs(converterHandler, argsParser)
-		callArgs(exporterHandler, argsParser)
+		callArgs(commandHandler, argsParser)
 
 		if (argsParser.getArgs.nonEmpty) {
 			stdOutput.`export`(s"Unknown command or invalid argument: '${argsParser.getArgs.head}'\n")
@@ -50,7 +49,6 @@ object Main {
 		val imageFilter = filterBuilder.build
 		val imageConverter = conversionBuilder.build
 		val imageExporters = exporterBuilder.build
-
 
 		if (imageExporters.isEmpty) {
 			stdOutput.`export`("No output specified. Skipping conversion")
@@ -73,56 +71,44 @@ object Main {
 		}
 	}
 
-	def importHandlers(imageProcessor: ImageProcessor, parser: InputArgumentsParser): ImportHandler = {
+	def handlers(imageProcessor: ImageProcessor,
+				 filterBuilder: FilterBuilder,
+				 converterBuilder: AsciiConversionBuilder,
+				 exporterBuilder: ExporterBuilder,
+				 parser: InputArgumentsParser): CommandHandler = {
 
 		val importJpgHandler = new ImportJpgHandler(imageProcessor, parser)
 		val importPngHandler = new ImportPngHandler(imageProcessor, parser)
 		val importRandomHandler = new ImportRandomHandler(imageProcessor, parser)
 
-		val initialImportHandler: ImportHandler = importJpgHandler
-		initialImportHandler
-		  .setNext(importPngHandler)
-		  .setNext(importRandomHandler)
-
-		initialImportHandler
-	}
-
-	def filterHandlers(filterBuilder: FilterBuilder, parser: InputArgumentsParser): FilterHandler = {
 		val brightnessFilterHandler = new BrightnessFilterHandler(filterBuilder, parser)
 		val rotateFilterHandler = new RotateFilterHandler(filterBuilder, parser)
 		val flipFilterHandler = new FlipFilterHandler(filterBuilder, parser)
 		val invertFilterHandler = new InvertFilterHandler(filterBuilder, parser)
 
-		val initialFilterHandler: FilterHandler = brightnessFilterHandler
-		brightnessFilterHandler
-		  .setNext(rotateFilterHandler)
-		  .setNext(flipFilterHandler)
-		  .setNext(invertFilterHandler)
-
-		initialFilterHandler
-	}
-
-	def converterHandlers(converterBuilder: AsciiConversionBuilder, parser: InputArgumentsParser): ConverterHandler = {
 		val bourkeConverterHandler = new BourkeConverterHandler(converterBuilder, parser)
 		val constantConverterHandler = new ConstantConverterHandler(converterBuilder, parser)
 		val customConverterHandler = new CustomConverterHandler(converterBuilder, parser)
 
-		val initialConverterHandler: ConverterHandler = bourkeConverterHandler
-		bourkeConverterHandler
-		  .setNext(constantConverterHandler)
-		  .setNext(customConverterHandler)
-
-		initialConverterHandler
-	}
-
-	def exporterHandlers(exporterBuilder: ExporterBuilder, parser: InputArgumentsParser): ExportHandler = {
 		val stdOutputHandler = new StdOutputHandler(exporterBuilder, parser)
 		val fileOutputHandler = new FileOutputHandler(exporterBuilder, parser)
 
-		val initialExporterHandler: ExportHandler = stdOutputHandler
-		initialExporterHandler
+		val initialHandler: CommandHandler = importJpgHandler
+
+		initialHandler
+		  .setNext(importPngHandler)
+		  .setNext(importRandomHandler)
+		  .setNext(brightnessFilterHandler)
+		  .setNext(rotateFilterHandler)
+		  .setNext(flipFilterHandler)
+		  .setNext(invertFilterHandler)
+		  .setNext(bourkeConverterHandler)
+		  .setNext(constantConverterHandler)
+		  .setNext(customConverterHandler)
+		  .setNext(stdOutputHandler)
 		  .setNext(fileOutputHandler)
-		initialExporterHandler
+
+		initialHandler
 	}
 
 }
