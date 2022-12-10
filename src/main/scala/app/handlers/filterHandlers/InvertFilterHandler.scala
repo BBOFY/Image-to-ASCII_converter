@@ -13,6 +13,12 @@ class InvertFilterHandler(val filterBuilder: FilterBuilder,
 						 )
 	extends FilterHandler {
 
+	/**
+	 * Checks, if args contain command for invert filter
+	 *
+	 * @param args Arguments to choose from to handle
+	 * @return The next handler, or none if argument is found and correctly processed or args are empty
+	 */
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
 		if (args.isEmpty)

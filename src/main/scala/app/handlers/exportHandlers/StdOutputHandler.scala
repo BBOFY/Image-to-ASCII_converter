@@ -14,7 +14,7 @@ class StdOutputHandler(val exporterBuilder: ExporterBuilder,
 	/**
 	 * Checks, if args contain command for console output
 	 * @param args Arguments to choose from to handle
-	 * @return The next handler or none if argument found
+	 * @return The next handler, or none if argument is found and correctly processed or args are empty
 	 */
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 

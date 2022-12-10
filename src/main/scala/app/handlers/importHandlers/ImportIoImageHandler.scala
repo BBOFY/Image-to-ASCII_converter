@@ -19,7 +19,7 @@ abstract class ImportIoImageHandler(private val importer: ImporterImageIo,
 	 * Checks, if there is command for image from file import, together with its one argument.
 	 * Correctness of argument is compared with valid file formats defined in child classes.
 	 * @param args Arguments to choose from to handle
-	 * @return The next handler if command does not match, otherwise None
+	 * @return The next handler, or none if argument is found and correctly processed or args are empty
 	 */
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 

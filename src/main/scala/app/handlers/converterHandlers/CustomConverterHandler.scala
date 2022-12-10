@@ -15,7 +15,7 @@ class CustomConverterHandler(val builder: AsciiConversionBuilder,
 	/**
 	 *  Checks, if args contain command for custom table and for its definition by user
 	 *  @param args Arguments to choose from to handle
-	 *  @return The next handler or none if argument found
+	 *  @return The next handler, or none if argument is found and correctly processed or args are empty
 	 */
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
