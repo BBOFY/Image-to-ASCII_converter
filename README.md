@@ -1,6 +1,7 @@
 # BI-OOP Semestral work - ASCII Art
 
 ### Supported commands:
+Insert all desired commands after `run` command as arguments in sbt shell. 
 - `--image <path>` imports image, where _**path**_ is the path to image to import
 - `--image-random` generates random image
 - `--table <table>` sets conversion table, where supporting ***table***s are: `bourke` and `constant`
@@ -11,3 +12,10 @@
 - `--brightness <value>` changes the brightness of image by given _**value**_ for each pixel
 - `--output-console` sets output of converted image to console
 - `--output-file <path>` sets output of converted image to file with location defined in _**path**_
+
+There must be exactly one `--image <path>` xor `--image-random` command and at most one `--table <table>` xor `--custom-table <table>` command.
+Since type of output is not mandatory command, it can miss out. But then the image will not go through conversion for optimization, since the resulting image cannot be seen in any way.
+
+If multiple output commands are specified, multiple same images can be output to console.
+
+If no table is specified, Bourke table will be used as default.
