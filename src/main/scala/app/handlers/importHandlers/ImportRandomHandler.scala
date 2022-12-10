@@ -12,6 +12,11 @@ class ImportRandomHandler(val imgProcessor: ImageProcessor,
 						 )
   extends ImportHandler {
 
+	/**
+	 *	Checks, if there is command for random image
+	 *  @param args Arguments to choose from to handle
+	 *  @return The next handler if command does not match, otherwise None
+	 */
 	override def handle(args: List[String]): Option[Handler[List[String]]] = {
 
 		if (args.isEmpty)
