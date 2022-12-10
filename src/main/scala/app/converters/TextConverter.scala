@@ -5,6 +5,11 @@ import converter.Converter
 
 class TextConverter extends Converter[ImageAscii, String] {
 
+	/**
+	 * 	Converts ascii image into plaint text
+	 * 	@param image Ascii image to convert
+	 *  @return Converted image as text
+	 */
 	override def convert(image: ImageAscii): String = {
 		val grid = image.getGrid
 		var result: String = ""
