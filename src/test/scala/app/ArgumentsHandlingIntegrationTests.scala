@@ -27,7 +27,7 @@ class ArgumentsHandlingIntegrationTests extends FunSuite {
 
 
 	// Just for visualization of test progress
-	private val nOfTests = Random.between(1, 5000)
+	private val nOfTests = Random.between(1, 2000)
 	println(s"[info] - Running $nOfTests valid random args tests:")
 	private val step = (nOfTests / 50.0).ceil.toInt
 
