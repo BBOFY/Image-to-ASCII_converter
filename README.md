@@ -1,10 +1,16 @@
-# BI-OOP Semestral work - ASCII Art
+# Image-to-ASCII converter
+
+
+### Building the app:
+You must have `sbt` installed on your system. After cloning the repository, go to the repo folder and in terminal type `sbt assemble`. New jar file `ASCII_img_converter.jar` will be created in newly created `target/scala-2.13/` folder. You can now run this jar file via `java -jar ASCII_img_converter.jar <cmds>` command, where `<cmd>` (without the chevrons) are commands mentioned below.
+
 
 ### Supported commands:
 Insert all desired commands after `run` command as arguments in sbt shell.
-Individual commands can be inserted in any order whatsoever, but their corresponding arguments must be right behind them.
+Individual commands can be inserted in any order whatsoever, but their corresponding arguments must be right behind them (write the parameters without the chevrons).
 
 - `--image <path>` imports image, where _**path**_ is the path to image to import. Supported formats are **jpg** and **png**
+    - *Path is relative to the folder the `java -jar` command is called from.*
 - `--image-random` generates random image
 - `--table <table>` sets conversion table, where supporting ***table***s are: `bourke` and `constant`
 - `--custom-table <table>` sets custom conversion table, where _**table**_ is some text, preferably in quotation marks, if white characters need to be part of the table
