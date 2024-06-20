@@ -10,10 +10,10 @@
 .$*
 
 # sbt
-project/project/
-project/target/
-target/
-project/
+project/project/*
+project/*
+!project/plugins.sbt
+target/*
 
 sbt.json
 
