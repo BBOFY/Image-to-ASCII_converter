@@ -2,7 +2,13 @@
 
 
 ### Building the app:
-You must have `sbt` installed on your system. After cloning the repository, go to the repo folder and in terminal type `sbt assemble`. New jar file `ASCII_img_converter.jar` will be created in newly created `target/scala-2.13/` folder. You can now run this jar file via `java -jar ASCII_img_converter.jar <cmds>` command, where `<cmd>` (without the chevrons) are commands mentioned below.
+1. Install `sbt`
+2. In cloned repo folder, type `sbt assemble`
+3. Move to `target/scala-2.13/` folder
+4. Run app via `java -jar ASCII_img_converter.jar <cmds>` where `<cmd>` (without the chevrons) are commands mentioned below
+
+
+<!--- You must have `sbt` installed on your system. After cloning the repository, go to the repo folder and in terminal type `sbt assemble`. New jar file `ASCII_img_converter.jar` will be created in newly created `target/scala-2.13/` folder. You can now run this jar file via `java -jar ASCII_img_converter.jar <cmds>` command, where `<cmd>` (without the chevrons) are commands mentioned below. -->
 
 
 ### Supported commands:
